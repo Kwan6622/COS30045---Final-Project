@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+  COS30045 Final Project — page skeleton.
+  GenAI: initial skeleton (section structure, ids, ARIA landmarks) generated with Claude on 2026-11-18;
+  see GENAI_LOG.md. Content and charts are written by the team.
+-->
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Who Is Really Being Hurt on Australian Roads?</title>
+  <meta name="description" content="An interactive data story on hospitalised injuries from road crashes in Australia, 2011–2021.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav aria-label="Chapters">
+      <ul class="chapter-nav">
+        <li><a href="#ch1">1. Beyond the road toll</a></li>
+        <li><a href="#ch2">2. Not just young drivers</a></li>
+        <li><a href="#ch3">3. No one else involved</a></li>
+        <li><a href="#ch4">4. Pedestrians &amp; cyclists</a></li>
+        <li><a href="#ch5">5. Where you live matters</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">Who is really being injured on Australian roads?</h1>
+      <p class="lede">TODO: one-sentence hook (hospitalisations vs deaths).</p>
+      <div id="hero-stats" class="stat-row" aria-live="polite"><!-- stat tiles rendered by JS --></div>
+    </section>
+
+    <!-- CHAPTER 1 -->
+    <section id="ch1" class="chapter" aria-labelledby="ch1-title">
+      <h2 id="ch1-title">Beyond the road toll</h2>
+      <p class="chapter-lede">TODO: key finding headline.</p>
+      <figure class="chart" id="chart-ch1-trend" role="img" aria-label="Line chart: hospitalised road crash injuries per year, 2011–2021"></figure>
+      <p class="note">Note: series breaks (Victoria 2012, NSW 2017) — see data notes.</p>
+    </section>
+
+    <!-- CHAPTER 2 -->
+    <section id="ch2" class="chapter" aria-labelledby="ch2-title">
+      <h2 id="ch2-title">Not just young drivers</h2>
+      <p class="chapter-lede">TODO</p>
+      <div class="controls" id="controls-ch2"><!-- age-group selector --></div>
+      <figure class="chart" id="chart-ch2-age" role="img" aria-label="Slope chart: hospitalisation rate per 100,000 by age group"></figure>
+    </section>
+
+    <!-- CHAPTER 3 -->
+    <section id="ch3" class="chapter" aria-labelledby="ch3-title">
+      <h2 id="ch3-title">No one else involved</h2>
+      <p class="chapter-lede">TODO</p>
+      <div class="controls" id="controls-ch3"><!-- road-user filter --></div>
+      <figure class="chart" id="chart-ch3-counterparty" role="img" aria-label="Stacked bar chart: what injured road users collided with"></figure>
+    </section>
+
+    <!-- CHAPTER 4 -->
+    <section id="ch4" class="chapter" aria-labelledby="ch4-title">
+      <h2 id="ch4-title">Pedestrians and cyclists pay the highest price</h2>
+      <p class="chapter-lede">TODO</p>
+      <figure class="chart" id="chart-ch4-index" role="img" aria-label="Line chart: change in hospitalisations by road user, indexed to the base year"></figure>
+      <figure class="chart" id="chart-ch4-los" role="img" aria-label="Lollipop chart: average length of hospital stay by road user"></figure>
+      <div class="controls" id="controls-ch4"><!-- road-user filter for heatmap --></div>
+      <figure class="chart" id="chart-ch4-heatmap" role="img" aria-label="Heatmap: hospitalisations by month and year"></figure>
+    </section>
+
+    <!-- CHAPTER 5 -->
+    <section id="ch5" class="chapter" aria-labelledby="ch5-title">
+      <h2 id="ch5-title">Where you live matters</h2>
+      <p class="chapter-lede">TODO</p>
+      <div class="controls" id="controls-ch5"><!-- count / rate toggle --></div>
+      <figure class="chart" id="chart-ch5-states" role="img" aria-label="Tile map of Australian states and territories"></figure>
+      <figure class="chart" id="chart-ch5-firstnations" role="img" aria-label="100% stacked bar: share of hospitalisations by First Nations status and remoteness of residence"></figure>
+    </section>
+
+    <!-- CONCLUSION -->
+    <section id="conclusion" class="chapter" aria-labelledby="conclusion-title">
+      <h2 id="conclusion-title">What this means</h2>
+      <p>TODO: summary of findings.</p>
+      <h3>About the data</h3>
+      <ul class="data-notes">
+        <li>Counts are hospital separations (episodes of care), not individual people.</li>
+        <li>TODO: series breaks, length-of-stay rule change, suppressed cells, population denominators.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Data: Bureau of Infrastructure and Transport Research Economics (2023), <em>Hospitalised injury</em>; Australian Bureau of Statistics.</p>
+    <p>COS30045 Data Visualisation · Team &lt;TEAM_NAME&gt; · Swinburne University of Technology</p>
+  </footer>
+
+  <div id="tooltip" class="tooltip" role="status" aria-live="polite" hidden></div>
+
+  <!-- D3 v7, pinned version -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="js/config.js"></script>
+  <!-- chart modules: add one <script> per file in js/charts/ -->
+  <script src="js/main.js"></script>
+</body>
+</html>
