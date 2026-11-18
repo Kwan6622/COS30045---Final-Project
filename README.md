@@ -6,26 +6,26 @@ COS30045 Data Visualisation · Final Project (Swinburne Vietnam, 2026)
 >
 > An interactive D3 data story for the Australian general public, built on BITRE hospitalised injury data (2011–2021).
 
-| | |
-|---|---|
-| **Team** | `<TEAM_NAME>` |
-| **Members** | Quang (`Kwan6622`) · Hồ Cao Cường (`cuongidol26`) |
-| **Live site (Mercury)** | `<add Mercury URL when deployed>` |
-| **Task board** | Trello — COS30045 Final Design Project (team members only) |
+|                               |                                                                       |
+| ----------------------------- | --------------------------------------------------------------------- |
+| **Team**                | `DataWerk`                                                          |
+| **Members**             | Nguyễn Duy Quang (`Kwan6622`) · Hồ Cao Cường (`cuongidol26`) |
+| **Live site (Mercury)** | `<add Mercury URL when deployed>`                                   |
+| **Task board**          | Trello — COS30045 Final Design Project (team members only)           |
 
 ---
 
 ## Story structure
 
-| Section | Chapter | Key message | Chart(s) |
-|---|---|---|---|
-| Hero | — | Hospitalisations, not only deaths | Stat tiles |
-| Ch1 | Beyond the road toll | Hospitalised injuries are large and rising | Line chart 2011–2021 (series breaks annotated) |
-| Ch2 | Not just young drivers | Older road users growing fastest | Slope chart by age group, rate per 100,000 |
-| Ch3 | No one else involved | ~40% involve no other vehicle | Stacked bar by counterparty, road-user filter |
-| Ch4 | Pedestrians & cyclists pay the highest price | Vulnerable road users: growth + severity + seasonality | Indexed multi-line · Lollipop (avg. length of stay) · Month × year heatmap |
-| Ch5 | Where you live matters | Per-capita differences by state, remoteness, First Nations | State tile map (count ↔ rate) · 100% stacked bar with population reference |
-| End | Conclusion & data limitations | — | — |
+| Section | Chapter                                      | Key message                                                | Chart(s)                                                                      |
+| ------- | -------------------------------------------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Hero    | —                                           | Hospitalisations, not only deaths                          | Stat tiles                                                                    |
+| Ch1     | Beyond the road toll                         | Hospitalised injuries are large and rising                 | Line chart 2011–2021 (series breaks annotated)                               |
+| Ch2     | Not just young drivers                       | Older road users growing fastest                           | Slope chart by age group, rate per 100,000                                    |
+| Ch3     | No one else involved                         | ~40% involve no other vehicle                              | Stacked bar by counterparty, road-user filter                                 |
+| Ch4     | Pedestrians & cyclists pay the highest price | Vulnerable road users: growth + severity + seasonality     | Indexed multi-line · Lollipop (avg. length of stay) · Month × year heatmap |
+| Ch5     | Where you live matters                       | Per-capita differences by state, remoteness, First Nations | State tile map (count ↔ rate) · 100% stacked bar with population reference  |
+| End     | Conclusion & data limitations                | —                                                         | —                                                                            |
 
 > All figures above are **provisional** until verified in the KNIME workflow (see `docs/decision-log.md`).
 
