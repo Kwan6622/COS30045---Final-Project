@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Outside the Car</title>
+  <meta name="description" content="Who pays the price on Australia's roads? An interactive story about pedestrians and cyclists hospitalised after road crashes, 2011–2021 (BITRE data).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // ?theme=light|dark wins (used for Design Book screenshots), then the saved choice
+    try { const t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) { /* storage blocked */ }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Stepper: every chapter name is always visible; a chapter becomes clickable once visited -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <span class="brand">Outside the Car</span>
+      <nav aria-label="Story chapters">
+        <ol class="stepper" id="stepper"></ol>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">◐</button>
+    </div>
+    <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+  </header>
+
+  <main id="main">
+    <!-- ============ 0. START ============ -->
+    <section class="step hero" id="s-start" data-label="Start" aria-label="Start">
+      <div class="wrap">
+        <p class="eyebrow">People walking and cycling, hospitalised after road crashes · Australia 2011–2021</p>
+        <h1>Every day, <span data-fact="beds">…</span> hospital beds hold someone who was walking or cycling.</h1>
+        <p class="lede">News about road safety counts deaths. Many more people survive a crash and end up in hospital. This story is about the people with no car around them: <span class="hl-ped">pedestrians</span> and <span class="hl-cyc">cyclists</span>.</p>
+        <figure class="chart-card ward">
+          <figcaption class="chart-title" id="ward-title">One icon = one hospital bed filled every day (average, 2011–2021)</figcaption>
+          <div class="legend"><span class="legend-item"><span class="swatch" style="background:var(--ped)"></span>Pedestrians</span><span class="legend-item"><span class="swatch" style="background:var(--cyc)"></span>Cyclists</span></div>
+          <div class="chart" id="chart-ward" role="img" aria-labelledby="ward-title"></div>
+          <p class="chart-note">Days in hospital from road-crash admissions ÷ 4,018 days. Source: <span class="cite" data-ref="bitre"></span>.</p>
+        </figure>
+        <aside class="insight">
+          <div><h3>What it means</h3><p>In 2021, <strong data-fact="vru2021">…</strong> hospital stays began with someone on foot or on a bike: about <strong>one every <span data-fact="every">…</span> minutes</strong>.</p></div>
+          <div><h3>What is being done</h3><p>Australia's National Road Safety Strategy aims to cut serious injuries by at least 30% by 2030 <span class="cite" data-ref="nrss"></span>. Hospital stays like these are what that target is about.</p></div>
+        </aside>
+        <p class="message">Outside the car, your body is the only crumple zone, so the road has to protect it.</p>
+        <p class="howto">5 short chapters. Click <strong>Next</strong> or press <kbd>→</kbd> to move forward. At the end you can jump back to any chapter from the bar at the top.</p>
+      </div>
+    </section>
+
+    <!-- ============ 1. WHO ============ -->
+    <section class="step chapter" id="s-who" data-label="Who" aria-label="Chapter 1: Who">
+      <div class="wrap">
+        <p class="chapter-num">Chapter 1 · Who is getting hurt</p>
+        <h2>More cyclists are getting hurt, and pedestrians are not getting safer</h2>
+        <p class="body">Each line shows how hospital admissions changed compared with 2012. <strong>Above 100</strong> means more admissions than in 2012. <span class="hl-ped">Orange</span> = pedestrians, <span class="hl-cyc">blue</span> = cyclists, grey = everyone else.</p>
+        <p class="question">Switch to <em>Number of admissions</em>: which group is largest?</p>
+        <div class="controls" id="trend-controls" role="group" aria-label="Scale">
+          <button class="chip is-active" data-mode="index" aria-pressed="true">Change since 2012</button>
+          <button class="chip" data-mode="hosp" aria-pressed="false">Number of admissions</button>
+        </div>
+        <figure class="chart-card">
+          <figcaption class="chart-title" id="trend-title">Hospital admissions after road crashes, by road user, Australia</figcaption>
+          <div class="chart" id="chart-trend" role="img" aria-labelledby="trend-title"></div>
+          <p class="chart-note">2020–21 are shaded: COVID changed how people travelled. From 2017 NSW counted some emergency care differently. Source: <span class="cite" data-ref="bitre"></span>.</p>
+        </figure>
+        <aside class="insight">
+          <div><h3>What it means</h3><p>From 2012 to 2019, cyclist admissions rose <strong class="hl-cyc" data-fact="cycChange">…</strong>. Pedestrian admissions barely moved (<strong class="hl-ped" data-fact="pedChange">…</strong>). Nothing here shows walking getting safer. We do not know how many people cycle, so part of the rise may simply be more cycling.</p></div>
+          <div><h3>What can be done</h3><p>More people riding needs more safe space to ride and walk. The WHO lists footpaths, cycling lanes, safe crossing points and traffic calming as key ways to reduce injuries for these road users <span class="cite" data-ref="who"></span>.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ 2. HOW BADLY ============ -->
+    <section class="step chapter" id="s-how" data-label="How badly" aria-label="Chapter 2: How badly">
+      <div class="wrap">
+        <p class="chapter-num">Chapter 2 · Your body is the only crumple zone</p>
+        <h2>Pedestrians stay in hospital twice as long as people in cars</h2>
+        <p class="body">Each dot is one group of road users. <strong>Further right = worse.</strong> The dashed line is the average for everyone hurt in a road crash.</p>
+        <p class="question">Switch to <em>Died within 30 days</em>: who is still at the top?</p>
+        <div class="controls" id="severity-controls" role="group" aria-label="Measure">
+          <button class="chip is-active" data-measure="los" aria-pressed="true">Days in hospital</button>
+          <button class="chip" data-measure="died_rate" aria-pressed="false">Died within 30 days</button>
+          <button class="chip" data-measure="ratio" aria-pressed="false">Share of hospital beds vs share of patients</button>
+        </div>
+        <figure class="chart-card">
+          <figcaption class="chart-title" id="sev-title">How badly each road user is hurt, 2011–2021</figcaption>
+          <div class="chart" id="chart-severity" role="img" aria-labelledby="sev-title"></div>
+          <p class="chart-note">Days in hospital leave out patients who died within 30 days. Source: <span class="cite" data-ref="bitre"></span>.</p>
+        </figure>
+
+        <p class="body" style="margin-top:28px">How did it happen? This bar shows <strong>what the injured person collided with</strong>. It tells us how the crash happened, not who was at fault.</p>
+        <figure class="chart-card">
+          <figcaption class="chart-title" id="cp-title">What injured pedestrians and cyclists collided with, 2011–2021</figcaption>
+          <div class="legend" id="legend-cp"></div>
+          <div class="chart" id="chart-cp" role="img" aria-labelledby="cp-title"></div>
+          <p class="chart-note">Hover a part of a bar to compare the same category in both bars.</p>
+        </figure>
+        <aside class="insight">
+          <div><h3>What it means</h3><p>A pedestrian stays <strong class="hl-ped"><span data-fact="pedLos">…</span> days</strong> on average; someone in a car <span data-fact="carLos">…</span> days. <span data-fact="pedDied">…</span> of pedestrians admitted die within 30 days (car occupants <span data-fact="carDied">…</span>). <strong data-fact="pedCar">…</strong> of injured pedestrians collided with a car, pick-up or van, while <strong data-fact="cycFall">…</strong> of injured cyclists had no collision at all, such as a fall.</p></div>
+          <div><h3>What can be done</h3><p><strong>Speed decides how badly a pedestrian is hurt.</strong> The risk of death is about 5% at an impact speed of 30 km/h and 50% at 59 km/h, so researchers support 30–40 km/h limits where many people walk <span class="cite" data-ref="hussain"></span>. For cyclists, many injuries involve no other vehicle, which points to the road itself: cycling lanes and traffic calming <span class="cite" data-ref="who"></span>.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ 3. AGE ============ -->
+    <section class="step chapter" id="s-age" data-label="Age" aria-label="Chapter 3: Age">
+      <div class="wrap">
+        <p class="chapter-num">Chapter 3 · It is someone's grandparent</p>
+        <h2>Older pedestrians are hurt the worst</h2>
+        <p class="body">Each bar is an age group. The <strong>75+</strong> bar is highlighted. Use the buttons to switch between pedestrians and cyclists, and between three measures.</p>
+        <p class="question">Switch to <em>Cyclists</em>: is it the same age group?</p>
+        <div class="controls" id="age-group-controls" role="group" aria-label="Road user">
+          <button class="chip is-active" data-group="Pedestrian" aria-pressed="true">Pedestrians</button>
+          <button class="chip" data-group="Pedal cyclist" aria-pressed="false">Cyclists</button>
+        </div>
+        <div class="controls" id="age-measure-controls" role="group" aria-label="Measure" style="margin-top:0">
+          <button class="chip is-active" data-measure="los" aria-pressed="true">Days in hospital</button>
+          <button class="chip" data-measure="died_rate" aria-pressed="false">Died within 30 days</button>
+          <button class="chip" data-measure="rate" aria-pressed="false">Per 100,000 people</button>
+        </div>
+        <figure class="chart-card">
+          <figcaption class="chart-title" id="age-title">By age group</figcaption>
+          <div class="chart" id="chart-age" role="img" aria-labelledby="age-title"></div>
+          <p class="chart-note">Per 100,000 uses ABS population <span class="cite" data-ref="abs"></span>. "≈" = estimate, because BITRE and ABS use different age bands.</p>
+        </figure>
+        <aside class="insight">
+          <div><h3>What it means</h3><p>A pedestrian aged 75 or over stays about <strong class="hl-ped"><span data-fact="oldLos">…</span> days</strong> in hospital, and <strong data-fact="oldDied">…</strong> dies within 30 days of admission. Older people are more frail and find it harder to judge the speed and distance of traffic <span class="cite" data-ref="vic65"></span>.</p></div>
+          <div><h3>What can be done</h3><p>Transport Victoria advises older pedestrians to cross at traffic lights or pedestrian crossings, cross as few roads as possible, wear brightly coloured clothing, have sight and hearing checked regularly, and ask a pharmacist how medicines may affect them on the road <span class="cite" data-ref="vic65"></span>. Share this with the older people in your life.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ 4. WHEN & WHERE ============ -->
+    <section class="step chapter" id="s-when" data-label="When &amp; where" aria-label="Chapter 4: When and where">
+      <div class="wrap">
+        <p class="chapter-num">Chapter 4 · When and where</p>
+        <h2>Pedestrians are hurt most in winter, cyclists in warmer months</h2>
+        <p class="body"><strong>1.0 = an average month.</strong> Above the line means more admissions than usual.</p>
+        <figure class="chart-card">
+          <figcaption class="chart-title" id="season-title">Each month compared with an average month, 2011–2019</figcaption>
+          <div class="chart" id="chart-season" role="img" aria-labelledby="season-title"></div>
+          <p class="chart-note">2020–21 left out so COVID lockdowns do not distort the pattern. The data records the month, not the time of day.</p>
+        </figure>
+
+        <p class="body" style="margin-top:28px">Each square is a state. <strong>Darker = more admissions per 100,000 people</strong>, so big and small states can be compared fairly. Click a square to see its trend.</p>
+        <p class="question">Which state is highest for pedestrians? Is it the same for cyclists?</p>
+        <div class="controls" id="state-controls" role="group" aria-label="Road user">
+          <button class="chip is-active" data-group="Pedestrian" aria-pressed="true">Pedestrians</button>
+          <button class="chip" data-group="Pedal cyclist" aria-pressed="false">Cyclists</button>
+        </div>
+        <div class="split">
+          <figure class="chart-card">
+            <figcaption class="chart-title" id="state-title">Admissions per 100,000 people per year, 2011–2021</figcaption>
+            <div class="chart" id="chart-states" role="group" aria-labelledby="state-title"></div>
+            <div class="ramp-legend" id="state-legend"></div>
+          </figure>
+          <figure class="chart-card" aria-live="polite">
+            <figcaption class="chart-title" id="state-detail-title">Select a state</figcaption>
+            <div class="chart" id="chart-state-detail"></div>
+          </figure>
+        </div>
+        <p class="chart-note">Sources: <span class="cite" data-ref="bitre"></span>; <span class="cite" data-ref="abs"></span>.</p>
+        <aside class="insight">
+          <div><h3>What it means</h3><p>Pedestrian admissions peak in June (<strong class="hl-ped" data-fact="pedJune">…</strong> above an average month); cyclists peak in March. Darker evenings may play a part, but this data cannot prove it. Per person, the <strong>Northern Territory</strong> is highest for pedestrians and the <strong>ACT</strong> for cyclists.</p></div>
+          <div><h3>What can be done</h3><p>Be seen when it is dark: wear brightly coloured clothing when walking <span class="cite" data-ref="vic65"></span>, and a bike ridden at night must have a white front light and a red rear light <span class="cite" data-ref="nswBike"></span>. Governments should compare rates per person, not raw counts, when choosing where to act first.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ 5. WHAT YOU CAN DO ============ -->
+    <section class="step chapter" id="s-act" data-label="What you can do" aria-label="Chapter 5: What you can do">
+      <div class="wrap">
+        <p class="chapter-num">Chapter 5 · What you can do</p>
+        <h2>How do you use the road?</h2>
+        <p class="body">Pick one. You will see the numbers from this story that matter most for you, and actions taken from official sources. Actions for the road system and for drivers come first: people make mistakes, so roads and speeds should be designed so a mistake does not put someone in hospital <span class="cite" data-ref="nrss"></span>.</p>
+        <div class="roles" id="roles" role="group" aria-label="Choose your role"></div>
+        <div class="role-panel" id="role-panel" tabindex="-1" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ============ 6. SUMMARY ============ -->
+    <section class="step chapter" id="s-summary" data-label="Summary" aria-label="Summary">
+      <div class="wrap">
+        <p class="chapter-num">Summary</p>
+        <h2>What we learned, and what can be done</h2>
+        <p class="body">One finding and one action per chapter. Click <strong>Revisit</strong>, or any chapter name at the top, to go back.</p>
+        <div class="summary-grid" id="summary-grid">
+          <article class="summary-card">
+            <p class="chapter-num">1 · Who</p>
+            <p class="value"><span class="hl-cyc" data-fact="cycChange">…</span></p>
+            <p><strong>Cyclist admissions, 2012→2019.</strong> Pedestrians: <span data-fact="pedChange">…</span>, not improving.</p>
+            <p class="todo">→ More safe space to ride and walk: footpaths, cycling lanes, safe crossings.</p>
+            <button class="revisit" data-goto="s-who">Revisit chapter 1</button>
+          </article>
+          <article class="summary-card">
+            <p class="chapter-num">2 · How badly</p>
+            <p class="value"><span class="hl-ped"><span data-fact="pedLos">…</span> days</span></p>
+            <p><strong>Average hospital stay for a pedestrian</strong>, twice that of someone in a car.</p>
+            <p class="todo">→ Lower speeds where people walk: 30–40 km/h.</p>
+            <button class="revisit" data-goto="s-how">Revisit chapter 2</button>
+          </article>
+          <article class="summary-card">
+            <p class="chapter-num">3 · Age</p>
+            <p class="value"><span class="hl-ped" data-fact="oldDied">…</span></p>
+            <p><strong>pedestrians aged 75+ admitted to hospital die within 30 days.</strong></p>
+            <p class="todo">→ Cross at lights or crossings; check sight, hearing and medicines.</p>
+            <button class="revisit" data-goto="s-age">Revisit chapter 3</button>
+          </article>
+          <article class="summary-card">
+            <p class="chapter-num">4 · When &amp; where</p>
+            <p class="value"><span class="hl-ped">June</span></p>
+            <p><strong>The worst month for pedestrians.</strong> The NT has the highest rate per person.</p>
+            <p class="todo">→ Be seen after dark; target help by rate per person.</p>
+            <button class="revisit" data-goto="s-when">Revisit chapter 4</button>
+          </article>
+          <article class="summary-card">
+            <p class="chapter-num">5 · You</p>
+            <p class="value"><span data-fact="beds">…</span> beds</p>
+            <p><strong>filled every day by people walking or cycling.</strong></p>
+            <p class="todo">→ Drivers: slow down and leave 1 m when passing a bike.</p>
+            <button class="revisit" data-goto="s-act">Revisit chapter 5</button>
+          </article>
+        </div>
+        <p class="message">Outside the car, your body is the only crumple zone, so the road has to protect it.</p>
+      </div>
+    </section>
+
+    <!-- ============ 7. SOURCES ============ -->
+    <section class="step chapter" id="s-sources" data-label="Sources" aria-label="Sources and data notes">
+      <div class="wrap">
+        <p class="chapter-num">Sources</p>
+        <h2>References and data notes</h2>
+        <div id="references"></div>
+        <h3>About the data</h3>
+        <ul class="limits">
+          <li><strong>An admission is not a person.</strong> BITRE counts hospital admissions; one person can be counted more than once.</li>
+          <li><strong>No fault.</strong> The data records what the injured person collided with, not who caused the crash.</li>
+          <li><strong>Counting changes.</strong> Victoria (from 2012) and NSW (from 2017) changed what counts as an admission, so we compare 2012 with 2019.</li>
+          <li><strong>COVID.</strong> Travel in 2020 and 2021 was unusual, so those years are shaded or left out.</li>
+          <li><strong>No exposure data.</strong> We do not know how many people walk or cycle, so a rise in cyclist injuries may partly reflect more cycling.</li>
+          <li><strong>Who is missing.</strong> People killed at the scene are not in hospital data. Patients who died within 30 days are reported separately.</li>
+          <li><strong>Scope.</strong> First Nations data was left out: a narrow treatment without community context risked misrepresenting First Nations people.</li>
+        </ul>
+        <p class="chart-note">Figures computed with <code>scripts/build_data.py</code> (prototype); final figures must come from the team's KNIME workflow.</p>
+      </div>
+    </section>
+
+    <!-- Step navigation (one bar, updated for the active step) -->
+    <div class="wrap step-nav" id="step-nav">
+      <button class="next-btn" id="next-btn" type="button">Next →</button>
+      <button class="ghost-btn" id="summary-btn" type="button" hidden>Back to summary</button>
+      <span class="hint" id="key-hint">or press <kbd>→</kbd></span>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><p>DataWerk · COS30045 Data Visualisation · web_proto_v1 (prototype) · Charts built with D3.js v7</p></div>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
