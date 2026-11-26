@@ -44,10 +44,11 @@ export function hideTooltip() { tip.hidden = true; }
 /* ---------------- Responsive SVG ---------------- */
 /**
  * Create (or recreate) an SVG that scales with its container via viewBox.
+ * `target` is a CSS selector or a DOM element.
  * Returns { svg, g, width, height } where g is translated by the margin.
  */
-export function createSvg(selector, { height = 380, margin }) {
-  const container = d3.select(selector);
+export function createSvg(target, { height = 380, margin }) {
+  const container = d3.select(target);
   container.selectAll("svg").remove();
   const outerW = Math.max(320, container.node().clientWidth);
   const width = outerW - margin.left - margin.right;
@@ -90,6 +91,15 @@ export function makeChips(containerSel, attr, values, initial, onChange) {
 /** Read a CSS custom property's resolved value (needed for d3 colour interpolation). */
 export function cssVar(name) {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+/**
+ * Charts never change state themselves: they ask main.js to, by emitting a
+ * bubbling "viz:state" event with the keys to change. main.js merges the patch
+ * into the one app state and calls update(state) on every chart.
+ */
+export function emit(el, patch) {
+  el.dispatchEvent(new CustomEvent("viz:state", { bubbles: true, detail: patch }));
 }
 
 /** Debounce helper for resize handling. */

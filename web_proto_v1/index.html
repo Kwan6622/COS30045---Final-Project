@@ -6,39 +6,50 @@
   <title>Outside the Car</title>
   <meta name="description" content="Who pays the price on Australia's roads? An interactive story about pedestrians and cyclists hospitalised after road crashes, 2011–2021 (BITRE data).">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700;8..60,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script>
-    // ?theme=light|dark wins (used for Design Book screenshots), then the saved choice
-    try { const t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) { /* storage blocked */ }
+    // Apply the saved theme / colour-vision view before anything is drawn (no flash).
+    // ?theme=dark|light and ?cvd=… override, for screenshots.
+    try {
+      const q = new URLSearchParams(location.search), root = document.documentElement;
+      root.dataset.theme = q.get("theme") || localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      root.dataset.cvd = q.get("cvd") || localStorage.getItem("cvd") || "normal";
+    } catch (e) { document.documentElement.dataset.theme = "light"; }
   </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Stepper: every chapter name is always visible; a chapter becomes clickable once visited -->
+  <!-- Stepper: every chapter name; click to jump. The current chapter is set by Scrollama. -->
   <header class="site-header">
     <div class="wrap header-inner">
-      <span class="brand">Outside the Car</span>
-      <nav aria-label="Story chapters">
+      <a class="brand" href="#s-start">Outside the&nbsp;<span>Car</span></a>
+      <nav class="chapters" aria-label="Story chapters">
         <ol class="stepper" id="stepper"></ol>
       </nav>
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">◐</button>
+      <div class="prefs">
+        <button class="theme-btn" id="theme-btn" type="button" aria-pressed="false">
+          <span class="icon" aria-hidden="true">☾</span><span class="label">Dark</span>
+        </button>
+        <label class="cvd-label" for="cvd-select">Colour vision</label>
+        <select class="cvd-select" id="cvd-select" title="Preview the charts as seen with each type of colour blindness"></select>
+      </div>
     </div>
     <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
   </header>
 
   <main id="main">
     <!-- ============ 0. START ============ -->
-    <section class="step hero" id="s-start" data-label="Start" aria-label="Start">
+    <section class="chapter-step hero" id="s-start" data-label="Start" aria-label="Start">
       <div class="wrap">
         <p class="eyebrow">People walking and cycling, hospitalised after road crashes · Australia 2011–2021</p>
         <h1>Every day, <span data-fact="beds">…</span> hospital beds hold someone who was walking or cycling.</h1>
         <p class="lede">News about road safety counts deaths. Many more people survive a crash and end up in hospital. This story is about the people with no car around them: <span class="hl-ped">pedestrians</span> and <span class="hl-cyc">cyclists</span>.</p>
-        <figure class="chart-card ward">
+        <figure class="chart-card ward" data-viz="ward">
           <figcaption class="chart-title" id="ward-title">One icon = one hospital bed filled every day (average, 2011–2021)</figcaption>
-          <div class="legend"><span class="legend-item"><span class="swatch" style="background:var(--ped)"></span>Pedestrians</span><span class="legend-item"><span class="swatch" style="background:var(--cyc)"></span>Cyclists</span></div>
-          <div class="chart" id="chart-ward" role="img" aria-labelledby="ward-title"></div>
+          <div class="legend"></div>
+          <div class="chart" role="img" aria-labelledby="ward-title"></div>
           <p class="chart-note">Days in hospital from road-crash admissions ÷ 4,018 days. Source: <span class="cite" data-ref="bitre"></span>.</p>
         </figure>
         <aside class="insight">
@@ -46,56 +57,86 @@
           <div><h3>What is being done</h3><p>Australia's National Road Safety Strategy aims to cut serious injuries by at least 30% by 2030 <span class="cite" data-ref="nrss"></span>. Hospital stays like these are what that target is about.</p></div>
         </aside>
         <p class="message">Outside the car, your body is the only crumple zone, so the road has to protect it.</p>
-        <p class="howto">5 short chapters. Click <strong>Next</strong> or press <kbd>→</kbd> to move forward. At the end you can jump back to any chapter from the bar at the top.</p>
+        <p class="howto">Scroll down (mouse, <kbd>↓</kbd> or <kbd>Space</kbd>) to read the story, or use the arrow buttons on the right / <kbd>→</kbd> and <kbd>←</kbd> to go to the next or previous part. The bar at the top takes you to any chapter. <span class="scroll-cue" aria-hidden="true">↓</span></p>
       </div>
     </section>
 
-    <!-- ============ 1. WHO ============ -->
-    <section class="step chapter" id="s-who" data-label="Who" aria-label="Chapter 1: Who">
+    <!-- ============ 1. WHO (scrollytelling) ============ -->
+    <section class="chapter-step chapter" id="s-who" data-label="Who" aria-label="Chapter 1: Who">
       <div class="wrap">
         <p class="chapter-num">Chapter 1 · Who is getting hurt</p>
         <h2>More cyclists are getting hurt, and pedestrians are not getting safer</h2>
-        <p class="body">Each line shows how hospital admissions changed compared with 2012. <strong>Above 100</strong> means more admissions than in 2012. <span class="hl-ped">Orange</span> = pedestrians, <span class="hl-cyc">blue</span> = cyclists, grey = everyone else.</p>
-        <p class="question">Switch to <em>Number of admissions</em>: which group is largest?</p>
-        <div class="controls" id="trend-controls" role="group" aria-label="Scale">
-          <button class="chip is-active" data-mode="index" aria-pressed="true">Change since 2012</button>
-          <button class="chip" data-mode="hosp" aria-pressed="false">Number of admissions</button>
+        <div class="scrolly">
+          <div class="scrolly-graphic">
+            <figure class="chart-card" data-viz="trend">
+              <figcaption class="chart-title" id="trend-title">Hospital admissions after road crashes, by road user, Australia</figcaption>
+              <div class="chart" role="img" aria-labelledby="trend-title"></div>
+              <div class="controls" data-state-key="trendMode" role="group" aria-label="Scale">
+                <button class="chip" data-value="index">Change since 2012</button>
+                <button class="chip" data-value="hosp">Number of admissions</button>
+              </div>
+              <p class="chart-note">Other road users (<span data-fact="otherShare">…</span> of admissions) are not shown. Source: <span class="cite" data-ref="bitre"></span>.</p>
+            </figure>
+          </div>
+          <div class="scrolly-text">
+            <div class="scrolly-step" data-state='{"trendMode":"index","trendFocus":null}'>
+              <div class="step-card">
+                <p>Each line shows how hospital admissions changed compared with <strong>2012</strong>. <strong>Above 100</strong> means more admissions than in 2012.</p>
+                <p class="key"><span class="hl-ped">Red</span> = pedestrians · <span class="hl-cyc">teal</span> = cyclists · <span class="hl-moto">purple</span> = motorcyclists · dashed grey = people in cars.</p>
+              </div>
+            </div>
+            <div class="scrolly-step" data-state='{"trendMode":"index","trendFocus":"Pedal cyclist"}'>
+              <div class="step-card">
+                <p><span class="hl-cyc">Cyclists</span> rose <strong data-fact="cycChange">…</strong> from 2012 to 2019, the fastest growth of any road user.</p>
+              </div>
+            </div>
+            <div class="scrolly-step" data-state='{"trendMode":"index","trendFocus":"Pedestrian"}'>
+              <div class="step-card">
+                <p><span class="hl-ped">Pedestrians</span> changed by only <strong data-fact="pedChange">…</strong>. Nothing here shows walking getting safer.</p>
+              </div>
+            </div>
+            <div class="scrolly-step" data-state='{"trendMode":"index","trendFocus":null}'>
+              <div class="step-card">
+                <p>The grey band is <strong>COVID</strong> (2020–21): people travelled differently, so we compare 2012 with 2019. The dotted line marks a change in how NSW counted admissions in 2017.</p>
+              </div>
+            </div>
+            <div class="scrolly-step" data-state='{"trendMode":"hosp","trendFocus":null}'>
+              <div class="step-card">
+                <p>In <strong>numbers</strong>, people in cars are still the largest group, but they have a car around them. Try the buttons under the chart.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <figure class="chart-card">
-          <figcaption class="chart-title" id="trend-title">Hospital admissions after road crashes, by road user, Australia</figcaption>
-          <div class="chart" id="chart-trend" role="img" aria-labelledby="trend-title"></div>
-          <p class="chart-note">2020–21 are shaded: COVID changed how people travelled. From 2017 NSW counted some emergency care differently. Source: <span class="cite" data-ref="bitre"></span>.</p>
-        </figure>
         <aside class="insight">
-          <div><h3>What it means</h3><p>From 2012 to 2019, cyclist admissions rose <strong class="hl-cyc" data-fact="cycChange">…</strong>. Pedestrian admissions barely moved (<strong class="hl-ped" data-fact="pedChange">…</strong>). Nothing here shows walking getting safer. We do not know how many people cycle, so part of the rise may simply be more cycling.</p></div>
+          <div><h3>What it means</h3><p>From 2012 to 2019, cyclist admissions rose <strong class="hl-cyc" data-fact="cycChange">…</strong>. Pedestrian admissions barely moved (<strong class="hl-ped" data-fact="pedChange">…</strong>). We do not know how many people cycle, so part of the rise may simply be more cycling.</p></div>
           <div><h3>What can be done</h3><p>More people riding needs more safe space to ride and walk. The WHO lists footpaths, cycling lanes, safe crossing points and traffic calming as key ways to reduce injuries for these road users <span class="cite" data-ref="who"></span>.</p></div>
         </aside>
       </div>
     </section>
 
     <!-- ============ 2. HOW BADLY ============ -->
-    <section class="step chapter" id="s-how" data-label="How badly" aria-label="Chapter 2: How badly">
+    <section class="chapter-step chapter" id="s-how" data-label="How badly" aria-label="Chapter 2: How badly">
       <div class="wrap">
         <p class="chapter-num">Chapter 2 · Your body is the only crumple zone</p>
         <h2>Pedestrians stay in hospital twice as long as people in cars</h2>
-        <p class="body">Each dot is one group of road users. <strong>Further right = worse.</strong> The dashed line is the average for everyone hurt in a road crash.</p>
+        <p class="body">Each dot is one group of road users. <strong>Further right = worse.</strong> The dotted line is the average for everyone hurt in a road crash.</p>
         <p class="question">Switch to <em>Died within 30 days</em>: who is still at the top?</p>
-        <div class="controls" id="severity-controls" role="group" aria-label="Measure">
-          <button class="chip is-active" data-measure="los" aria-pressed="true">Days in hospital</button>
-          <button class="chip" data-measure="died_rate" aria-pressed="false">Died within 30 days</button>
-          <button class="chip" data-measure="ratio" aria-pressed="false">Share of hospital beds vs share of patients</button>
+        <div class="controls" data-state-key="sevMeasure" role="group" aria-label="Measure">
+          <button class="chip" data-value="los">Days in hospital</button>
+          <button class="chip" data-value="died_rate">Died within 30 days</button>
+          <button class="chip" data-value="ratio">Share of hospital beds vs share of patients</button>
         </div>
-        <figure class="chart-card">
+        <figure class="chart-card" data-viz="severity">
           <figcaption class="chart-title" id="sev-title">How badly each road user is hurt, 2011–2021</figcaption>
-          <div class="chart" id="chart-severity" role="img" aria-labelledby="sev-title"></div>
+          <div class="chart" role="img" aria-labelledby="sev-title"></div>
           <p class="chart-note">Days in hospital leave out patients who died within 30 days. Source: <span class="cite" data-ref="bitre"></span>.</p>
         </figure>
 
         <p class="body" style="margin-top:28px">How did it happen? This bar shows <strong>what the injured person collided with</strong>. It tells us how the crash happened, not who was at fault.</p>
-        <figure class="chart-card">
+        <figure class="chart-card" data-viz="counterparty">
           <figcaption class="chart-title" id="cp-title">What injured pedestrians and cyclists collided with, 2011–2021</figcaption>
-          <div class="legend" id="legend-cp"></div>
-          <div class="chart" id="chart-cp" role="img" aria-labelledby="cp-title"></div>
+          <div class="legend"></div>
+          <div class="chart" role="img" aria-labelledby="cp-title"></div>
           <p class="chart-note">Hover a part of a bar to compare the same category in both bars.</p>
         </figure>
         <aside class="insight">
@@ -106,24 +147,24 @@
     </section>
 
     <!-- ============ 3. AGE ============ -->
-    <section class="step chapter" id="s-age" data-label="Age" aria-label="Chapter 3: Age">
+    <section class="chapter-step chapter" id="s-age" data-label="Age" aria-label="Chapter 3: Age">
       <div class="wrap">
         <p class="chapter-num">Chapter 3 · It is someone's grandparent</p>
         <h2>Older pedestrians are hurt the worst</h2>
-        <p class="body">Each bar is an age group. The <strong>75+</strong> bar is highlighted. Use the buttons to switch between pedestrians and cyclists, and between three measures.</p>
+        <p class="body">Each bar is an age group; the <strong>75+</strong> bar is in full colour and marked in yellow. Use the buttons to switch between pedestrians and cyclists, and between three measures.</p>
         <p class="question">Switch to <em>Cyclists</em>: is it the same age group?</p>
-        <div class="controls" id="age-group-controls" role="group" aria-label="Road user">
-          <button class="chip is-active" data-group="Pedestrian" aria-pressed="true">Pedestrians</button>
-          <button class="chip" data-group="Pedal cyclist" aria-pressed="false">Cyclists</button>
+        <div class="controls" data-state-key="ageGroup" role="group" aria-label="Road user">
+          <button class="chip" data-value="Pedestrian">Pedestrians</button>
+          <button class="chip" data-value="Pedal cyclist">Cyclists</button>
         </div>
-        <div class="controls" id="age-measure-controls" role="group" aria-label="Measure" style="margin-top:0">
-          <button class="chip is-active" data-measure="los" aria-pressed="true">Days in hospital</button>
-          <button class="chip" data-measure="died_rate" aria-pressed="false">Died within 30 days</button>
-          <button class="chip" data-measure="rate" aria-pressed="false">Per 100,000 people</button>
+        <div class="controls" data-state-key="ageMeasure" role="group" aria-label="Measure" style="margin-top:0">
+          <button class="chip" data-value="los">Days in hospital</button>
+          <button class="chip" data-value="died_rate">Died within 30 days</button>
+          <button class="chip" data-value="rate">Per 100,000 people</button>
         </div>
-        <figure class="chart-card">
+        <figure class="chart-card" data-viz="age">
           <figcaption class="chart-title" id="age-title">By age group</figcaption>
-          <div class="chart" id="chart-age" role="img" aria-labelledby="age-title"></div>
+          <div class="chart" role="img" aria-labelledby="age-title"></div>
           <p class="chart-note">Per 100,000 uses ABS population <span class="cite" data-ref="abs"></span>. "≈" = estimate, because BITRE and ABS use different age bands.</p>
         </figure>
         <aside class="insight">
@@ -134,32 +175,32 @@
     </section>
 
     <!-- ============ 4. WHEN & WHERE ============ -->
-    <section class="step chapter" id="s-when" data-label="When &amp; where" aria-label="Chapter 4: When and where">
+    <section class="chapter-step chapter" id="s-when" data-label="When &amp; where" aria-label="Chapter 4: When and where">
       <div class="wrap">
         <p class="chapter-num">Chapter 4 · When and where</p>
         <h2>Pedestrians are hurt most in winter, cyclists in warmer months</h2>
-        <p class="body"><strong>1.0 = an average month.</strong> Above the line means more admissions than usual.</p>
-        <figure class="chart-card">
+        <p class="body"><strong>1.0 = an average month.</strong> Above the line means more admissions than usual. Yellow rings mark each group's worst month.</p>
+        <figure class="chart-card" data-viz="season">
           <figcaption class="chart-title" id="season-title">Each month compared with an average month, 2011–2019</figcaption>
-          <div class="chart" id="chart-season" role="img" aria-labelledby="season-title"></div>
+          <div class="chart" role="img" aria-labelledby="season-title"></div>
           <p class="chart-note">2020–21 left out so COVID lockdowns do not distort the pattern. The data records the month, not the time of day.</p>
         </figure>
 
         <p class="body" style="margin-top:28px">Each square is a state. <strong>Darker = more admissions per 100,000 people</strong>, so big and small states can be compared fairly. Click a square to see its trend.</p>
         <p class="question">Which state is highest for pedestrians? Is it the same for cyclists?</p>
-        <div class="controls" id="state-controls" role="group" aria-label="Road user">
-          <button class="chip is-active" data-group="Pedestrian" aria-pressed="true">Pedestrians</button>
-          <button class="chip" data-group="Pedal cyclist" aria-pressed="false">Cyclists</button>
+        <div class="controls" data-state-key="mapGroup" role="group" aria-label="Road user">
+          <button class="chip" data-value="Pedestrian">Pedestrians</button>
+          <button class="chip" data-value="Pedal cyclist">Cyclists</button>
         </div>
-        <div class="split">
+        <div class="split" data-viz="stateMap">
           <figure class="chart-card">
             <figcaption class="chart-title" id="state-title">Admissions per 100,000 people per year, 2011–2021</figcaption>
-            <div class="chart" id="chart-states" role="group" aria-labelledby="state-title"></div>
-            <div class="ramp-legend" id="state-legend"></div>
+            <div class="chart" data-part="map" role="group" aria-labelledby="state-title"></div>
+            <div class="ramp-legend" data-part="legend"></div>
           </figure>
           <figure class="chart-card" aria-live="polite">
-            <figcaption class="chart-title" id="state-detail-title">Select a state</figcaption>
-            <div class="chart" id="chart-state-detail"></div>
+            <figcaption class="chart-title" data-part="detail-title">Select a state</figcaption>
+            <div class="chart" data-part="detail"></div>
           </figure>
         </div>
         <p class="chart-note">Sources: <span class="cite" data-ref="bitre"></span>; <span class="cite" data-ref="abs"></span>.</p>
@@ -171,23 +212,25 @@
     </section>
 
     <!-- ============ 5. WHAT YOU CAN DO ============ -->
-    <section class="step chapter" id="s-act" data-label="What you can do" aria-label="Chapter 5: What you can do">
+    <section class="chapter-step chapter" id="s-act" data-label="What you can do" aria-label="Chapter 5: What you can do">
       <div class="wrap">
         <p class="chapter-num">Chapter 5 · What you can do</p>
         <h2>How do you use the road?</h2>
         <p class="body">Pick one. You will see the numbers from this story that matter most for you, and actions taken from official sources. Actions for the road system and for drivers come first: people make mistakes, so roads and speeds should be designed so a mistake does not put someone in hospital <span class="cite" data-ref="nrss"></span>.</p>
-        <div class="roles" id="roles" role="group" aria-label="Choose your role"></div>
-        <div class="role-panel" id="role-panel" tabindex="-1" aria-live="polite"></div>
+        <div data-viz="roles">
+          <div class="roles" data-part="buttons" role="group" aria-label="Choose your role"></div>
+          <div class="role-panel" data-part="panel" tabindex="-1" aria-live="polite"></div>
+        </div>
       </div>
     </section>
 
     <!-- ============ 6. SUMMARY ============ -->
-    <section class="step chapter" id="s-summary" data-label="Summary" aria-label="Summary">
+    <section class="chapter-step chapter" id="s-summary" data-label="Summary" aria-label="Summary">
       <div class="wrap">
         <p class="chapter-num">Summary</p>
         <h2>What we learned, and what can be done</h2>
         <p class="body">One finding and one action per chapter. Click <strong>Revisit</strong>, or any chapter name at the top, to go back.</p>
-        <div class="summary-grid" id="summary-grid">
+        <div class="summary-grid">
           <article class="summary-card">
             <p class="chapter-num">1 · Who</p>
             <p class="value"><span class="hl-cyc" data-fact="cycChange">…</span></p>
@@ -229,7 +272,7 @@
     </section>
 
     <!-- ============ 7. SOURCES ============ -->
-    <section class="step chapter" id="s-sources" data-label="Sources" aria-label="Sources and data notes">
+    <section class="chapter-step chapter" id="s-sources" data-label="Sources" aria-label="Sources and data notes">
       <div class="wrap">
         <p class="chapter-num">Sources</p>
         <h2>References and data notes</h2>
@@ -245,23 +288,25 @@
           <li><strong>Scope.</strong> First Nations data was left out: a narrow treatment without community context risked misrepresenting First Nations people.</li>
         </ul>
         <p class="chart-note">Figures computed with <code>scripts/build_data.py</code> (prototype); final figures must come from the team's KNIME workflow.</p>
+        <p><button class="revisit" data-goto="s-start">Back to the start ↑</button></p>
       </div>
     </section>
-
-    <!-- Step navigation (one bar, updated for the active step) -->
-    <div class="wrap step-nav" id="step-nav">
-      <button class="next-btn" id="next-btn" type="button">Next →</button>
-      <button class="ghost-btn" id="summary-btn" type="button" hidden>Back to summary</button>
-      <span class="hint" id="key-hint">or press <kbd>→</kbd></span>
-    </div>
   </main>
 
+  <!-- Previous / next stop: chapters, and each message of the Chapter 1 scrollytelling -->
+  <nav class="side-nav" aria-label="Previous and next part">
+    <div class="slot"><button type="button" id="prev-btn" aria-label="Previous part">↑</button><span class="where" id="prev-where"></span></div>
+    <div class="slot"><button type="button" id="next-btn" aria-label="Next part">↓</button><span class="where" id="next-where"></span></div>
+  </nav>
+  <p class="cvd-note" id="cvd-note" role="status"></p>
+
   <footer class="site-footer">
-    <div class="wrap"><p>DataWerk · COS30045 Data Visualisation · web_proto_v1 (prototype) · Charts built with D3.js v7</p></div>
+    <div class="wrap"><p>DataWerk · COS30045 Data Visualisation · web_proto_v1 (prototype) · D3.js v7 + Scrollama</p></div>
   </footer>
 
   <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
   <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/scrollama@3.2.0/build/scrollama.min.js"></script>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
