@@ -1,0 +1,11 @@
+"group","cp","hosp","share"
+"Pedal cyclist","Car, pick-up truck or van",16124,0.21395398211300123
+"Pedal cyclist","Fixed object",4207,0.0558238900241501
+"Pedal cyclist","Heavy vehicle or bus",626,0.008306573604734482
+"Pedal cyclist","Motorcycle",162,0.002149624479180489
+"Pedal cyclist","No collision (e.g. fall)",33421,0.44347283776969826
+"Pedal cyclist","Other",20822,0.2762930920092354
+"Pedestrian","Car, pick-up truck or van",25056,0.8781718771905229
+"Pedestrian","Heavy vehicle or bus",1185,0.04153231459413991
+"Pedestrian","Motorcycle",578,0.02025795597925137
+"Pedestrian","Other",1713,0.0600378522360858
