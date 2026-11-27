@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>02 Overview - phone</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">Overview: phone (760 px and narrower)</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">Same order as desktop; one column; header on two rows; arrow buttons move to the bottom-right corner.</tspan></text>
+<rect x="120.0" y="70.0" width="300.0" height="590.0" rx="26" fill="#FFFFFF" stroke="#1F2328" stroke-width="2"/>
+<rect x="132.0" y="86.0" width="276.0" height="62.0" rx="8" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="15" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="144.0" y="105.6">Outside the Car</tspan></text>
+<rect x="140.0" y="116.0" width="160.0" height="24.0" rx="12" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="220.0" y="131.1">★ 1 Who 2 3 4</tspan></text>
+<rect x="306.0" y="116.0" width="30.0" height="24.0" rx="12" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle"><tspan x="321.0" y="131.4">☾</tspan></text>
+<rect x="342.0" y="116.0" width="60.0" height="24.0" rx="12" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="372.0" y="131.1">CVD ▾</tspan></text>
+<circle cx="410.0" cy="92.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="410.0" y="95.4">1</tspan></text>
+<rect x="132.0" y="158.0" width="276.0" height="200.0" rx="8" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#7A7A7A" text-anchor="middle"><tspan x="270.0" y="253.9">pinned chart</tspan><tspan x="270.0" y="268.8">(300 px tall on phones)</tspan></text>
+<circle cx="410.0" cy="166.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="410.0" y="169.4">2</tspan></text>
+<rect x="132.0" y="370.0" width="276.0" height="90.0" rx="8" fill="#FFFFFF" stroke="#F2B705" stroke-width="2"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle"><tspan x="270.0" y="403.5">active message card</tspan><tspan x="270.0" y="418.4">(others hidden so they never</tspan><tspan x="270.0" y="433.2">cover the chart)</tspan></text>
+<circle cx="410.0" cy="376.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="410.0" y="379.4">3</tspan></text>
+<rect x="132.0" y="472.0" width="276.0" height="50.0" rx="8" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="270.0" y="500.4">charts and insight boxes stack</tspan></text>
+<rect x="132.0" y="532.0" width="276.0" height="50.0" rx="8" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="270.0" y="560.4">tile map above state detail</tspan></text>
+<rect x="316.0" y="598.0" width="88.0" height="46.0" rx="23" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<circle cx="338.0" cy="621.0" r="16" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1.5"/>
+<text font-size="13" fill="#1F2328" text-anchor="middle"><tspan x="338.0" y="625.0">↑</tspan></text>
+<circle cx="382.0" cy="621.0" r="16" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="13" fill="#1F2328" text-anchor="middle"><tspan x="382.0" y="625.0">↓</tspan></text>
+<circle cx="312.0" cy="596.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="312.0" y="599.4">4</tspan></text>
+<rect x="480.0" y="70.0" width="290.0" height="218.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="494.0" y="92.0">Notes</tspan></text>
+<circle cx="502.0" cy="116.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="119.4">1</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="522.0" y="120.0">Title on row 1; chapters + theme +</tspan><tspan x="522.0" y="134.8">colour-vision on row 2</tspan></text>
+<circle cx="502.0" cy="162.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="165.4">2</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="522.0" y="166.0">Chapter 1 chart pinned under the</tspan><tspan x="522.0" y="180.8">header, shorter so the card fits</tspan></text>
+<circle cx="502.0" cy="208.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="211.4">3</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="522.0" y="212.0">Message card sits low, above the</tspan><tspan x="522.0" y="226.8">arrow buttons</tspan></text>
+<circle cx="502.0" cy="254.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="257.4">4</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="522.0" y="258.0">Arrow buttons bottom-right</tspan><tspan x="522.0" y="272.9">(40 px targets)</tspan></text>
+</svg>

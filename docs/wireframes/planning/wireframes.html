@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wireframes — Outside the Car (web_proto_v1)</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .wf-svg-wrap svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+    }
+    .tab-btn.is-active {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border-color: var(--primary);
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 50;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .toast.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+    }
+  </style>
+</head>
+<body class="bg-[var(--background)] text-[var(--foreground)] antialiased min-h-screen">
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-30 border-b border-[var(--border)] bg-[var(--card)]/95 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 text-xs font-semibold rounded bg-[var(--primary)]/15 text-[var(--primary)]">web_proto_v1</span>
+          <h1 class="text-base font-bold tracking-tight">Wireframe &amp; Interaction Studio — Outside the Car</h1>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mt-0.5">
+          Wireframe tổng thể website + 8 biểu đồ &amp; tương tác · Export SVG / PNG (HTML5 Canvas) để đưa vào Canva, Figma, Excalidraw, Slides
+        </p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="export-all-svg" class="px-3 py-1.5 text-xs font-medium rounded-md border border-[var(--border)] bg-[var(--background)] hover:bg-[var(--accent)]/10 transition cursor-pointer">
+          ⬇ Export All SVG (9 files)
+        </button>
+        <button id="export-all-png" class="px-3 py-1.5 text-xs font-medium rounded-md bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition cursor-pointer">
+          🖼 Export All PNG 2× (Canvas)
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="max-w-7xl mx-auto px-4 pb-2.5 flex items-center gap-1.5 overflow-x-auto" id="tabs">
+      <button class="tab-btn is-active px-2.5 py-1 text-xs font-medium rounded-md border border-[var(--border)] whitespace-nowrap cursor-pointer" data-filter="all">Tất cả (9)</button>
+      <button class="tab-btn px-2.5 py-1 text-xs font-medium rounded-md border border-[var(--border)] whitespace-nowrap cursor-pointer" data-filter="site">0. Tổng thể Website</button>
+      <button class="tab-btn px-2.5 py-1 text-xs font-medium rounded-md border border-[var(--border)] whitespace-nowrap cursor-pointer" data-filter="ward">1. Ward (Isotype)</button>
+      <button class="tab-btn px-2.5 py-1 text-xs font-medium rounded-md border border-[var(--border)] whitespace-nowrap cursor-pointer" data-filter="trend">2. Trend (Scrolly)</button>
+      <button class="tab-btn px-2.5 py-1 text-xs font-medium rounded-md border border-[var(--border)] whitespace-nowrap cursor-pointer" data-filter="severity">3. Severity (Dot Plot)</button>
+      <button class="tab-btn px-2.5 py-1 text-xs font-medium rounded-md border border-[var(--border)] whitespace-nowrap cursor-pointer" data-filter="counterparty">4. Counterparty (100% Bar)</button>
+      <button class="tab-btn px-2.5 py-1 text-xs font-medium rounded-md border border-[var(--border)] whitespace-nowrap cursor-pointer" data-filter="age">5. Age (Vertical Bar)</button>
+      <button class="tab-btn px-2.5 py-1 text-xs font-medium rounded-md border border-[var(--border)] whitespace-nowrap cursor-pointer" data-filter="season">6. Seasonality (Line)</button>
+      <button class="tab-btn px-2.5 py-1 text-xs font-medium rounded-md border border-[var(--border)] whitespace-nowrap cursor-pointer" data-filter="stateMap">7. State Map + Detail</button>
+      <button class="tab-btn px-2.5 py-1 text-xs font-medium rounded-md border border-[var(--border)] whitespace-nowrap cursor-pointer" data-filter="roles">8. Role Picker</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-6" id="cards-root"></main>
+
+  <!-- Hidden Canvas for PNG Export -->
+  <canvas id="export-canvas" class="hidden"></canvas>
+
+  <!-- Toast -->
+  <div id="toast" class="toast is-hidden px-3.5 py-2 rounded-lg bg-[var(--card)] border border-[var(--border)] shadow-lg text-xs font-medium"></div>
+
+  <script>
+    // Shared SVG styling defs for clean vector export (works standalone in Canva/Figma/Excalidraw)
+    const SVG_DEFS = `
+      <defs>
+        <pattern id="wf-hatch" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="0" y2="8" stroke="#CBD5E1" stroke-width="1.5"/>
+        </pattern>
+        <marker id="wf-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+        </marker>
+        <marker id="wf-arrow-dark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/>
+        </marker>
+        <style>
+          .t-title { font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 700; fill: #0F172A; }
+          .t-sub { font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 11px; font-weight: 600; fill: #334155; }
+          .t-body { font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 10.5px; fill: #475569; }
+          .t-muted { font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 9.5px; fill: #64748B; }
+          .t-mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9.5px; fill: #334155; }
+          .t-badge { font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 10px; font-weight: 700; fill: #FFFFFF; text-anchor: middle; dominant-baseline: central; }
+          .t-callout { font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 10px; font-weight: 600; fill: #1D4ED8; }
+          .box { fill: #F8FAFC; stroke: #94A3B8; stroke-width: 1.25; }
+          .box-card { fill: #FFFFFF; stroke: #475569; stroke-width: 1.5; }
+          .box-dash { fill: #F8FAFC; stroke: #94A3B8; stroke-width: 1.25; stroke-dasharray: 4 3; }
+          .chip { fill: #FFFFFF; stroke: #94A3B8; stroke-width: 1.2; }
+          .chip-on { fill: #0F172A; stroke: #0F172A; stroke-width: 1.2; }
+          .axis { stroke: #475569; stroke-width: 1.25; }
+          .grid { stroke: #E2E8F0; stroke-width: 1; stroke-dasharray: 3 3; }
+        </style>
+      </defs>
+    `;
+
+    const badge = (x, y, n) => `
+      <g>
+        <circle cx="${x}" cy="${y}" r="9.5" fill="#2563EB"/>
+        <text x="${x}" y="${y}" class="t-badge">${n}</text>
+      </g>
+    `;
+
+    const WIREFRAMES = [
+      {
+        id: "site",
+        filename: "00-website-overall-wireframe",
+        title: "0. Wireframe tổng thể Website (Outside the Car — Scrollytelling Architecture)",
+        subtitle: "index.html + js/main.js · 8 chapter-steps, Fixed Header Stepper, Floating Side-Nav, Scrollama + Global State",
+        sourceFiles: ["index.html", "js/main.js", "css/style.css"],
+        interactions: [
+          { tag: "1", title: "Fixed Header Stepper & Prefs", desc: "Click tên chapter trên #stepper để cuộn mượt tới section tương ứng; tự thu gọn thành số trên màn hình hẹp (fitStepper). Nút Light/Dark (#theme-btn) và Colour Vision (#cvd-select) cập nhật CSS vars & vẽ lại toàn bộ 8 chart." },
+          { tag: "2", title: "Progress Bar & Scrollama", desc: "#progress-bar đo % cuộn trang. Scrollama 1 (offset 0.4) theo dõi section.chapter-step để highlight stepper; Scrollama 2 (offset 0.55) điều khiển 5 bước scrollytelling trong Chapter 1." },
+          { tag: "3", title: "Floating Side-Nav & Keyboard", desc: "Nút ↑ / ↓ (#prev-btn, #next-btn) và phím ← / → nhảy qua từng 'stop' (8 chapters + 5 scrolly steps của Ch.1). Phím ↑ / ↓ / Space giữ nguyên cuộn tự nhiên." },
+          { tag: "4", title: "Single Source of Truth (setState)", desc: "main.js giữ 1 object state duy nhất. Chart hoặc control phát event 'viz:state' → main.js merge patch → gọi mod.update(state) cho cả 8 chart." },
+        ],
+        svg: () => `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 980" width="1100" height="980">
+            ${SVG_DEFS}
+            <rect width="1100" height="980" fill="#FFFFFF"/>
+
+            <!-- Title Bar -->
+            <text x="28" y="34" class="t-title">OVERALL WEBSITE WIREFRAME — OUTSIDE THE CAR (web_proto_v1)</text>
+            <text x="28" y="52" class="t-muted">Desktop Viewport (1100px) · Single-page vertical scrollytelling · 8 Chapters · D3.js v7 + Scrollama 3.2</text>
+
+            <!-- Browser Frame -->
+            <rect x="28" y="68" width="800" height="888" rx="10" fill="#FFFFFF" stroke="#334155" stroke-width="2"/>
+
+            <!-- Fixed Header -->
+            <rect x="28" y="68" width="800" height="52" rx="10" fill="#F1F5F9" stroke="#334155" stroke-width="1.5"/>
+            <rect x="28" y="108" width="800" height="12" fill="#F1F5F9"/>
+            <line x1="28" y1="120" x2="828" y2="120" stroke="#334155" stroke-width="1.5"/>
+            <text x="44" y="96" class="t-sub">Outside the Car</text>
+            <!-- Stepper pills -->
+            <g transform="translate(155, 82)">
+              <rect x="0" y="0" width="44" height="22" rx="11" class="chip-on"/><text x="22" y="14" class="t-badge" style="font-size:9px">★ Start</text>
+              <rect x="50" y="0" width="44" height="22" rx="11" class="chip"/><text x="72" y="14" class="t-muted" text-anchor="middle">1 Who</text>
+              <rect x="100" y="0" width="60" height="22" rx="11" class="chip"/><text x="130" y="14" class="t-muted" text-anchor="middle">2 How badly</text>
+              <rect x="166" y="0" width="42" height="22" rx="11" class="chip"/><text x="187" y="14" class="t-muted" text-anchor="middle">3 Age</text>
+              <rect x="214" y="0" width="76" height="22" rx="11" class="chip"/><text x="252" y="14" class="t-muted" text-anchor="middle">4 When/Where</text>
+              <rect x="296" y="0" width="54" height="22" rx="11" class="chip"/><text x="323" y="14" class="t-muted" text-anchor="middle">5 Action</text>
+              <rect x="356" y="0" width="56" height="22" rx="11" class="chip"/><text x="384" y="14" class="t-muted" text-anchor="middle">6 Sum</text>
+              <rect x="418" y="0" width="52" height="22" rx="11" class="chip"/><text x="444" y="14" class="t-muted" text-anchor="middle">7 Src</text>
+            </g>
+            <!-- Theme & CVD -->
+            <rect x="646" y="82" width="56" height="22" rx="5" class="chip"/><text x="674" y="96" class="t-muted" text-anchor="middle">☾ Dark</text>
+            <rect x="708" y="82" width="106" height="22" rx="5" class="chip"/><text x="761" y="96" class="t-muted" text-anchor="middle">CVD: Normal ▾</text>
+            <!-- Progress bar -->
+            <rect x="28" y="116" width="260" height="4" fill="#E11D48"/>
+            ${badge(828, 86, 1)}
+
+            <!-- Section 0: START -->
+            <g transform="translate(48, 134)">
+              <rect x="0" y="0" width="760" height="114" rx="6" class="box"/>
+              <text x="12" y="18" class="t-sub">0. #s-start · HERO &amp; THE WARD</text>
+              <text x="12" y="34" class="t-muted">Eyebrow + H1 ("Every day, [X] hospital beds...") + Lede</text>
+              <rect x="12" y="42" width="490" height="60" rx="4" class="box-card"/>
+              <text x="22" y="58" class="t-body" font-weight="600">Chart 1: ward.js (Isotype Bed Grid · 24 cols)</text>
+              <text x="22" y="74" class="t-muted">[Pedestrian beds ■■] + [Cyclist beds ■■] · Animate on first enter</text>
+              <rect x="514" y="42" width="234" height="60" rx="4" class="box-dash"/>
+              <text x="524" y="58" class="t-body" font-weight="600">Aside .insight (2-col)</text>
+              <text x="524" y="74" class="t-muted">What it means / What is being done</text>
+              <text x="524" y="90" class="t-muted">+ How-to scroll cue (↓ / Space / →)</text>
+            </g>
+
+            <!-- Section 1: WHO (Scrollytelling) -->
+            <g transform="translate(48, 258)">
+              <rect x="0" y="0" width="760" height="132" rx="6" class="box"/>
+              <text x="12" y="18" class="t-sub">1. #s-who · CHAPTER 1: WHO (Scrollytelling 2-Column)</text>
+              <!-- Left Sticky -->
+              <rect x="12" y="28" width="440" height="92" rx="4" class="box-card"/>
+              <text x="22" y="46" class="t-body" font-weight="600">Sticky .scrolly-graphic → Chart 2: trend.js</text>
+              <text x="22" y="62" class="t-muted">4-line chart (2011–2021) + COVID band + NSW 2017 line</text>
+              <rect x="22" y="76" width="110" height="20" rx="10" class="chip-on"/><text x="77" y="89" class="t-badge" style="font-size:8.5px">Change since 2012</text>
+              <rect x="138" y="76" width="120" height="20" rx="10" class="chip"/><text x="198" y="89" class="t-muted" text-anchor="middle">Number of admissions</text>
+              <!-- Right Scrolling Steps -->
+              <rect x="466" y="28" width="282" height="92" rx="4" class="box-dash"/>
+              <text x="476" y="45" class="t-body" font-weight="600">Scrolling .scrolly-text (5 steps)</text>
+              <rect x="476" y="52" width="262" height="18" rx="3" fill="#E0F2FE" stroke="#0284C7"/>
+              <text x="484" y="64" class="t-muted">Step 1..5 (.scrolly-step) → updates trendFocus</text>
+              <text x="476" y="88" class="t-muted">Scrollama offset: 0.55</text>
+              <text x="476" y="104" class="t-muted">+ Bottom 2-col .insight</text>
+              <path d="M 466 74 L 454 74" stroke="#2563EB" stroke-width="2" marker-end="url(#wf-arrow)"/>
+              ${badge(460, 48, 2)}
+            </g>
+
+            <!-- Section 2: HOW BADLY -->
+            <g transform="translate(48, 400)">
+              <rect x="0" y="0" width="760" height="106" rx="6" class="box"/>
+              <text x="12" y="18" class="t-sub">2. #s-how · CHAPTER 2: HOW BADLY</text>
+              <rect x="12" y="26" width="364" height="68" rx="4" class="box-card"/>
+              <text x="22" y="44" class="t-body" font-weight="600">Chart 3: severity.js (Cleveland Dot Plot)</text>
+              <text x="22" y="60" class="t-muted">Chips: [Days in hospital] [Died 30d] [Bed/Patient ratio]</text>
+              <text x="22" y="76" class="t-muted">Sorted horizontal dots + avg vertical ref line</text>
+              <rect x="388" y="26" width="360" height="68" rx="4" class="box-card"/>
+              <text x="398" y="44" class="t-body" font-weight="600">Chart 4: counterparty.js (100% Stacked Bar)</text>
+              <text x="398" y="60" class="t-muted">What injured Pedestrians vs Cyclists collided with</text>
+              <text x="398" y="76" class="t-muted">Hover category highlights across both bars + .insight</text>
+            </g>
+
+            <!-- Section 3: AGE -->
+            <g transform="translate(48, 516)">
+              <rect x="0" y="0" width="760" height="86" rx="6" class="box"/>
+              <text x="12" y="18" class="t-sub">3. #s-age · CHAPTER 3: AGE</text>
+              <rect x="12" y="26" width="736" height="50" rx="4" class="box-card"/>
+              <text x="22" y="44" class="t-body" font-weight="600">Chart 5: age.js (Vertical Bar Chart · 75+ highlighted)</text>
+              <text x="22" y="62" class="t-muted">2 Filter Groups: [Pedestrians | Cyclists] × [Days in hospital | Died 30d | Per 100k] + .insight</text>
+            </g>
+
+            <!-- Section 4: WHEN & WHERE -->
+            <g transform="translate(48, 612)">
+              <rect x="0" y="0" width="760" height="114" rx="6" class="box"/>
+              <text x="12" y="18" class="t-sub">4. #s-when · CHAPTER 4: WHEN &amp; WHERE</text>
+              <rect x="12" y="26" width="300" height="76" rx="4" class="box-card"/>
+              <text x="22" y="44" class="t-body" font-weight="600">Chart 6: season.js (12-Month Line)</text>
+              <text x="22" y="60" class="t-muted">1.0× avg line · Winter band · Peak yellow rings</text>
+              <rect x="324" y="26" width="424" height="76" rx="4" class="box-card"/>
+              <text x="334" y="44" class="t-body" font-weight="600">Chart 7: stateMap.js (.split 2-col: Tile Map + Linked Trend)</text>
+              <text x="334" y="60" class="t-muted">Chips: [Pedestrians | Cyclists] → Click state tile → updates right chart</text>
+              <text x="334" y="76" class="t-muted">5-step colour ramp legend + State vs Australia line</text>
+            </g>
+
+            <!-- Section 5: WHAT YOU CAN DO -->
+            <g transform="translate(48, 736)">
+              <rect x="0" y="0" width="760" height="76" rx="6" class="box"/>
+              <text x="12" y="18" class="t-sub">5. #s-act · CHAPTER 5: WHAT YOU CAN DO (roles.js)</text>
+              <rect x="12" y="26" width="736" height="40" rx="4" class="box-card"/>
+              <text x="22" y="49" class="t-body">4 Role Cards [🚗 I drive | 🚶 I walk | 🚲 I ride | 🏛️ Policy] → Dynamic Role Panel (3 stats + Safe System actions)</text>
+            </g>
+
+            <!-- Section 6 & 7: SUMMARY & SOURCES -->
+            <g transform="translate(48, 822)">
+              <rect x="0" y="0" width="374" height="72" rx="6" class="box"/>
+              <text x="12" y="18" class="t-sub">6. #s-summary · SUMMARY GRID</text>
+              <text x="12" y="36" class="t-muted">5 Summary Cards (1 finding + 1 action each)</text>
+              <text x="12" y="52" class="t-muted">Each card has [Revisit chapter N] scroll button</text>
+
+              <rect x="386" y="0" width="374" height="72" rx="6" class="box"/>
+              <text x="398" y="18" class="t-sub">7. #s-sources · REFERENCES &amp; DATA NOTES</text>
+              <text x="398" y="36" class="t-muted">#references list + 7 data-limitation bullets</text>
+              <text x="398" y="52" class="t-muted">[Back to the start ↑] button + Footer</text>
+            </g>
+
+            <!-- Footer inside browser -->
+            <rect x="28" y="906" width="800" height="50" rx="0" fill="#F1F5F9" stroke="#334155" stroke-width="1.5"/>
+            <text x="44" y="935" class="t-muted">Footer: DataWerk · COS30045 · D3.js v7 + Scrollama · Floating #tooltip (hidden until pointermove)</text>
+
+            <!-- Floating Side Nav inside Browser -->
+            <g transform="translate(772, 430)">
+              <rect x="0" y="0" width="44" height="86" rx="22" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+              <circle cx="22" cy="24" r="14" fill="#F1F5F9" stroke="#94A3B8"/><text x="22" y="28" class="t-sub" text-anchor="middle">↑</text>
+              <circle cx="22" cy="62" r="14" fill="#F1F5F9" stroke="#94A3B8"/><text x="22" y="66" class="t-sub" text-anchor="middle">↓</text>
+            </g>
+            ${badge(826, 472, 3)}
+
+            <!-- Right Annotation Column -->
+            <g transform="translate(852, 72)">
+              <rect x="0" y="0" width="224" height="884" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+              <text x="14" y="24" class="t-sub">ARCHITECTURE &amp; FLOW</text>
+              <line x1="14" y1="34" x2="210" y2="34" stroke="#CBD5E1"/>
+
+              ${badge(24, 62, 1)}
+              <text x="40" y="60" class="t-callout">Header &amp; Global Look</text>
+              <text x="14" y="80" class="t-body">• Stepper: jump to any chapter</text>
+              <text x="14" y="96" class="t-body">• Theme: Light / Dark toggle</text>
+              <text x="14" y="112" class="t-body">• CVD: Normal / Deutan / Protan</text>
+
+              ${badge(24, 152, 2)}
+              <text x="40" y="150" class="t-callout">Scrollama Triggers</text>
+              <text x="14" y="170" class="t-body">• Chapter trigger (offset 0.4)</text>
+              <text x="14" y="186" class="t-body">• Ch.1 step trigger (offset 0.55)</text>
+              <text x="14" y="202" class="t-body">• Updates state.chapter &amp;</text>
+              <text x="14" y="216" class="t-body">  state.trendMode / trendFocus</text>
+
+              ${badge(24, 256, 3)}
+              <text x="40" y="254" class="t-callout">Stop-based Navigation</text>
+              <text x="14" y="274" class="t-body">• Stops = 8 chapters + 5 steps</text>
+              <text x="14" y="290" class="t-body">• Side ↑/↓ buttons + ← / → keys</text>
+              <text x="14" y="306" class="t-body">• Smooth scroll with pendingY</text>
+
+              ${badge(24, 346, 4)}
+              <text x="40" y="344" class="t-callout">State Bus (main.js)</text>
+              <rect x="14" y="362" width="196" height="170" rx="6" fill="#FFFFFF" stroke="#94A3B8"/>
+              <text x="24" y="382" class="t-mono" font-weight="700">INITIAL_STATE</text>
+              <text x="24" y="400" class="t-mono">• chapter: "s-start"</text>
+              <text x="24" y="416" class="t-mono">• wardPlayed: false</text>
+              <text x="24" y="432" class="t-mono">• trendMode: "index"</text>
+              <text x="24" y="448" class="t-mono">• trendFocus: null</text>
+              <text x="24" y="464" class="t-mono">• sevMeasure: "los"</text>
+              <text x="24" y="480" class="t-mono">• ageGroup / ageMeasure</text>
+              <text x="24" y="496" class="t-mono">• mapGroup / mapState</text>
+              <text x="24" y="512" class="t-mono">• role / theme / cvd</text>
+
+              <text x="14" y="560" class="t-sub">COLOUR ENCODING RULE</text>
+              <rect x="14" y="572" width="14" height="14" rx="3" fill="#E11D48"/>
+              <text x="34" y="583" class="t-body">Pedestrian (Red)</text>
+              <rect x="14" y="594" width="14" height="14" rx="3" fill="#0D9488"/>
+              <text x="34" y="605" class="t-body">Cyclist (Teal)</text>
+              <rect x="14" y="616" width="14" height="14" rx="3" fill="#7C3AED"/>
+              <text x="34" y="627" class="t-body">Motorcyclist (Purple)</text>
+              <rect x="14" y="638" width="14" height="14" rx="3" fill="#64748B"/>
+              <text x="34" y="649" class="t-body">Car occupant (Dashed grey)</text>
+              <rect x="14" y="660" width="14" height="14" rx="3" fill="#F59E0B"/>
+              <text x="34" y="671" class="t-body">Annotation ring (Yellow)</text>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "ward",
+        filename: "01-chart-ward-isotype",
+        title: "1. Chart: The Ward — Isotype Hospital Bed Grid (ward.js)",
+        subtitle: "Section #s-start · 1 icon = 1 hospital bed filled every day (2011–2021 average)",
+        sourceFiles: ["js/charts/ward.js", "js/data.js"],
+        interactions: [
+          { tag: "1", title: "Scrollama Entrance Animation", desc: "Khi #s-start vào khung nhìn lần đầu, Scrollama đặt state.wardPlayed = true. Các icon giường xuất hiện lần lượt với delay i * 18ms (bỏ qua animation nếu prefers-reduced-motion)." },
+          { tag: "2", title: "Pointermove Tooltip", desc: "Hover bất kỳ giường nào → hiện #tooltip với tên nhóm (Pedestrians hoặc Cyclists), số giường/ngày (fmt(d.n)) và tổng số ngày nằm viện 2011–2021." },
+          { tag: "3", title: "Responsive Columns", desc: "Tự động đổi từ 24 cột (desktop) sang 12 cột (viewport < 520px) khi state.width thay đổi." },
+        ],
+        svg: () => `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420">
+            ${SVG_DEFS}
+            <rect width="920" height="420" fill="#FFFFFF"/>
+            <text x="24" y="30" class="t-title">CHART 1: THE WARD — ISOTYPE BED GRID (ward.js)</text>
+            <text x="24" y="48" class="t-muted">figure.chart-card[data-viz="ward"] · 1 glyph = 1 hospital bed filled every day</text>
+
+            <!-- Chart Card -->
+            <rect x="24" y="64" width="580" height="330" rx="8" class="box-card"/>
+            <text x="42" y="90" class="t-sub">One icon = one hospital bed filled every day (average, 2011–2021)</text>
+            <!-- Legend -->
+            <rect x="42" y="104" width="12" height="12" rx="2" fill="#E11D48"/><text x="60" y="114" class="t-body">Pedestrians</text>
+            <rect x="145" y="104" width="12" height="12" rx="2" fill="#0D9488"/><text x="163" y="114" class="t-body">Cyclists</text>
+
+            <!-- Bed Grid Wireframe (12x4 preview representing 24 cols) -->
+            <g transform="translate(42, 134)">
+              ${Array.from({ length: 48 }, (_, i) => {
+                const col = i % 12, row = Math.floor(i / 12);
+                const x = col * 44, y = row * 46;
+                const fill = i < 29 ? "#E11D48" : "#0D9488";
+                const op = i > 42 ? 0.35 : 0.9;
+                return `
+                  <g transform="translate(${x},${y})" opacity="${op}">
+                    <rect x="0" y="10" width="32" height="9" rx="2" fill="${fill}"/>
+                    <rect x="0" y="4" width="3" height="18" rx="1" fill="${fill}"/>
+                    <rect x="5" y="6" width="7" height="4" rx="1.5" fill="${fill}" opacity="0.6"/>
+                  </g>
+                `;
+              }).join("")}
+            </g>
+            ${badge(520, 290, 1)}
+
+            <!-- Tooltip Mockup -->
+            <g transform="translate(260, 175)">
+              <rect x="0" y="0" width="190" height="58" rx="6" fill="#0F172A" opacity="0.94"/>
+              <text x="10" y="18" class="t-badge" style="text-anchor:start;font-size:10.5px">Pedestrians</text>
+              <text x="10" y="34" class="t-muted" fill="#CBD5E1">Beds filled every day: XX</text>
+              <text x="10" y="48" class="t-muted" fill="#CBD5E1">Days in hospital 2011–21: XXX,XXX</text>
+            </g>
+            ${badge(255, 175, 2)}
+
+            <text x="42" y="376" class="t-muted">Note: Days in hospital from road-crash admissions ÷ 4,018 days. Source: BITRE.</text>
+
+            <!-- Interaction Panel -->
+            <g transform="translate(624, 64)">
+              <rect x="0" y="0" width="272" height="330" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+              <text x="14" y="24" class="t-sub">INTERACTION &amp; STATE</text>
+              <line x1="14" y1="34" x2="258" y2="34" stroke="#CBD5E1"/>
+              <text x="14" y="54" class="t-mono" font-weight="700">Watch: width | wardPlayed | theme | cvd</text>
+
+              ${badge(24, 86, 1)}
+              <text x="40" y="84" class="t-callout">Staggered Entrance (i * 18ms)</text>
+              <text x="14" y="104" class="t-body">Triggered once when #s-start enters</text>
+              <text x="14" y="120" class="t-body">viewport via Scrollama.</text>
+
+              ${badge(24, 156, 2)}
+              <text x="40" y="154" class="t-callout">Bed Glyph Hover</text>
+              <text x="14" y="174" class="t-body">pointermove → #tooltip shows group</text>
+              <text x="14" y="190" class="t-body">bed count &amp; 11-year hospital days.</text>
+
+              <text x="14" y="232" class="t-sub">RESPONSIVE GRID</text>
+              <text x="14" y="250" class="t-body">• width ≥ 520px → 24 columns</text>
+              <text x="14" y="266" class="t-body">• width &lt; 520px → 12 columns</text>
+              <text x="14" y="282" class="t-body">• Height auto-calculated from rows</text>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "trend",
+        filename: "02-chart-trend-scrolly",
+        title: "2. Chart: Admissions Trend — Scrollytelling Line Chart (trend.js)",
+        subtitle: "Section #s-who · Sticky chart driven by 5 Scrollama text steps + Scale toggle chips",
+        sourceFiles: ["js/charts/trend.js", "index.html", "js/main.js"],
+        interactions: [
+          { tag: "1", title: "Scrollama 5-Step Focus", desc: "Cuộn qua 5 .scrolly-step bên phải cập nhật state.trendMode và state.trendFocus. Nhóm được focus giữ opacity = 1, các nhóm khác mờ xuống 0.18." },
+          { tag: "2", title: "Scale Mode Chips", desc: "Click [Change since 2012] (index, baseline = 100) hoặc [Number of admissions] (số tuyệt đối) để chuyển trục Y." },
+          { tag: "3", title: "Year Crosshair Hover", desc: "Di chuột trên vùng biểu đồ → dựng đường dọc (crosshair) bắt tròn năm gần nhất (Math.round) và hiện tooltip so sánh cả 4 nhóm." },
+        ],
+        svg: () => `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" width="920" height="460">
+            ${SVG_DEFS}
+            <rect width="920" height="460" fill="#FFFFFF"/>
+            <text x="24" y="30" class="t-title">CHART 2: ADMISSIONS TREND — SCROLLYTELLING (trend.js)</text>
+            <text x="24" y="48" class="t-muted">Chapter 1 (#s-who) · Left sticky chart + Right 5 Scrollama steps</text>
+
+            <!-- Left Chart Card -->
+            <rect x="24" y="64" width="560" height="372" rx="8" class="box-card"/>
+            <text x="42" y="88" class="t-sub">Hospital admissions after road crashes, by road user, Australia</text>
+
+            <!-- Plot area -->
+            <g transform="translate(68, 108)">
+              <!-- COVID band -->
+              <rect x="315" y="0" width="75" height="220" fill="#E2E8F0" opacity="0.7"/>
+              <text x="352" y="-5" class="t-muted" text-anchor="middle">COVID</text>
+              <!-- NSW 2017 line -->
+              <line x1="228" y1="0" x2="228" y2="220" stroke="#64748B" stroke-dasharray="3 3"/>
+              <text x="232" y="12" class="t-muted">NSW counting change (2017)</text>
+              <!-- Baseline 100 -->
+              <line x1="0" y1="140" x2="390" y2="140" stroke="#94A3B8"/>
+              <!-- Grid & Axes -->
+              <line x1="0" y1="40" x2="390" y2="40" class="grid"/>
+              <line x1="0" y1="90" x2="390" y2="90" class="grid"/>
+              <line x1="0" y1="190" x2="390" y2="190" class="grid"/>
+              <line x1="0" y1="220" x2="390" y2="220" class="axis"/>
+              <line x1="0" y1="0" x2="0" y2="220" class="axis"/>
+              <text x="-8" y="143" class="t-muted" text-anchor="end">100</text>
+              <text x="0" y="236" class="t-muted">2011</text>
+              <text x="195" y="236" class="t-muted" text-anchor="middle">2016</text>
+              <text x="390" y="236" class="t-muted" text-anchor="end">2021</text>
+
+              <!-- Lines -->
+              <path d="M 0 148 Q 100 120 190 95 T 310 55 T 390 42" fill="none" stroke="#0D9488" stroke-width="3"/>
+              <path d="M 0 142 Q 120 145 210 135 T 310 132 T 390 155" fill="none" stroke="#E11D48" stroke-width="3" opacity="0.25"/>
+              <path d="M 0 144 Q 120 132 210 124 T 310 118 T 390 128" fill="none" stroke="#7C3AED" stroke-width="2" opacity="0.25"/>
+              <path d="M 0 140 Q 120 144 210 142 T 310 146 T 390 165" fill="none" stroke="#64748B" stroke-width="2" stroke-dasharray="4 3" opacity="0.25"/>
+
+              <!-- 2019 Yellow Annotation Ring -->
+              <circle cx="310" cy="55" r="7" fill="none" stroke="#F59E0B" stroke-width="3"/>
+              <circle cx="310" cy="55" r="4" fill="#0D9488"/>
+              <text x="298" y="44" class="t-sub" fill="#0D9488" text-anchor="end">+XX% 2012→19</text>
+
+              <!-- Direct End Labels -->
+              <text x="398" y="45" class="t-sub" fill="#0D9488">Cyclists</text>
+              <text x="398" y="130" class="t-muted">Motorcyclists</text>
+              <text x="398" y="155" class="t-muted">Pedestrians</text>
+              <text x="398" y="170" class="t-muted">Car occupants</text>
+
+              <!-- Crosshair -->
+              <line x1="195" y1="0" x2="195" y2="220" stroke="#2563EB" stroke-width="1.5"/>
+              <rect x="145" y="68" width="118" height="62" rx="5" fill="#0F172A" opacity="0.92"/>
+              <text x="153" y="84" class="t-badge" style="text-anchor:start;font-size:9.5px">2016</text>
+              <text x="153" y="99" class="t-muted" fill="#CBD5E1">Cyclists: X,XXX (1XX)</text>
+              <text x="153" y="113" class="t-muted" fill="#CBD5E1">Pedestrians: X,XXX</text>
+              ${badge(195, 16, 3)}
+            </g>
+
+            <!-- Controls -->
+            <g transform="translate(42, 372)">
+              <rect x="0" y="0" width="136" height="24" rx="12" class="chip-on"/>
+              <text x="68" y="15" class="t-badge" style="font-size:9.5px">Change since 2012</text>
+              <rect x="144" y="0" width="150" height="24" rx="12" class="chip"/>
+              <text x="219" y="15" class="t-body" text-anchor="middle">Number of admissions</text>
+              ${badge(304, 12, 2)}
+            </g>
+            <text x="42" y="418" class="t-muted">Note: Other road users not shown. Source: BITRE.</text>
+
+            <!-- Right Scrollytelling Steps -->
+            <g transform="translate(604, 64)">
+              <rect x="0" y="0" width="292" height="372" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+              <text x="14" y="24" class="t-sub">SCROLLY STEPS → STATE PATCH</text>
+              <line x1="14" y1="34" x2="278" y2="34" stroke="#CBD5E1"/>
+
+              <rect x="14" y="46" width="264" height="50" rx="6" class="chip"/>
+              <text x="24" y="64" class="t-body" font-weight="600">Step 1: Intro (2012 = 100)</text>
+              <text x="24" y="82" class="t-mono">{"trendMode":"index","trendFocus":null}</text>
+
+              <rect x="14" y="106" width="264" height="54" rx="6" fill="#ECFEFF" stroke="#0D9488" stroke-width="1.8"/>
+              <text x="24" y="124" class="t-body" font-weight="700">Step 2 (Active): Cyclists rose...</text>
+              <text x="24" y="142" class="t-mono">{"trendMode":"index","trendFocus":"Pedal cyclist"}</text>
+
+              <rect x="14" y="170" width="264" height="50" rx="6" class="chip"/>
+              <text x="24" y="188" class="t-body" font-weight="600">Step 3: Pedestrians unchanged</text>
+              <text x="24" y="206" class="t-mono">{"trendMode":"index","trendFocus":"Pedestrian"}</text>
+
+              <rect x="14" y="230" width="264" height="50" rx="6" class="chip"/>
+              <text x="24" y="248" class="t-body" font-weight="600">Step 4: COVID &amp; NSW 2017 note</text>
+              <text x="24" y="266" class="t-mono">{"trendMode":"index","trendFocus":null}</text>
+
+              <rect x="14" y="290" width="264" height="50" rx="6" class="chip"/>
+              <text x="24" y="308" class="t-body" font-weight="600">Step 5: Raw admissions count</text>
+              <text x="24" y="326" class="t-mono">{"trendMode":"hosp","trendFocus":null}</text>
+
+              ${badge(14, 132, 1)}
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "severity",
+        filename: "03-chart-severity-dotplot",
+        title: "3. Chart: Severity — Cleveland Dot Plot (severity.js)",
+        subtitle: "Section #s-how (Ch.2a) · Sorted lollipop/dot plot with 3 measure chips + all-user reference line",
+        sourceFiles: ["js/charts/severity.js", "index.html"],
+        interactions: [
+          { tag: "1", title: "3 Measure Chips (state.sevMeasure)", desc: "Chuyển giữa [Days in hospital], [Died within 30 days], [Share of hospital beds vs share of patients]. Tự động sort lại thứ tự từ cao xuống thấp và animate đường + chấm (500ms)." },
+          { tag: "2", title: "All-User Reference Line", desc: "Đường đứt nét dọc hiển thị trung bình của toàn bộ người tham gia giao thông (hoặc mốc 'fair share 1×' ở chế độ ratio)." },
+          { tag: "3", title: "Row Hover Tooltip", desc: "Hover một hàng → hiện đầy đủ 5 chỉ số: Admissions, Avg days, Died 30d, Share of admissions, Share of hospital days." },
+        ],
+        svg: () => `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 380" width="920" height="380">
+            ${SVG_DEFS}
+            <rect width="920" height="380" fill="#FFFFFF"/>
+            <text x="24" y="30" class="t-title">CHART 3: SEVERITY — CLEVELAND DOT PLOT (severity.js)</text>
+            <text x="24" y="48" class="t-muted">Chapter 2a (#s-how) · Further right = worse · Focus groups (Pedestrian/Cyclist) use larger radius (8px vs 6px)</text>
+
+            <!-- Measure Chips -->
+            <g transform="translate(24, 64)">
+              <rect x="0" y="0" width="120" height="24" rx="12" class="chip-on"/><text x="60" y="15" class="t-badge" style="font-size:9.5px">Days in hospital</text>
+              <rect x="128" y="0" width="136" height="24" rx="12" class="chip"/><text x="196" y="15" class="t-body" text-anchor="middle">Died within 30 days</text>
+              <rect x="272" y="0" width="230" height="24" rx="12" class="chip"/><text x="387" y="15" class="t-body" text-anchor="middle">Share of beds vs share of patients</text>
+              ${badge(514, 12, 1)}
+            </g>
+
+            <!-- Chart Card -->
+            <rect x="24" y="98" width="580" height="256" rx="8" class="box-card"/>
+            <text x="42" y="122" class="t-sub">How badly each road user is hurt, 2011–2021</text>
+
+            <g transform="translate(136, 148)">
+              <!-- Grid & Axes -->
+              <line x1="90" y1="0" x2="90" y2="155" class="grid"/>
+              <line x1="180" y1="0" x2="180" y2="155" class="grid"/>
+              <line x1="270" y1="0" x2="270" y2="155" class="grid"/>
+              <line x1="360" y1="0" x2="360" y2="155" class="grid"/>
+              <line x1="0" y1="155" x2="400" y2="155" class="axis"/>
+
+              <!-- Reference line -->
+              <line x1="195" y1="-6" x2="195" y2="155" stroke="#475569" stroke-dasharray="4 3" stroke-width="1.5"/>
+              <text x="200" y="-4" class="t-muted" font-weight="600">all road users X.X days</text>
+              ${badge(195, -14, 2)}
+
+              <!-- Row 1: Pedestrians -->
+              <text x="-10" y="26" class="t-sub" text-anchor="end">Pedestrians</text>
+              <line x1="0" y1="22" x2="330" y2="22" stroke="#E11D48" stroke-width="2.5"/>
+              <circle cx="330" cy="22" r="8" fill="#E11D48"/>
+              <text x="344" y="26" class="t-sub">X.X days</text>
+
+              <!-- Row 2: Motorcyclists -->
+              <text x="-10" y="64" class="t-body" text-anchor="end">Motorcyclists</text>
+              <line x1="0" y1="60" x2="215" y2="60" stroke="#7C3AED" stroke-width="2"/>
+              <circle cx="215" cy="60" r="6" fill="#7C3AED"/>
+              <text x="227" y="64" class="t-body">X.X days</text>
+
+              <!-- Row 3: Car occupants -->
+              <text x="-10" y="102" class="t-body" text-anchor="end">Car occupants</text>
+              <line x1="0" y1="98" x2="170" y2="98" stroke="#64748B" stroke-width="2" stroke-dasharray="4 3"/>
+              <circle cx="170" cy="98" r="6" fill="#64748B"/>
+              <text x="182" y="102" class="t-body">X.X days</text>
+
+              <!-- Row 4: Cyclists -->
+              <text x="-10" y="140" class="t-sub" text-anchor="end">Cyclists</text>
+              <line x1="0" y1="136" x2="135" y2="136" stroke="#0D9488" stroke-width="2.5"/>
+              <circle cx="135" cy="136" r="8" fill="#0D9488"/>
+              <text x="149" y="140" class="t-sub">X.X days</text>
+
+              ${badge(330, 42, 3)}
+            </g>
+            <text x="42" y="340" class="t-muted">Note: Days in hospital leave out patients who died within 30 days.</text>
+
+            <!-- Interaction Panel -->
+            <g transform="translate(624, 98)">
+              <rect x="0" y="0" width="272" height="256" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+              <text x="14" y="24" class="t-sub">INTERACTION &amp; STATE</text>
+              <line x1="14" y1="34" x2="258" y2="34" stroke="#CBD5E1"/>
+              <text x="14" y="54" class="t-mono" font-weight="700">Watch: width | sevMeasure | theme | cvd</text>
+
+              ${badge(24, 84, 1)}
+              <text x="40" y="82" class="t-callout">Animated Re-sort (500ms)</text>
+              <text x="14" y="102" class="t-body">Switching measure re-sorts rows</text>
+              <text x="14" y="118" class="t-body">descending &amp; transitions lines/dots.</text>
+
+              ${badge(24, 150, 2)}
+              <text x="40" y="148" class="t-callout">Benchmark Reference Line</text>
+              <text x="14" y="168" class="t-body">Computes weighted average across all</text>
+              <text x="14" y="184" class="t-body">road users (or 1.0× for ratio).</text>
+
+              ${badge(24, 214, 3)}
+              <text x="40" y="212" class="t-callout">Full 5-Metric Tooltip</text>
+              <text x="14" y="232" class="t-body">Shows all metrics regardless of active chip.</text>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "counterparty",
+        filename: "04-chart-counterparty-stacked",
+        title: "4. Chart: Counterparty — 100% Stacked Bar (counterparty.js)",
+        subtitle: "Section #s-how (Ch.2b) · Neutral greyscale palette (road-user colours reserved for 'who' only)",
+        sourceFiles: ["js/charts/counterparty.js"],
+        interactions: [
+          { tag: "1", title: "Cross-Bar Category Highlight", desc: "Hover một phân đoạn bất kỳ trên thanh Pedestrians hoặc Cyclists → giữ opacity = 1 cho cùng category trên CẢ HAI thanh, làm mờ các category khác xuống 0.25 để dễ so sánh trực tiếp." },
+          { tag: "2", title: "Direct Percentage Labels", desc: "Tự động ẩn label nếu share ≤ 12%. Nếu độ rộng đoạn > 150px sẽ hiển thị thêm tên rút gọn của category." },
+          { tag: "3", title: "Tooltip", desc: "Hiển thị tên nhóm + category, tổng số ca nhập viện và % tỷ trọng chính xác 1 chữ số thập phân." },
+        ],
+        svg: () => `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 330" width="920" height="330">
+            ${SVG_DEFS}
+            <rect width="920" height="330" fill="#FFFFFF"/>
+            <text x="24" y="30" class="t-title">CHART 4: COUNTERPARTY — 100% STACKED BAR (counterparty.js)</text>
+            <text x="24" y="48" class="t-muted">Chapter 2b (#s-how) · What injured pedestrians and cyclists collided with (no fault recorded)</text>
+
+            <rect x="24" y="64" width="580" height="240" rx="8" class="box-card"/>
+            <text x="42" y="88" class="t-sub">What injured pedestrians and cyclists collided with, 2011–2021</text>
+
+            <!-- Legend -->
+            <g transform="translate(42, 102)">
+              <rect x="0" y="0" width="10" height="10" fill="#1E293B"/><text x="14" y="9" class="t-muted">Car/van</text>
+              <rect x="64" y="0" width="10" height="10" fill="#475569"/><text x="78" y="9" class="t-muted">Heavy veh.</text>
+              <rect x="142" y="0" width="10" height="10" fill="#64748B"/><text x="156" y="9" class="t-muted">Motorcycle</text>
+              <rect x="220" y="0" width="10" height="10" fill="#94A3B8"/><text x="234" y="9" class="t-muted">Fixed obj.</text>
+              <rect x="294" y="0" width="10" height="10" fill="#334155"/><text x="308" y="9" class="t-muted">No collision (fall)</text>
+              <rect x="406" y="0" width="10" height="10" fill="#CBD5E1"/><text x="420" y="9" class="t-muted">Other</text>
+            </g>
+
+            <!-- Bars -->
+            <g transform="translate(120, 134)">
+              <text x="-10" y="28" class="t-sub" text-anchor="end">Pedestrians</text>
+              <rect x="0" y="4" width="340" height="40" fill="#1E293B"/>
+              <text x="12" y="28" class="t-badge" style="text-anchor:start;font-size:11px">XX% Car, pick-up truck or van</text>
+              <rect x="342" y="4" width="44" height="40" fill="#475569" opacity="0.25"/>
+              <rect x="388" y="4" width="72" height="40" fill="#CBD5E1" opacity="0.25"/>
+
+              <text x="-10" y="88" class="t-sub" text-anchor="end">Cyclists</text>
+              <rect x="0" y="64" width="110" height="40" fill="#1E293B"/>
+              <text x="10" y="88" class="t-badge" style="text-anchor:start;font-size:11px">XX%</text>
+              <rect x="112" y="64" width="52" height="40" fill="#94A3B8" opacity="0.25"/>
+              <rect x="166" y="64" width="234" height="40" fill="#334155" opacity="0.25"/>
+              <text x="176" y="88" class="t-muted">XX% No collision (dimmed on hover)</text>
+              <rect x="402" y="64" width="58" height="40" fill="#CBD5E1" opacity="0.25"/>
+
+              <line x1="0" y1="118" x2="460" y2="118" class="axis"/>
+              <text x="0" y="134" class="t-muted">0%</text>
+              <text x="230" y="134" class="t-muted" text-anchor="middle">50%</text>
+              <text x="460" y="134" class="t-muted" text-anchor="end">100%</text>
+
+              ${badge(170, 24, 1)}
+              ${badge(55, 84, 1)}
+            </g>
+            <text x="42" y="290" class="t-muted">Hover a part of a bar to compare the same category in both bars.</text>
+
+            <!-- Interaction Panel -->
+            <g transform="translate(624, 64)">
+              <rect x="0" y="0" width="272" height="240" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+              <text x="14" y="24" class="t-sub">INTERACTION &amp; STATE</text>
+              <line x1="14" y1="34" x2="258" y2="34" stroke="#CBD5E1"/>
+              <text x="14" y="54" class="t-mono" font-weight="700">Watch: width | theme | cvd</text>
+
+              ${badge(24, 86, 1)}
+              <text x="40" y="84" class="t-callout">Linked Category Highlight</text>
+              <text x="14" y="104" class="t-body">Hovering any segment sets opacity=1</text>
+              <text x="14" y="120" class="t-body">for matching category across BOTH</text>
+              <text x="14" y="136" class="t-body">bars, dimming others to 0.25.</text>
+
+              <text x="14" y="172" class="t-sub">DESIGN RULES</text>
+              <text x="14" y="190" class="t-body">• Neutral greys only (not road users)</text>
+              <text x="14" y="206" class="t-body">• Labels shown when share &gt; 12%</text>
+              <text x="14" y="222" class="t-body">• Tooltip: admissions + exact %</text>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "age",
+        filename: "05-chart-age-bars",
+        title: "5. Chart: Age Breakdown — Vertical Bar Chart (age.js)",
+        subtitle: "Section #s-age (Ch.3) · 2 Toggle Groups (Road User × Measure) · Shared Y-scale across groups",
+        sourceFiles: ["js/charts/age.js", "index.html"],
+        interactions: [
+          { tag: "1", title: "2 Toggle Chip Groups", desc: "Hàng 1: state.ageGroup ([Pedestrians] | [Cyclists]). Hàng 2: state.ageMeasure ([Days in hospital] | [Died within 30 days] | [Per 100,000 people])." },
+          { tag: "2", title: "Shared Y-Axis Scale", desc: "Miền Y tính trên cả Pedestrians và Cyclists cùng lúc để khi chuyển nhóm người đọc không bị đánh lừa bởi trục Y tự co giãn." },
+          { tag: "3", title: "75+ Focal Bar & Yellow Marker", desc: "Cột 75+ dùng màu đậm (P.group) + vạch vàng bên dưới; các nhóm tuổi khác dùng màu nhạt (P.soft). Cột có giá trị ước lượng gắn ký hiệu '≈'." },
+        ],
+        svg: () => `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 400" width="920" height="400">
+            ${SVG_DEFS}
+            <rect width="920" height="400" fill="#FFFFFF"/>
+            <text x="24" y="30" class="t-title">CHART 5: AGE GROUP — VERTICAL BAR CHART (age.js)</text>
+            <text x="24" y="48" class="t-muted">Chapter 3 (#s-age) · Two-row chip controls + animated bars (500ms) + 75+ highlight</text>
+
+            <!-- Controls -->
+            <g transform="translate(24, 62)">
+              <rect x="0" y="0" width="104" height="22" rx="11" class="chip-on"/><text x="52" y="14" class="t-badge" style="font-size:9px">Pedestrians</text>
+              <rect x="110" y="0" width="82" height="22" rx="11" class="chip"/><text x="151" y="14" class="t-body" text-anchor="middle">Cyclists</text>
+
+              <rect x="0" y="28" width="116" height="22" rx="11" class="chip-on"/><text x="58" y="42" class="t-badge" style="font-size:9px">Days in hospital</text>
+              <rect x="122" y="28" width="128" height="22" rx="11" class="chip"/><text x="186" y="42" class="t-body" text-anchor="middle">Died within 30 days</text>
+              <rect x="256" y="28" width="128" height="22" rx="11" class="chip"/><text x="320" y="42" class="t-body" text-anchor="middle">Per 100,000 people</text>
+              ${badge(398, 26, 1)}
+            </g>
+
+            <!-- Chart Card -->
+            <rect x="24" y="122" width="580" height="252" rx="8" class="box-card"/>
+            <text x="42" y="146" class="t-sub">Pedestrians: average days in hospital, by age group (2011–2021)</text>
+
+            <g transform="translate(72, 174)">
+              <line x1="0" y1="35" x2="490" y2="35" class="grid"/>
+              <line x1="0" y1="85" x2="490" y2="85" class="grid"/>
+              <line x1="0" y1="135" x2="490" y2="135" class="axis"/>
+              <line x1="0" y1="0" x2="0" y2="135" class="axis"/>
+              ${badge(14, 18, 2)}
+
+              <!-- Bars -->
+              ${[
+                { age: "0–17", h: 42, x: 25, main: false },
+                { age: "18–25", h: 58, x: 100, main: false },
+                { age: "26–39", h: 64, x: 175, main: false },
+                { age: "40–64", h: 82, x: 250, main: false },
+                { age: "65–74", h: 102, x: 325, main: false },
+                { age: "75+", h: 122, x: 400, main: true },
+              ].map((b) => `
+                <rect x="${b.x}" y="${135 - b.h}" width="52" height="${b.h}" rx="3" fill="${b.main ? "#E11D48" : "#FDA4AF"}"/>
+                <text x="${b.x + 26}" y="${129 - b.h}" class="${b.main ? "t-sub" : "t-muted"}" text-anchor="middle">X.X d</text>
+                <text x="${b.x + 26}" y="152" class="${b.main ? "t-sub" : "t-muted"}" text-anchor="middle">${b.age}</text>
+              `).join("")}
+
+              <!-- Yellow marker under 75+ -->
+              <rect x="400" y="157" width="52" height="4" fill="#F59E0B"/>
+              ${badge(456, 150, 3)}
+            </g>
+            <text x="42" y="360" class="t-muted">Note: "≈" = estimate where BITRE and ABS age bands do not line up.</text>
+
+            <!-- Interaction Panel -->
+            <g transform="translate(624, 122)">
+              <rect x="0" y="0" width="272" height="252" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+              <text x="14" y="24" class="t-sub">INTERACTION &amp; STATE</text>
+              <line x1="14" y1="34" x2="258" y2="34" stroke="#CBD5E1"/>
+              <text x="14" y="54" class="t-mono" font-weight="700">Watch: width | ageGroup | ageMeasure</text>
+
+              ${badge(24, 84, 1)}
+              <text x="40" y="82" class="t-callout">2-Axis Filter Controls</text>
+              <text x="14" y="102" class="t-body">Updates chart title dynamically &amp;</text>
+              <text x="14" y="118" class="t-body">animates bar heights (500ms).</text>
+
+              ${badge(24, 150, 2)}
+              <text x="40" y="148" class="t-callout">Fixed Cross-Group Y Scale</text>
+              <text x="14" y="168" class="t-body">Domain computed over BOTH groups</text>
+              <text x="14" y="184" class="t-body">so switching Ped ↔ Cyc is honest.</text>
+
+              ${badge(24, 216, 3)}
+              <text x="40" y="214" class="t-callout">75+ Focus + Bar Tooltip</text>
+              <text x="14" y="234" class="t-body">Hover bar → shows all 4 metrics.</text>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "season",
+        filename: "06-chart-seasonality-line",
+        title: "6. Chart: Seasonality — 12-Month Line Chart (season.js)",
+        subtitle: "Section #s-when (Ch.4a) · 2011–2019 (excluding COVID) · 1.0× typical month baseline",
+        sourceFiles: ["js/charts/season.js"],
+        interactions: [
+          { tag: "1", title: "Winter Band & Peak Rings", desc: "Vùng xám đánh dấu mùa đông Úc (Jun–Aug). Vòng tròn vàng tự động đặt tại tháng cao điểm của mỗi nhóm (Pedestrians: Jun, Cyclists: Mar)." },
+          { tag: "2", title: "Data Point Hover", desc: "Hover từng chấm tròn tháng → hiện tooltip với tổng số ca nhập viện 2011–2019 và % chênh lệch so với tháng trung bình." },
+          { tag: "3", title: "Narrow Mobile Labels", desc: "Khi width < 520px, nhãn tháng rút gọn thành 1 ký tự (J, F, M...) và nhãn đường chuyển vào trong plot." },
+        ],
+        svg: () => `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 350" width="920" height="350">
+            ${SVG_DEFS}
+            <rect width="920" height="350" fill="#FFFFFF"/>
+            <text x="24" y="30" class="t-title">CHART 6: SEASONALITY — MONTHLY LINE CHART (season.js)</text>
+            <text x="24" y="48" class="t-muted">Chapter 4a (#s-when) · Index relative to average month (1.0×), 2011–2019</text>
+
+            <rect x="24" y="64" width="580" height="262" rx="8" class="box-card"/>
+            <text x="42" y="88" class="t-sub">Each month compared with an average month, 2011–2019</text>
+
+            <g transform="translate(68, 114)">
+              <!-- Winter Band (Jun-Aug) -->
+              <rect x="196" y="0" width="112" height="156" fill="#E2E8F0" opacity="0.75"/>
+              <text x="252" y="-5" class="t-muted" text-anchor="middle">Winter</text>
+              <!-- 1.0x reference line -->
+              <line x1="0" y1="78" x2="430" y2="78" stroke="#64748B"/>
+              <text x="4" y="73" class="t-muted">average month (1.0×)</text>
+              <line x1="0" y1="30" x2="430" y2="30" class="grid"/>
+              <line x1="0" y1="126" x2="430" y2="126" class="grid"/>
+              <line x1="0" y1="156" x2="430" y2="156" class="axis"/>
+              <line x1="0" y1="0" x2="0" y2="156" class="axis"/>
+
+              <!-- Lines -->
+              <path d="M 16 105 L 54 96 L 92 84 L 130 74 L 168 58 L 206 36 L 244 48 L 282 54 L 320 76 L 358 88 L 396 92 L 420 100" fill="none" stroke="#E11D48" stroke-width="2.5"/>
+              <path d="M 16 54 L 54 48 L 92 38 L 130 62 L 168 78 L 206 96 L 244 104 L 282 92 L 320 74 L 358 62 L 396 56 L 420 60" fill="none" stroke="#0D9488" stroke-width="2.5"/>
+
+              <!-- Peak yellow rings -->
+              <circle cx="206" cy="36" r="8" fill="none" stroke="#F59E0B" stroke-width="3"/>
+              <circle cx="92" cy="38" r="8" fill="none" stroke="#F59E0B" stroke-width="3"/>
+              ${badge(220, 24, 1)}
+              ${badge(92, 22, 2)}
+
+              <!-- Direct labels -->
+              <text x="436" y="62" class="t-sub" fill="#0D9488">Cyclists</text>
+              <text x="436" y="102" class="t-sub" fill="#E11D48">Pedestrians</text>
+
+              <text x="16" y="172" class="t-muted" text-anchor="middle">Jan</text>
+              <text x="92" y="172" class="t-muted" text-anchor="middle">Mar</text>
+              <text x="206" y="172" class="t-muted" text-anchor="middle">Jun</text>
+              <text x="320" y="172" class="t-muted" text-anchor="middle">Sep</text>
+              <text x="420" y="172" class="t-muted" text-anchor="middle">Dec</text>
+            </g>
+            <text x="42" y="314" class="t-muted">Note: 2020–21 left out so COVID lockdowns do not distort the pattern.</text>
+
+            <!-- Interaction Panel -->
+            <g transform="translate(624, 64)">
+              <rect x="0" y="0" width="272" height="262" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+              <text x="14" y="24" class="t-sub">INTERACTION &amp; STATE</text>
+              <line x1="14" y1="34" x2="258" y2="34" stroke="#CBD5E1"/>
+              <text x="14" y="54" class="t-mono" font-weight="700">Watch: width | theme | cvd</text>
+
+              ${badge(24, 86, 1)}
+              <text x="40" y="84" class="t-callout">Winter Band + Peak Rings</text>
+              <text x="14" y="104" class="t-body">Jun–Aug shaded; yellow rings mark</text>
+              <text x="14" y="120" class="t-body">each group's peak month (Jun / Mar).</text>
+
+              ${badge(24, 152, 2)}
+              <text x="40" y="150" class="t-callout">Month Point Hover</text>
+              <text x="14" y="170" class="t-body">Hover circle → tooltip shows 2011–19</text>
+              <text x="14" y="186" class="t-body">admissions &amp; % vs average month.</text>
+
+              ${badge(24, 218, 3)}
+              <text x="40" y="216" class="t-callout">Responsive Axis &amp; Labels</text>
+              <text x="14" y="236" class="t-body">width &lt; 520px → 1-letter months.</text>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "stateMap",
+        filename: "07-chart-statemap-linked",
+        title: "7. Chart: State Tile Map + Linked Trend (stateMap.js)",
+        subtitle: "Section #s-when (Ch.4b) · 4×4 Equal-Area Tile Grid + 5-step Quantize Ramp + Linked Detail Line",
+        sourceFiles: ["js/charts/stateMap.js", "js/constants.js"],
+        interactions: [
+          { tag: "1", title: "Road User Chips (state.mapGroup)", desc: "Chuyển giữa [Pedestrians] và [Cyclists] → đổi bảng màu 5 bước (P.ramp), tính lại ngưỡng quantize, vẽ lại cả bản đồ ô vuông và biểu đồ chi tiết bên phải." },
+          { tag: "2", title: "Click / Keyboard Select Tile (emit)", desc: "Click hoặc nhấn Enter/Space trên một ô bang (tabindex=0, role=button) → emit({ mapState: d.state }) → viền ô được chọn sáng lên và biểu đồ phải cập nhật thành bang đó vs Australia." },
+          { tag: "3", title: "Tile Hover Tooltip", desc: "Hover một ô bang → hiện rate/100k của bang, mức trung bình Australia và tổng admissions 2011–2021." },
+        ],
+        svg: () => `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 410" width="920" height="410">
+            ${SVG_DEFS}
+            <rect width="920" height="410" fill="#FFFFFF"/>
+            <text x="24" y="30" class="t-title">CHART 7: STATE TILE MAP + LINKED TREND (stateMap.js)</text>
+            <text x="24" y="48" class="t-muted">Chapter 4b (#s-when) · Master-detail split view (.split)</text>
+
+            <!-- Chips -->
+            <g transform="translate(24, 62)">
+              <rect x="0" y="0" width="104" height="22" rx="11" class="chip-on"/><text x="52" y="14" class="t-badge" style="font-size:9px">Pedestrians</text>
+              <rect x="110" y="0" width="82" height="22" rx="11" class="chip"/><text x="151" y="14" class="t-body" text-anchor="middle">Cyclists</text>
+              ${badge(206, 11, 1)}
+            </g>
+
+            <!-- Left Card: Tile Grid -->
+            <rect x="24" y="96" width="286" height="290" rx="8" class="box-card"/>
+            <text x="38" y="118" class="t-sub">Admissions per 100,000 / yr</text>
+            <g transform="translate(52, 134)">
+              <!-- 4x4 Tile positions matching Australia layout -->
+              <rect x="58" y="0" width="50" height="50" rx="6" fill="#9F1239" stroke="#0F172A" stroke-width="2.5"/>
+              <text x="65" y="18" class="t-badge" style="text-anchor:start">NT</text>
+              <text x="65" y="36" class="t-muted" fill="#FFFFFF">XX.X</text>
+
+              <rect x="0" y="56" width="50" height="50" rx="6" fill="#FDA4AF"/>
+              <text x="7" y="74" class="t-sub">WA</text><text x="7" y="92" class="t-muted">XX.X</text>
+
+              <rect x="58" y="56" width="50" height="50" rx="6" fill="#FB7185"/>
+              <text x="65" y="74" class="t-sub">SA</text><text x="65" y="92" class="t-muted">XX.X</text>
+
+              <rect x="116" y="56" width="50" height="50" rx="6" fill="#FB7185"/>
+              <text x="123" y="74" class="t-sub">QLD</text><text x="123" y="92" class="t-muted">XX.X</text>
+
+              <rect x="116" y="112" width="50" height="50" rx="6" fill="#E11D48"/>
+              <text x="123" y="130" class="t-badge" style="text-anchor:start">NSW</text>
+
+              <rect x="174" y="112" width="50" height="50" rx="6" fill="#FECDD3"/>
+              <text x="181" y="130" class="t-sub">ACT</text>
+
+              <rect x="116" y="168" width="50" height="50" rx="6" fill="#E11D48"/>
+              <text x="123" y="186" class="t-badge" style="text-anchor:start">VIC</text>
+
+              <rect x="174" y="168" width="50" height="50" rx="6" fill="#FECDD3"/>
+              <text x="181" y="186" class="t-sub">TAS</text>
+            </g>
+            <!-- Ramp Legend -->
+            <text x="38" y="372" class="t-muted">Ramp: [■][■][■][■][■] · Australia XX.X</text>
+            ${badge(164, 150, 2)}
+
+            <!-- Arrow between Map & Detail -->
+            <path d="M 310 230 L 336 230" stroke="#2563EB" stroke-width="2" marker-end="url(#wf-arrow)"/>
+
+            <!-- Right Card: Linked Detail -->
+            <rect x="340" y="96" width="290" height="290" rx="8" class="box-card"/>
+            <text x="356" y="118" class="t-sub">Northern Territory vs Australia</text>
+            <g transform="translate(382, 144)">
+              <rect x="148" y="0" width="46" height="190" fill="#E2E8F0" opacity="0.7"/>
+              <line x1="0" y1="60" x2="194" y2="60" class="grid"/>
+              <line x1="0" y1="125" x2="194" y2="125" class="grid"/>
+              <line x1="0" y1="190" x2="194" y2="190" class="axis"/>
+              <line x1="0" y1="0" x2="0" y2="190" class="axis"/>
+
+              <path d="M 0 135 L 40 132 L 80 134 L 120 136 L 160 138 L 194 146" fill="none" stroke="#64748B" stroke-width="2" stroke-dasharray="4 3"/>
+              <path d="M 0 42 L 40 62 L 80 35 L 120 55 L 160 48 L 194 64" fill="none" stroke="#E11D48" stroke-width="3"/>
+              <text x="200" y="66" class="t-sub" fill="#E11D48">NT</text>
+              <text x="200" y="148" class="t-muted">Australia</text>
+              <text x="0" y="206" class="t-muted">2011</text>
+              <text x="194" y="206" class="t-muted" text-anchor="end">2021</text>
+            </g>
+
+            <!-- Interaction Panel -->
+            <g transform="translate(648, 96)">
+              <rect x="0" y="0" width="248" height="290" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+              <text x="14" y="24" class="t-sub">INTERACTION &amp; STATE</text>
+              <line x1="14" y1="34" x2="234" y2="34" stroke="#CBD5E1"/>
+              <text x="14" y="54" class="t-mono" font-weight="700">Watch: mapGroup | mapState</text>
+
+              ${badge(24, 86, 1)}
+              <text x="40" y="84" class="t-callout">Group Switch</text>
+              <text x="14" y="104" class="t-body">Recomputes 5-step quantize ramp</text>
+              <text x="14" y="120" class="t-body">&amp; updates both map + detail chart.</text>
+
+              ${badge(24, 152, 2)}
+              <text x="40" y="150" class="t-callout">Click / Enter Tile → emit</text>
+              <text x="14" y="170" class="t-body">Emits { mapState } to main.js.</text>
+              <text x="14" y="186" class="t-body">Accessible: tabindex=0, aria-pressed.</text>
+
+              ${badge(24, 218, 3)}
+              <text x="40" y="216" class="t-callout">Tile Tooltip</text>
+              <text x="14" y="236" class="t-body">Hover tile → state rate vs Aus rate</text>
+              <text x="14" y="252" class="t-body">+ total admissions 2011–21.</text>
+            </g>
+          </svg>
+        `
+      },
+      {
+        id: "roles",
+        filename: "08-chart-roles-picker",
+        title: "8. Interactive Component: Role Picker & Action Panel (roles.js)",
+        subtitle: "Section #s-act (Ch.5) · 4 Role Cards → Personalized stats + Safe System ordered actions",
+        sourceFiles: ["js/charts/roles.js", "js/cite.js"],
+        interactions: [
+          { tag: "1", title: "Role Card Selection (emit)", desc: "Click 1 trong 4 thẻ vai trò ([🚗 I drive], [🚶 I walk], [🚲 I ride], [🏛️ I make decisions]) → emit({ role }) → cập nhật trạng thái is-active & aria-pressed." },
+          { tag: "2", title: "Dynamic Stats + Safe System Actions", desc: "Panel bên dưới (aria-live='polite') render lại 3 số liệu nổi bật từ các chương trước + 3 hành động sắp xếp theo thứ tự Safe System (System → Driver → Extra protection) kèm citation links." },
+        ],
+        svg: () => `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 380" width="920" height="380">
+            ${SVG_DEFS}
+            <rect width="920" height="380" fill="#FFFFFF"/>
+            <text x="24" y="30" class="t-title">COMPONENT 8: ROLE PICKER &amp; ACTION PANEL (roles.js)</text>
+            <text x="24" y="48" class="t-muted">Chapter 5 (#s-act) · Personalized takeaway &amp; Safe System actions</text>
+
+            <!-- 4 Role Cards -->
+            <g transform="translate(24, 68)">
+              <rect x="0" y="0" width="136" height="62" rx="8" fill="#0F172A" stroke="#0F172A"/>
+              <text x="14" y="26" class="t-badge" style="text-anchor:start;font-size:12px">🚗 I drive</text>
+              <text x="14" y="44" class="t-muted" fill="#CBD5E1">car, ute or van</text>
+
+              <rect x="148" y="0" width="136" height="62" rx="8" class="box-card"/>
+              <text x="162" y="26" class="t-sub">🚶 I walk</text>
+              <text x="162" y="44" class="t-muted">or my parents do</text>
+
+              <rect x="296" y="0" width="136" height="62" rx="8" class="box-card"/>
+              <text x="310" y="26" class="t-sub">🚲 I ride</text>
+              <text x="310" y="44" class="t-muted">bike or e-bike</text>
+
+              <rect x="444" y="0" width="136" height="62" rx="8" class="box-card"/>
+              <text x="458" y="26" class="t-sub">🏛️ Policy</text>
+              <text x="458" y="44" class="t-muted">council, state, fed</text>
+
+              ${badge(134, 4, 1)}
+            </g>
+
+            <!-- Arrow down -->
+            <path d="M 92 132 L 92 152" stroke="#2563EB" stroke-width="2" marker-end="url(#wf-arrow)"/>
+
+            <!-- Role Panel -->
+            <rect x="24" y="156" width="580" height="198" rx="8" class="box-card"/>
+            <text x="42" y="182" class="t-sub">When you drive, the people outside your car have no crumple zone</text>
+
+            <!-- 3 Stat Boxes -->
+            <g transform="translate(42, 196)">
+              <rect x="0" y="0" width="174" height="56" rx="6" class="box"/>
+              <text x="12" y="24" class="t-title">XX%</text>
+              <text x="12" y="42" class="t-muted">collided with car/van</text>
+
+              <rect x="184" y="0" width="174" height="56" rx="6" class="box"/>
+              <text x="196" y="24" class="t-title">X.X days</text>
+              <text x="196" y="42" class="t-muted">avg pedestrian stay</text>
+
+              <rect x="368" y="0" width="174" height="56" rx="6" class="box"/>
+              <text x="380" y="24" class="t-title">+XX%</text>
+              <text x="380" y="42" class="t-muted">more in June vs avg</text>
+            </g>
+
+            <!-- Safe System Actions -->
+            <g transform="translate(42, 266)">
+              <rect x="0" y="0" width="56" height="18" rx="4" fill="#E0F2FE"/><text x="28" y="12" class="t-callout" text-anchor="middle">System</text>
+              <text x="64" y="12" class="t-body">30–40 km/h speed limits where many people walk [cite]</text>
+
+              <rect x="0" y="24" width="56" height="18" rx="4" fill="#FEF3C7"/><text x="28" y="36" class="t-muted" text-anchor="middle" font-weight="700">Driver</text>
+              <text x="64" y="36" class="t-body">Slow down near people on foot; leave ≥ 1 m passing a bike [cite]</text>
+
+              <rect x="0" y="48" width="56" height="18" rx="4" fill="#F1F5F9"/><text x="28" y="60" class="t-muted" text-anchor="middle">Extra</text>
+              <text x="64" y="60" class="t-body">Role-specific protective actions + renderCites(panel)</text>
+              ${badge(536, 10, 2)}
+            </g>
+
+            <!-- Interaction Panel -->
+            <g transform="translate(624, 68)">
+              <rect x="0" y="0" width="272" height="286" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+              <text x="14" y="24" class="t-sub">INTERACTION &amp; STATE</text>
+              <line x1="14" y1="34" x2="258" y2="34" stroke="#CBD5E1"/>
+              <text x="14" y="54" class="t-mono" font-weight="700">Watch: state.role</text>
+
+              ${badge(24, 86, 1)}
+              <text x="40" y="84" class="t-callout">Role Button Emit</text>
+              <text x="14" y="104" class="t-body">Click button → emit(root, { role })</text>
+              <text x="14" y="120" class="t-body">Updates active pill &amp; aria-pressed.</text>
+
+              ${badge(24, 152, 2)}
+              <text x="40" y="150" class="t-callout">Safe System Ordering</text>
+              <text x="14" y="170" class="t-body">Always lists System &amp; Driver actions</text>
+              <text x="14" y="186" class="t-body">before "Extra protection" so it avoids</text>
+              <text x="14" y="202" class="t-body">victim-blaming framing.</text>
+
+              <text x="14" y="238" class="t-sub">LIVE REGION</text>
+              <text x="14" y="256" class="t-body">aria-live="polite" + renderCites()</text>
+              <text x="14" y="272" class="t-body">links each action to Sources.</text>
+            </g>
+          </svg>
+        `
+      }
+    ];
+
+    const root = document.getElementById("cards-root");
+    const toast = document.getElementById("toast");
+    let toastTimer;
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.remove("is-hidden");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.add("is-hidden"), 2400);
+    }
+
+    function renderCards(filter = "all") {
+      const items = filter === "all" ? WIREFRAMES : WIREFRAMES.filter((w) => w.id === filter);
+      root.innerHTML = items.map((w) => `
+        <section class="bg-[var(--card)] border border-[var(--border)] rounded-xl p-4 space-y-3 shadow-sm" data-card-id="${w.id}">
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h2 class="text-sm font-bold text-[var(--foreground)]">${w.title}</h2>
+              <p class="text-xs text-[var(--muted-foreground)] mt-0.5">${w.subtitle}</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5">
+              <button class="btn-copy-svg px-2.5 py-1 text-xs font-medium rounded border border-[var(--border)] hover:bg-[var(--accent)]/10 cursor-pointer" data-id="${w.id}">
+                📋 Copy SVG
+              </button>
+              <button class="btn-dl-svg px-2.5 py-1 text-xs font-medium rounded border border-[var(--border)] hover:bg-[var(--accent)]/10 cursor-pointer" data-id="${w.id}">
+                ⬇ SVG
+              </button>
+              <button class="btn-dl-png px-2.5 py-1 text-xs font-medium rounded bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 cursor-pointer" data-id="${w.id}">
+                🖼 PNG (Canvas 2×)
+              </button>
+            </div>
+          </div>
+
+          <div class="wf-svg-wrap" id="svg-wrap-${w.id}">
+            ${w.svg()}
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5 pt-1">
+            ${w.interactions.map((it) => `
+              <div class="p-2.5 rounded-lg bg-[var(--background)] border border-[var(--border)]">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white text-xs font-bold">${it.tag}</span>
+                  <span class="text-xs font-semibold">${it.title}</span>
+                </div>
+                <p class="text-xs text-[var(--muted-foreground)] leading-relaxed">${it.desc}</p>
+              </div>
+            `).join("")}
+          </div>
+        </section>
+      `).join("");
+
+      root.querySelectorAll(".btn-dl-svg").forEach((b) => b.addEventListener("click", () => downloadSvg(b.dataset.id)));
+      root.querySelectorAll(".btn-dl-png").forEach((b) => b.addEventListener("click", () => downloadPng(b.dataset.id)));
+      root.querySelectorAll(".btn-copy-svg").forEach((b) => b.addEventListener("click", () => copySvg(b.dataset.id)));
+    }
+
+    function getSvgMarkup(id) {
+      const w = WIREFRAMES.find((x) => x.id === id);
+      return w.svg().trim();
+    }
+
+    function triggerDownload(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function downloadSvg(id) {
+      const w = WIREFRAMES.find((x) => x.id === id);
+      const blob = new Blob([getSvgMarkup(id)], { type: "image/svg+xml;charset=utf-8" });
+      triggerDownload(blob, `${w.filename}.svg`);
+      showToast(`Đã export ${w.filename}.svg (kéo thả trực tiếp vào Canva / Figma / Excalidraw)`);
+    }
+
+    function downloadPng(id) {
+      const w = WIREFRAMES.find((x) => x.id === id);
+      const svgEl = document.querySelector(`#svg-wrap-${id} svg`);
+      const vb = svgEl.viewBox.baseVal;
+      const scale = 2;
+      const canvas = document.getElementById("export-canvas");
+      canvas.width = vb.width * scale;
+      canvas.height = vb.height * scale;
+      const ctx = canvas.getContext("2d");
+
+      const svgBlob = new Blob([getSvgMarkup(id)], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(svgBlob);
+      const img = new Image();
+      img.onload = () => {
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(url);
+        canvas.toBlob((pngBlob) => {
+          triggerDownload(pngBlob, `${w.filename}@2x.png`);
+          showToast(`Đã export ${w.filename}@2x.png qua HTML5 Canvas!`);
+        }, "image/png");
+      };
+      img.src = url;
+    }
+
+    async function copySvg(id) {
+      try {
+        await navigator.clipboard.writeText(getSvgMarkup(id));
+        showToast("Đã copy mã SVG! Dán trực tiếp vào Figma, Excalidraw hoặc Canva.");
+      } catch {
+        showToast("Không thể truy cập clipboard — hãy dùng nút ⬇ SVG.");
+      }
+    }
+
+    // Tabs
+    document.getElementById("tabs").addEventListener("click", (e) => {
+      const btn = e.target.closest(".tab-btn");
+      if (!btn) return;
+      document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      renderCards(btn.dataset.filter);
+    });
+
+    // Export All
+    document.getElementById("export-all-svg").addEventListener("click", () => {
+      WIREFRAMES.forEach((w, i) => setTimeout(() => downloadSvg(w.id), i * 180));
+    });
+    document.getElementById("export-all-png").addEventListener("click", () => {
+      // Ensure all cards are in DOM or render temp
+      const active = document.querySelector(".tab-btn.is-active").dataset.filter;
+      if (active !== "all") {
+        document.querySelector('[data-filter="all"]').click();
+      }
+      WIREFRAMES.forEach((w, i) => setTimeout(() => downloadPng(w.id), i * 220));
+    });
+
+    renderCards("all");
+  </script>
+</body>
+</html>

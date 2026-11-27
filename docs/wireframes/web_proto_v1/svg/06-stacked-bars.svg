@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>06 Ch2 How badly - stacked bars</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">Chapter 2 "How badly": what they collided with</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">100% stacked bars, one per group. Categories are not road users, so they use greys; the two that carry the story are darkest and labelled.</tspan></text>
+<rect x="20.0" y="70.0" width="690.0" height="300.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="36.0" y="93.0">What injured pedestrians and cyclists collided with, 2011-2021</tspan></text>
+<text font-size="12" fill="#1F2328" text-anchor="end" font-weight="bold"><tspan x="122.0" y="141.7">Pedestrians</tspan></text>
+<rect x="130.0" y="120.0" width="483.0" height="36.0" rx="0" fill="#1F2328" stroke="#FFFFFF" stroke-width="1"/>
+<text font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="bold"><tspan x="371.5" y="141.4">88%</tspan></text>
+<rect x="613.0" y="120.0" width="22.8" height="36.0" rx="0" fill="#A8A8A8" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="635.8" y="120.0" width="11.2" height="36.0" rx="0" fill="#D4D4D4" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="647.0" y="120.0" width="33.0" height="36.0" rx="0" fill="#EFEFEF" stroke="#FFFFFF" stroke-width="1"/>
+<text font-size="12" fill="#1F2328" text-anchor="end" font-weight="bold"><tspan x="122.0" y="221.7">Cyclists</tspan></text>
+<rect x="130.0" y="200.0" width="117.7" height="36.0" rx="0" fill="#1F2328" stroke="#FFFFFF" stroke-width="1"/>
+<text font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="bold"><tspan x="188.8" y="221.4">21%</tspan></text>
+<rect x="247.7" y="200.0" width="243.9" height="36.0" rx="0" fill="#4A4A4A" stroke="#FFFFFF" stroke-width="1"/>
+<text font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="bold"><tspan x="369.7" y="221.4">44%</tspan></text>
+<rect x="491.6" y="200.0" width="30.7" height="36.0" rx="0" fill="#7A7A7A" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="522.3" y="200.0" width="4.6" height="36.0" rx="0" fill="#A8A8A8" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="526.9" y="200.0" width="1.2" height="36.0" rx="0" fill="#D4D4D4" stroke="#FFFFFF" stroke-width="1"/>
+<rect x="528.0" y="200.0" width="152.0" height="36.0" rx="0" fill="#EFEFEF" stroke="#FFFFFF" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="604.0" y="221.4">28%</tspan></text>
+<circle cx="136.0" cy="116.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="136.0" y="119.4">1</tspan></text>
+<rect x="40.0" y="293.0" width="12.0" height="12.0" rx="2" fill="#1F2328" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start"><tspan x="58.0" y="302.1">Car, pick-up truck or van</tspan></text>
+<rect x="260.0" y="293.0" width="12.0" height="12.0" rx="2" fill="#4A4A4A" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start"><tspan x="278.0" y="302.1">No collision (e.g. fall)</tspan></text>
+<rect x="480.0" y="293.0" width="12.0" height="12.0" rx="2" fill="#7A7A7A" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start"><tspan x="498.0" y="302.1">Fixed object</tspan></text>
+<rect x="40.0" y="315.0" width="12.0" height="12.0" rx="2" fill="#A8A8A8" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start"><tspan x="58.0" y="324.1">Heavy vehicle or bus</tspan></text>
+<rect x="260.0" y="315.0" width="12.0" height="12.0" rx="2" fill="#D4D4D4" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start"><tspan x="278.0" y="324.1">Motorcycle</tspan></text>
+<rect x="480.0" y="315.0" width="12.0" height="12.0" rx="2" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start"><tspan x="498.0" y="324.1">Other</tspan></text>
+<circle cx="30.0" cy="290.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="30.0" y="293.4">2</tspan></text>
+<rect x="20.0" y="390.0" width="690.0" height="110.0" rx="8" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="365.0" y="440.9">WHAT IT MEANS  |  WHAT CAN BE DONE</tspan><tspan x="365.0" y="455.8">(insight + official action, with citations)</tspan></text>
+<rect x="730.0" y="70.0" width="290.0" height="172.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="744.0" y="92.0">Notes</tspan></text>
+<circle cx="752.0" cy="116.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="119.4">1</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="120.0">Percentages written inside the</tspan><tspan x="772.0" y="134.8">segments that are wide enough</tspan></text>
+<circle cx="752.0" cy="162.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="165.4">2</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="166.0">Legend in reading order; wording</tspan><tspan x="772.0" y="180.8">"collided with", never "hit by"</tspan></text>
+<circle cx="752.0" cy="208.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="211.4">3</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="212.0">Hover a segment: category,</tspan><tspan x="772.0" y="226.8">share and number of admissions</tspan></text>
+</svg>
