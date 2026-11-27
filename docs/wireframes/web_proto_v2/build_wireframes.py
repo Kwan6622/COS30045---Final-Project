@@ -18,7 +18,10 @@ highlight/annotation colour of palette v2. Numbers are the prototype's, rounded.
 
 GenAI acknowledgement: drafted with Claude (Anthropic), reviewed by the team.
 """
+import base64
 import csv
+import json
+import math
 import os
 from xml.sax.saxutils import escape, quoteattr
 
@@ -55,6 +58,10 @@ class Page:
 
     def circle(self, cx, cy, r, fill=PAPER, stroke=G2, sw=1.5):
         self.items.append(dict(k="circle", cx=cx, cy=cy, r=r, fill=fill, stroke=stroke, sw=sw))
+
+    def polygon(self, pts, fill=G5, stroke=PAPER, sw=0.8, dash=None):
+        """Any closed shape (state outlines on the Chapter 4 map)."""
+        self.items.append(dict(k="polygon", pts=pts, fill=fill, stroke=stroke, sw=sw, dash=dash))
 
     def poly(self, kind, cx, cy, r, fill):
         """kind = tri | dia (filled triangle / diamond centred on cx, cy)."""
@@ -231,6 +238,10 @@ def to_svg(p):
         elif it["k"] in ("tri", "dia"):
             pts = " ".join(f"{x:.1f},{y:.1f}" for x, y in _poly_pts(it))
             out.append(f'<polygon points="{pts}" fill="{it["fill"]}"/>')
+        elif it["k"] == "polygon":
+            pts = " ".join(f"{x:.1f},{y:.1f}" for x, y in it["pts"])
+            d = f' stroke-dasharray="{it["dash"]}"' if it["dash"] else ""
+            out.append(f'<polygon points="{pts}" fill="{it["fill"]}" stroke="{it["stroke"]}" stroke-width="{it["sw"]}" stroke-linejoin="round"{d}/>')
         else:
             out.append(f'<circle cx="{it["cx"]:.1f}" cy="{it["cy"]:.1f}" r="{it["r"]}" fill="{it["fill"]}" '
                        f'stroke="{it["stroke"]}" stroke-width="{it["sw"]}"/>')
@@ -266,6 +277,18 @@ def to_drawio_page(p, idx):
                          f'<mxPoint x="{pts[0][0]:.1f}" y="{pts[0][1]:.1f}" as="sourcePoint"/>'
                          f'<mxPoint x="{pts[-1][0]:.1f}" y="{pts[-1][1]:.1f}" as="targetPoint"/>{arr}'
                          f'</mxGeometry></mxCell>')
+        elif it["k"] == "polygon":
+            # draw.io has no free polygon cell: embed the shape as a small SVG image at its bounding box
+            xs, ys = [x for x, _ in it["pts"]], [y for _, y in it["pts"]]
+            x0, y0, x1, y1 = min(xs), min(ys), max(xs), max(ys)
+            pad = it["sw"]
+            ww, hh = max(1, x1 - x0 + 2 * pad), max(1, y1 - y0 + 2 * pad)
+            pts = " ".join(f"{x - x0 + pad:.1f},{y - y0 + pad:.1f}" for x, y in it["pts"])
+            mini = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{ww:.1f}" height="{hh:.1f}" viewBox="0 0 {ww:.1f} {hh:.1f}">'
+                    f'<polygon points="{pts}" fill="{it["fill"]}" stroke="{it["stroke"]}" stroke-width="{it["sw"]}"/></svg>')
+            b64 = base64.b64encode(mini.encode()).decode()
+            cells.append(f'<mxCell id="{cid}" value="" style="shape=image;html=1;imageAspect=0;image=data:image/svg+xml,{b64};" vertex="1" parent="1">'
+                         f'<mxGeometry x="{x0 - pad:.1f}" y="{y0 - pad:.1f}" width="{ww:.1f}" height="{hh:.1f}" as="geometry"/></mxCell>')
         elif it["k"] in ("tri", "dia"):
             r = it["r"]
             shape = "triangle;direction=north;" if it["k"] == "tri" else "rhombus;"
@@ -287,6 +310,214 @@ def to_drawio_page(p, idx):
 # ---------------------------------------------------------------------------
 def scale(v, d0, d1, r0, r1):
     return r0 + (v - d0) / (d1 - d0) * (r1 - r0)
+
+# ---------------------------------------------------------------------------
+# Chapter 4: real map of Australia from the site's own boundary file
+# (ABS ASGS 2021, generalised) with the same equal-area projection as the site
+# ---------------------------------------------------------------------------
+def _albers(lon, lat):
+    """Albers equal-area conic, parallels -18 / -36, centred on 134 E (as d3.geoConicEqualArea on the site)."""
+    p1, p2 = math.radians(-18), math.radians(-36)
+    n = (math.sin(p1) + math.sin(p2)) / 2
+    c = math.cos(p1) ** 2 + 2 * n * math.sin(p1)
+    rho0 = math.sqrt(c) / n
+    th = n * math.radians(lon - 134)
+    rho = math.sqrt(c - 2 * n * math.sin(math.radians(lat))) / n
+    return rho * math.sin(th), -(rho0 - rho * math.cos(th))   # screen y grows southwards
+
+
+def _simplify(pts, tol):
+    """Douglas-Peucker, so the wireframe SVG stays light."""
+    if len(pts) < 4:
+        return pts
+    (x0, y0), (x1, y1) = pts[0], pts[-1]
+    dx, dy = x1 - x0, y1 - y0
+    norm = math.hypot(dx, dy) or 1e-12
+    dmax, idx = 0, 0
+    for i in range(1, len(pts) - 1):
+        d = abs(dy * pts[i][0] - dx * pts[i][1] + x1 * y0 - y1 * x0) / norm
+        if d > dmax:
+            dmax, idx = d, i
+    if dmax <= tol:
+        return [pts[0], pts[-1]]
+    return _simplify(pts[:idx + 1], tol)[:-1] + _simplify(pts[idx:], tol)
+
+
+def _load_geo():
+    with open(os.path.join(DATA, "states.geojson"), encoding="utf-8") as f:
+        fc = json.load(f)
+    geo = {}
+    for feat in fc["features"]:
+        rings = []
+        for poly in feat["geometry"]["coordinates"]:
+            ring = [_albers(lon, lat) for lon, lat in poly[0]]
+            tol = 0.0006 if feat["properties"]["code"] != "ACT" else 0.00005
+            half = len(ring) // 2   # a closed ring starts and ends on the same point: simplify each half
+            ring = _simplify(ring[:half + 1], tol)[:-1] + _simplify(ring[half:], tol)[:-1]
+            if len(ring) >= 3:
+                rings.append(ring)
+        geo[feat["properties"]["code"]] = rings
+    xs = [x for rs in geo.values() for r in rs for x, _ in r]
+    ys = [y for rs in geo.values() for r in rs for _, y in r]
+    return geo, (min(xs), min(ys), max(xs), max(ys))
+
+
+GEO, GEO_BOUNDS = _load_geo()
+
+
+def _centroid(ring):
+    a = cx = cy = 0
+    for (x0, y0), (x1, y1) in zip(ring, ring[1:] + ring[:1]):
+        k = x0 * y1 - x1 * y0
+        a += k; cx += (x0 + x1) * k; cy += (y0 + y1) * k
+    return (cx / (3 * a), cy / (3 * a)) if a else ring[0]
+
+
+def state_rates(group):
+    """Admissions per 100,000 per year by state, 2011-2021 (+ yearly rates), from the site's CSV."""
+    hosp, pop, years = {}, {}, {}
+    aus_h, aus_p = {}, {}
+    with open(os.path.join(DATA, "state_year.csv"), newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if r["road_user"] != group:
+                continue
+            st, yr, h, t = r["state"], int(r["year"]), float(r["hosp"]), float(r["total"])
+            hosp[st] = hosp.get(st, 0) + h
+            pop[st] = pop.get(st, 0) + t
+            years.setdefault(st, {})[yr] = float(r["rate"])
+            aus_h[yr] = aus_h.get(yr, 0) + h
+            aus_p[yr] = aus_p.get(yr, 0) + t
+    rates = {st: hosp[st] / pop[st] * 1e5 for st in hosp}
+    aus = sum(hosp.values()) / sum(pop.values()) * 1e5
+    aus_years = {yr: aus_h[yr] / aus_p[yr] * 1e5 for yr in aus_h}
+    return rates, aus, years, aus_years
+
+
+RAMP = [G5, G4, G3, G2, INK]   # greyscale stand-in for the 5-step palette ramp
+
+
+def ramp_class(v, vmax):
+    return min(4, int(v / (vmax / 5)))
+
+
+def draw_map(p, x, y, w, h, rates, selected=None, focus=None, labels=True, inset=True, fs=10.5, dim=None):
+    """Real map at (x, y, w, h); returns {state: bbox} in page coordinates.
+    The ACT is enlarged in an inset box on the right, joined to its real place."""
+    inset_w, inset_h = (min(78, w * 0.2), min(90, h * 0.3)) if inset else (0, 0)
+    area_w = w - (inset_w + 12 if inset else 0)
+    gx0, gy0, gx1, gy1 = GEO_BOUNDS
+    s = min(area_w / (gx1 - gx0), h / (gy1 - gy0))
+    ox, oy = x + (area_w - (gx1 - gx0) * s) / 2, y + (h - (gy1 - gy0) * s) / 2
+    P2 = lambda q: (ox + (q[0] - gx0) * s, oy + (q[1] - gy0) * s)
+    vmax = max(rates.values())
+    boxes = {}
+    for code in ("WA", "NT", "SA", "Qld", "NSW", "Vic", "Tas", "ACT"):
+        k = ramp_class(rates[code], vmax)
+        fill = RAMP[k] if not dim or code not in dim else G5
+        pts_all = []
+        for ring in GEO[code]:
+            pts = [P2(q) for q in ring]
+            pts_all += pts
+            p.polygon(pts, fill=fill, stroke=PAPER, sw=0.8)
+        xs, ys = [q[0] for q in pts_all], [q[1] for q in pts_all]
+        boxes[code] = (min(xs), min(ys), max(xs) - min(xs), max(ys) - min(ys))
+    for code, sw_, col in ((selected, 2.5, INK), (focus, 4, YEL)):
+        if code and code != "ACT":
+            for ring in GEO[code]:
+                p.polygon([P2(q) for q in ring], fill="none", stroke=col, sw=sw_)
+    if labels:
+        for code in ("WA", "NT", "SA", "Qld", "NSW", "Vic", "Tas"):
+            big = max(GEO[code], key=len)
+            cx, cy = P2(_centroid(big))
+            dark = ramp_class(rates[code], vmax) >= 3
+            col = PAPER if dark else INK
+            if code == "Tas":       # too small: beside the island, in ink
+                bx, by, bw, bh = boxes["Tas"]
+                p.text(bx + bw + 4, by + bh / 2 - 14, 60, 14, code, fs=fs, bold=True, align="left")
+                p.text(bx + bw + 4, by + bh / 2, 60, 14, f"{rates[code]:.1f}", fs=fs - 1, align="left")
+            elif code == "Vic":     # small: one line
+                p.text(cx - 34, cy - 6, 68, 14, f"Vic {rates[code]:.1f}", fs=fs - 0.5, bold=True, color=col)
+            else:
+                p.text(cx - 30, cy - 13, 60, 14, code, fs=fs, bold=True, color=col)
+                p.text(cx - 30, cy + 1, 60, 14, f"{rates[code]:.1f}", fs=fs - 1, color=col)
+    if inset:
+        ax, ay, aw, ah = boxes["ACT"]
+        bx, by = x + w - inset_w, max(y, min(y + h - inset_h, ay - inset_h / 2))
+        p.line([(ax + aw / 2, ay + ah / 2), (bx, by + inset_h / 2 - 8)], stroke=G2, sw=1, dash="2 2")
+        p.rect(bx, by, inset_w, inset_h, fill=PAPER, stroke=INK if selected == "ACT" else G2,
+               sw=2.5 if selected == "ACT" else 1, r=6)
+        if focus == "ACT":
+            p.rect(bx - 3, by - 3, inset_w + 6, inset_h + 6, fill="none", stroke=YEL, sw=4, r=8)
+        # the ACT itself, enlarged to fill the top of the box
+        ring = GEO["ACT"][0]
+        rx0, ry0 = min(q[0] for q in ring), min(q[1] for q in ring)
+        rx1, ry1 = max(q[0] for q in ring), max(q[1] for q in ring)
+        k2 = min((inset_w - 24) / (rx1 - rx0), (inset_h - 40) / (ry1 - ry0))
+        offx = bx + (inset_w - (rx1 - rx0) * k2) / 2
+        p.polygon([(offx + (q[0] - rx0) * k2, by + 8 + (q[1] - ry0) * k2) for q in ring],
+                  fill=RAMP[ramp_class(rates["ACT"], vmax)], stroke=PAPER, sw=0.8)
+        if labels:
+            p.text(bx, by + inset_h - 30, inset_w, 14, "ACT", fs=fs, bold=True)
+            p.text(bx, by + inset_h - 16, inset_w, 14, f"{rates['ACT']:.1f}", fs=fs - 1)
+        boxes["ACT_inset"] = (bx, by, inset_w, inset_h)
+    return boxes
+
+
+def ramp_legend(p, x, y, vmax, aus, extra=""):
+    p.text(x, y, 80, 14, "Per 100,000:", fs=9.5, color=G1, align="left")
+    cx = x + 66
+    for i, c in enumerate(RAMP):
+        lo, hi = vmax / 5 * i, vmax / 5 * (i + 1)
+        p.rect(cx, y + 2, 10, 10, fill=c, stroke=G3, r=2)
+        p.text(cx + 12, y, 52, 14, f"{lo:.1f}-{hi:.1f}", fs=8.5, color=G1, align="left")
+        cx += 60
+    p.text(x, y + 16, 400, 14, f"· Australia {aus:.1f}{extra}", fs=9, color=G1, align="left")
+
+
+def mini_line(p, x0, y0, x1, y1, series, aus, label):
+    """Selected state (solid) vs Australia (dashed), 2011-2021, COVID band."""
+    vmax = max(list(series.values()) + list(aus.values())) * 1.1
+    X = lambda yr: scale(yr, 2011, 2021, x0, x1)
+    Y = lambda v: scale(v, 0, vmax, y1, y0)
+    p.rect(X(2019.5), y0, X(2021) - X(2019.5), y1 - y0, fill=G5, stroke="none", r=0)
+    step = 5 if vmax <= 20 else 10
+    p.axes(x0, y0, x1, y1, [(X(yr), str(yr)) for yr in (2011, 2016, 2021)],
+           [(Y(v), str(v)) for v in range(0, int(vmax) + 1, step)])
+    p.line([(X(yr), Y(v)) for yr, v in sorted(aus.items())], stroke=G3, sw=2, dash="6 4")
+    p.line([(X(yr), Y(v)) for yr, v in sorted(series.items())], stroke=INK, sw=2.5)
+    ys, ya = Y(sorted(series.items())[-1][1]), Y(sorted(aus.items())[-1][1])
+    if abs(ys - ya) < 16:             # keep the two end labels apart
+        ys, ya = (ys - 9, ya + 9) if ys <= ya else (ys + 9, ya - 9)
+    p.text(x1 + 4, ys - 7, 70, 14, f"{label} (solid)", fs=9.5, bold=True, align="left")
+    p.text(x1 + 4, ya - 7, 80, 14, "Australia (dashed)", fs=9, color=G1, align="left")
+
+
+def rank_bars(p, x, y, w, h, rates, aus, selected=None, focus=None, fs=10):
+    """The ranking view: highest first, zero baseline, dashed Australia line."""
+    order = sorted(rates, key=lambda k: -rates[k])
+    vmax = max(rates.values())
+    top = math.ceil(vmax / 5) * 5
+    label_w, value_w = 34, 36
+    X = lambda v: x + label_w + v / top * (w - label_w - value_w)
+    step = (h - 26) / len(order)
+    bh = step * 0.66
+    for i, code in enumerate(order):
+        by = y + i * step + (step - bh) / 2
+        k = ramp_class(rates[code], vmax)
+        p.text(x, by + bh / 2 - 7, label_w - 4, 14, code, fs=fs, bold=True, align="left")
+        p.rect(X(0), by, X(rates[code]) - X(0), bh, fill=RAMP[k], stroke=INK if code == selected else G3,
+               sw=2.5 if code == selected else 0.6, r=2)
+        if code == focus:
+            p.rect(X(0) - 3, by - 3, X(rates[code]) - X(0) + 6, bh + 6, fill="none", stroke=YEL, sw=3, r=4)
+        p.text(X(rates[code]) + 4, by + bh / 2 - 7, value_w, 14, f"{rates[code]:.1f}", fs=fs - 0.5,
+               bold=code == selected, align="left")
+    p.line([(X(aus), y - 2), (X(aus), y + h - 22)], stroke=G2, sw=1, dash="2 3")
+    p.text(X(aus) + 3, y + h - 36, 100, 12, f"Australia {aus:.1f}", fs=9, color=G1, align="left")
+    p.line([(X(0), y + h - 22), (X(top), y + h - 22)], stroke=G3, sw=1)
+    for v in range(0, int(top) + 1, 5 if top <= 30 else 10):
+        p.text(X(v) - 12, y + h - 20, 24, 12, str(v), fs=8.5, color=G2)
+    return order, X, step, bh
+
 
 
 NAMES = {"Pedal cyclist": "Cyclists", "Pedestrian": "Pedestrians", "Motorcyclist": "Motorcyclists", "Car occupant": "Car occupants"}
@@ -313,7 +544,7 @@ def overview_desktop():
             ("Ch1 Who - sticky line chart | 5 message cards; table under the scrolly", 78),
             ("Ch2 How badly - teaser prompt, chips, dot plot + table, stacked bars + table", 48),
             ("Ch3 Age - teaser prompt, chips, take-away line, bar chart + table", 40),
-            ("Ch4 When & where - month chart + table; tile map | detail, take-away, table", 48),
+            ("Ch4 When & where - month chart + table; REAL MAP <-> ranking | trend, take-away, table", 48),
             ("Ch5 What you can do - role buttons -> action panel", 34),
             ("Summary - 5 cards + Revisit; closing message", 48)]
     ys, y = [], 126
@@ -547,61 +778,112 @@ def severity():
 
 
 def counterparty():
-    p = Page("06 Ch2 How badly - stacked bars", "Chapter 2 \"How badly\": what they collided with",
-             "100% stacked bars, one per group; categories are not road users, so greys. v2: the two story categories also carry a pattern.")
-    rows = {}
+    p = Page("06 Ch2 How badly - stacked bars", "Chapter 2 \"How badly\": what they collided with (100% stacked bars)",
+             "v2: truck/bus and motorcycle merged into \"Other vehicle\"; every segment >= 5% labelled; tiny segments get a callout + 24 px hover target.")
+    raw = {}
     with open(os.path.join(DATA, "counterparty.csv"), newline="", encoding="utf-8") as f:
         for r in csv.DictReader(f):
-            rows.setdefault(r["group"], {})[r["cp"]] = float(r["share"])
-    cats = ["Car, pick-up truck or van", "Heavy vehicle or bus", "Motorcycle",
-            "Fixed object", "No collision (e.g. fall)", "Other"]
-    shades = {cats[0]: INK, cats[4]: G1, cats[1]: G2, cats[2]: G3, cats[3]: G4, cats[5]: G5}
-    pattern = {cats[0]: "dots", cats[4]: "stripes"}
-    p.card(20, 70, 690, 320, "What injured pedestrians and cyclists collided with, 2011-2021")
-    x0, x1 = 130, 680
-    for gi, (g, lab) in enumerate((("Pedestrian", "Pedestrians"), ("Pedal cyclist", "Cyclists"))):
-        y = 120 + gi * 80
-        p.text(30, y + 6, 94, 24, lab, fs=12, bold=True, align="right")
+            raw.setdefault(r["group"], {})[r["cp"]] = (float(r["share"]), int(r["hosp"]))
+    get = lambda g, c: raw.get(g, {}).get(c, (0.0, 0))
+    cats = [("Car, pick-up truck or van", ["Car, pick-up truck or van"], INK, "dots", "Car"),
+            ("Other vehicle (truck, bus or motorcycle)", ["Heavy vehicle or bus", "Motorcycle"], G2, None, "Other vehicle"),
+            ("Fixed object", ["Fixed object"], G3, None, "Fixed object"),
+            ("No collision (e.g. fall)", ["No collision (e.g. fall)"], G1, "stripes", "No collision"),
+            ("Other", ["Other"], G5, None, "Other")]
+    share = lambda g, parts: sum(get(g, c)[0] for c in parts)
+    p.card(20, 66, 690, 350, "What injured pedestrians and cyclists collided with, 2011-2021")
+    # legend in bar order, patterns named
+    lx = 34
+    for name, _, col, pat, _ in cats:
+        p.rect(lx, 97, 11, 11, fill=col, stroke=G3, r=2)
+        if pat == "stripes":
+            p.hatch(lx, 97, 11, 11, color=G3, step=4)
+        label = name.split(" (")[0] if len(name) > 30 else name
+        p.text(lx + 14, 94, 160, 16, label + (" (dotted)" if pat == "dots" else " (striped)" if pat == "stripes" else ""), fs=9.5, color=G1, align="left")
+        lx += 30 + 5.4 * len(label) + (30 if pat else 0)
+    x0, x1 = 128, 690
+    bars_y = {"Pedestrian": 140, "Pedal cyclist": 232}
+    for g, lab in (("Pedestrian", "Pedestrians"), ("Pedal cyclist", "Cyclists")):
+        y = bars_y[g]
+        p.text(30, y + 8, 92, 24, lab, fs=12, bold=True, align="right")
         x = x0
-        for c in cats:
-            v = rows.get(g, {}).get(c, 0)
+        for name, parts, col, pat, short in cats:
+            v = share(g, parts)
             if not v:
                 continue
             w = v * (x1 - x0)
-            s = shades[c]
-            p.rect(x, y, w, 36, fill=s, stroke=PAPER, sw=1, r=0)
-            if pattern.get(c) == "stripes":
-                p.hatch(x + 1, y + 1, w - 2, 34, color=G3, step=7)
-            elif pattern.get(c) == "dots":
+            p.rect(x, y, w, 40, fill=col, stroke=PAPER, sw=1, r=0)
+            if pat == "stripes":
+                p.hatch(x + 1, y + 1, w - 2, 38, color=G3, step=7)
+            elif pat == "dots":
                 for dx in range(6, int(w) - 2, 9):
-                    for dy in (8, 18, 28):
+                    for dy in (8, 20, 32):
                         p.circle(x + dx, y + dy, 1, fill=G2, stroke=G2, sw=0.5)
-            if v >= 0.08:
-                p.rect(x + 4, y + 9, 70, 18, fill=s, stroke="none", r=3, text=f"{v:.0%}", fs=11, bold=True,
-                       color=PAPER if s in (INK, G1, G2) else INK)
+            if v >= 0.05:
+                txt = f"{v:.0%} {short}" if w > 30 + len(short) * 7.5 else f"{v:.0%}"
+                p.rect(x + 4, y + 11, min(w - 8, 8 + len(txt) * 6.6), 18, fill=col, stroke="none", r=3,
+                       text=txt, fs=10.5, bold=True, color=PAPER if col in (INK, G1, G2) else INK)
+            else:
+                # callout ABOVE the bar (clear of the axis) + the wider hover target
+                cx = x + w / 2
+                p.line([(cx, y - 2), (cx, y - 12)], stroke=INK, sw=1)
+                p.text(cx - 70, y - 28, 140, 14, f"{v:.1%} {short.lower()}", fs=10, bold=True)
+                p.rect(cx - 12, y - 30, 24, 72, fill="none", stroke=INK, sw=1, dash=True, r=2)
+                p.badge(cx - 84, y - 21, 3)
+                hover = (cx, y)
             x += w
-    # focus on the cyclists' car/van segment, + same category highlighted in the other bar
-    p.focus(x0, 200, rows["Pedal cyclist"][cats[0]] * (x1 - x0), 36)
-    p.badge(x0 + 10, 252, 3)
-    p.badge(x0 + 6, 116, 1)
-    lx, ly = 40, 286
-    for c in cats:
-        p.rect(lx, ly + 3, 12, 12, fill=shades[c], stroke=G3, r=2)
-        if pattern.get(c) == "stripes":
-            p.hatch(lx, ly + 3, 12, 12, color=G3, step=4)
-        p.text(lx + 16, ly, 170, 18, c + (" (dotted)" if c == cats[0] else " (striped)" if c == cats[4] else ""), fs=10, color=G1, align="left")
-        lx += 220
-        if lx > 600:
-            lx, ly = 40, ly + 22
-    p.badge(30, 286, 2)
-    p.table_toggle(34, 352, 660)
-    p.badge(28, 364, 4)
-    p.rect(20, 404, 690, 100, stroke=G3, r=8, text="WHAT IT MEANS  |  WHAT CAN BE DONE\n(insight + official action, with citations)", fs=11, color=G1)
-    p.notes([(1, "Percentages inside segments that\nare wide enough"),
-             (2, "Legend in reading order; wording\n\"collided with\", never \"hit by\".\nv2 legend names the patterns"),
-             (3, "v2 Tab, then ← →: every segment;\nthe same category stays bright in\nboth bars (like mouse hover)"),
-             (4, "v2 table: category x road user,\nshare and number"),
-             (5, "v2 dots / stripes on the two story\ncategories: not lightness alone")],
+    # axis
+    p.line([(x0, 292), (x1, 292)], stroke=G3, sw=1)
+    for k in range(0, 101, 20):
+        p.text(scale(k, 0, 100, x0, x1) - 16, 294, 32, 14, f"{k}%", fs=9, color=G2)
+    p.badge(x0 + 8, 136, 1)
+    p.badge(x0 + 0.73 * (x1 - x0) + 80, 246, 2)
+    # tooltip mock on the 1.0% segment
+    hx, hy = hover
+    tx = hx + 88
+    p.rect(tx, hy - 50, 326, 40, fill=PAPER, stroke=G2, r=6, align="left", valign="top", fs=9.5,
+           text="Cyclists: Other vehicle · 788 admissions · 1.0%\n   Heavy vehicle or bus 0.8% (626) · Motorcycle 0.2% (162)")
+    p.line([(hx + 12, hy - 18), (tx, hy - 30)], stroke=G2, sw=1)
+    p.badge(tx + 326, hy - 50, 4)
+    p.text(34, 314, 660, 14, "How to use: Hover or tap a part of a bar, or Tab to the chart and use ← →: the same category lights up in both bars.",
+           fs=9.5, color=INK, align="left")
+    p.text(34, 330, 660, 14, "Heavy vehicles, buses and motorcycles are each under 5%, so they are shown together as \"Other vehicle\"; the table keeps them apart.",
+           fs=9.5, color=G1, align="left")
+    p.table_toggle(34, 350, 660)
+    # mini table preview
+    rows = [("Car, pick-up truck or van", "87.8%", "21.4%"), ("Other vehicle (truck, bus or motorcycle)", "6.2%", "1.0%"),
+            ("   ↳ of which: Heavy vehicle or bus", "4.2%", "0.8%"), ("   ↳ of which: Motorcycle", "2.0%", "0.2%")]
+    p.rect(40, 374, 640, 36, fill=PAPER, stroke=G4, r=4)
+    for i, (a, b, c) in enumerate(rows[:2] + rows[2:3]):
+        pass
+    p.text(46, 375, 300, 12, "Collided with                                  Pedestrians   Cyclists", fs=8.5, bold=True, align="left")
+    p.text(46, 386, 620, 12, "Other vehicle (truck, bus or motorcycle)      6.2%           1.0%", fs=8.5, color=G1, align="left")
+    p.text(46, 397, 620, 12, "   ↳ of which: Heavy vehicle or bus 4.2% / 0.8%   ·   ↳ of which: Motorcycle 2.0% / 0.2%", fs=8.5, color=G1, align="left")
+    p.badge(30, 362, 5)
+    # before -> after
+    p.rect(20, 430, 690, 104, fill=G5, stroke=G4, r=8)
+    p.text(32, 436, 400, 16, "Why: before (v2) vs after (v2b), cyclists' bar", fs=11, bold=True, align="left")
+    bx0, bx1 = 128, 690
+    before = [(0.214, INK), (0.0083, G2), (0.0021, G3), (0.0558, G4), (0.4435, G1), (0.2763, PAPER)]
+    after = [(0.214, INK), (0.0104, G2), (0.0558, G3), (0.4435, G1), (0.2763, PAPER)]
+    for row, (lab, segs, yy) in enumerate((("Before: 6 parts", before, 460), ("After: 5 parts", after, 498))):
+        p.text(30, yy + 4, 94, 16, lab, fs=10, bold=True, align="right")
+        x = bx0
+        for v, c in segs:
+            w = v * (bx1 - bx0)
+            p.rect(x, yy, max(w, 0.6), 24, fill=c, stroke=G3 if c == PAPER else PAPER, sw=0.6, r=0)
+            x += w
+    p.line([(bx0 + 0.214 * (bx1 - bx0) + 3, 486), (bx0 + 0.214 * (bx1 - bx0) + 40, 492)], stroke=INK, sw=1, arrow=True)
+    p.text(bx0 + 0.214 * (bx1 - bx0) + 44, 484, 300, 14, "0.8% + 0.2% slivers: invisible, impossible to hover", fs=9.5, italic=True, align="left")
+    p.text(32, 526, 680, 14, "", fs=9)
+    p.rect(20, 546, 690, 112, stroke=G3, r=8, text="WHAT IT MEANS  |  WHAT CAN BE DONE\n(insight + official action, with citations)", fs=11, color=G1)
+    p.notes([(1, "v2b \"Heavy vehicle or bus\" + \"Motorcycle\"\nmerged into \"Other vehicle\": each <5%\nand not the story; 100% still adds up"),
+             (2, "v2b every segment >= 5% labelled\ninside (name too when wide enough):\nno hover needed to read the chart"),
+             (3, "v2b segment < 5%: callout ABOVE the\nbar (axis stays clear) + invisible\nhover target >= 24 px (WCAG 2.5.8)"),
+             (4, "Tooltip of the merged segment lists\nboth parts with share and count"),
+             (5, "Table keeps all 6 original categories\n(\"↳ of which\" rows): nothing is lost"),
+             (6, "Tab, then ← →: every segment; the\nsame category stays bright in both\nbars. Dots / stripes = 2nd encoding"),
+             (7, "Wording \"collided with\", never \"hit\nby\": the data records no fault")],
             watch="width, theme, cvd (static data)")
     return p
 
@@ -692,53 +974,108 @@ def season():
 
 
 def state_map():
-    p = Page("09 Ch4 Where - tile map + detail", "Chapter 4 \"When & where\" (b): states, linked views",
-             "Equal-area tile map per 100,000 people (5-step ramp); Enter / click on a state updates the line chart. v2: teaser, take-away, keyboard, table.")
-    p.question(20, 64, 690, "For pedestrians the Northern Territory is highest. Switch to Cyclists: a different territory leads.", h=28)
-    p.badge(16, 64, 1)
-    x = p.chip(20, 100, "Pedestrians", True); p.chip(x, 100, "Cyclists")
-    p.card(20, 136, 340, 390, "Admissions per 100,000 people per year")
-    # real pedestrian rates -> 5 equal classes from 0 to the max (23.5)
-    rates = {"NT": 23.5, "Qld": 8.8, "WA": 8.3, "SA": 9.2, "NSW": 11.5, "ACT": 6.3, "Vic": 11.7, "Tas": 8.4}
-    pos = {"NT": (1, 0), "Qld": (2, 0), "WA": (0, 1), "SA": (1, 1), "NSW": (2, 1), "ACT": (3, 1), "Vic": (2, 2), "Tas": (2, 3)}
-    ramp = [G5, G4, G3, G2, INK]
-    for s, (c, r) in pos.items():
-        k = min(4, int(rates[s] / (23.5 / 5)))
-        tx, ty = 50 + c * 72, 176 + r * 72
-        p.rect(tx, ty, 66, 66, fill=ramp[k], stroke=INK if s == "Vic" else PAPER, sw=3 if s == "Vic" else 2, r=6,
-               text=f"{s}\n{rates[s]}", fs=11, bold=True, color=PAPER if k >= 3 else INK)
-    p.focus(50 + 2 * 72, 176 + 2 * 72, 66, 66)
-    p.badge(50 + 2 * 72 + 76, 176 + 2 * 72 + 8, 2)
-    for i, s in enumerate(ramp):
-        p.rect(40 + i * 60, 478, 56, 14, fill=s, stroke=G3, r=0)
-        p.text(36 + i * 60, 494, 64, 14, ["0-4.7", "4.7-9.4", "9.4-14.1", "14.1-18.8", "18.8-23.5"][i], fs=9, color=G2)
-    p.card(370, 136, 340, 390, "Victoria vs Australia, pedestrians per 100,000")
-    p.line([(50 + 2 * 72 + 72, 176 + 2 * 72 + 33), (300, 176 + 2 * 72 + 33), (300, 330), (372, 330)], stroke=INK, sw=1.5, arrow=True)
-    p.text(296, 312, 80, 14, "emit mapState", fs=9, italic=True, color=G1, align="left")
-    x0, x1, y0, y1 = 410, 680, 190, 470
-    X = lambda i: scale(i, 0, 10, x0, x1)
-    p.rect(X(8.5), y0, X(10) - X(8.5), y1 - y0, fill=G5, stroke="none", r=0)
-    p.axes(x0, y0, x1, y1, [(X(i), str(2011 + i)) for i in range(0, 11, 5)], [(y0 + k * 70, "") for k in range(5)])
-    vic = [13.3, 11.9, 11.7, 10.9, 11.6, 13.0, 12.5, 12.9, 12.5, 8.4, 10.4]   # data/state_year.csv
-    au = [12.1, 11.5, 11.2, 10.6, 10.6, 11.1, 10.7, 10.3, 10.4, 8.0, 8.9]
-    Yv = lambda v: scale(v, 0, 16, y1, y0)
-    p.line([(X(i), Yv(v)) for i, v in enumerate(vic)], stroke=INK, sw=2.5)
-    p.line([(X(i), Yv(v)) for i, v in enumerate(au)], stroke=G3, sw=2, dash="6 4")
-    p.text(X(10) - 90, Yv(vic[-1]) - 34, 90, 14, "Vic (solid)", fs=10, bold=True, align="right")
-    p.text(X(0), Yv(au[0]) + 6, 120, 14, "Australia (dashed)", fs=10, color=G1, align="left")
-    p.badge(x1 - 6, y0 - 6, 4)
-    p.takeaway(30, 536, 680, "Highest for pedestrians: Northern Territory (23.5 per 100,000); lowest: ACT (6.3).")
-    p.badge(16, 544, 3)
-    p.table_toggle(30, 560, 680)
-    p.badge(16, 572, 5)
-    p.text(30, 590, 680, 16, "Sources: BITRE admissions ÷ ABS population. Values = prototype pedestrian rates, 2011-2021.", fs=10, color=G2, align="left")
-    p.notes([(1, "v2 prompt answers the first half\n(NT) and teases the second"),
-             (2, "Tiles = one Tab stop; v2 ← → move\nbetween tiles, Enter selects (focus\nstays on the tile after the redraw)"),
-             (3, "v2 take-away line names the\nhighest and lowest state"),
-             (4, "Linked line chart: selected state\n(solid) vs Australia (dashed);\nv2 role=img + <title>/<desc>"),
-             (5, "v2 table: every state, highest\nfirst, plus Australia"),
-             (6, "Change of state or road user is\nannounced (v2 live region)")], y=136,
-            watch="mapGroup, mapState, width, theme, cvd")
+    p = Page("09 Ch4 Where - real map and detail", "Chapter 4 \"When & where\" (b): real map of Australia + linked trend",
+             "Real state outlines (ABS 2021, equal-area projection), shaded per 100,000 (5 classes); the ACT is enlarged in a box. Click a state -> ranking (page 09b).")
+    rates, aus, years, aus_years = state_rates("Pedestrian")
+    p.question(20, 62, 690, "For pedestrians the Northern Territory is highest. Switch to Cyclists: a different territory leads.", h=26)
+    p.badge(16, 62, 1)
+    x = p.chip(20, 94, "Pedestrians", True); x = p.chip(x, 94, "Cyclists")
+    x = p.chip(x + 16, 94, "Map", True); p.chip(x, 94, "Ranking (bar chart)")
+    p.badge(x - 4, 94, 2)
+    p.card(20, 128, 400, 430, "Admissions per 100,000 people per year, 2011-2021")
+    boxes = draw_map(p, 30, 160, 380, 300, rates, selected="NT", focus="Vic")
+    p.badge(boxes["NT"][0] + 4, boxes["NT"][1] + 4, 3)
+    ib = boxes["ACT_inset"]
+    p.badge(ib[0] + ib[2] - 2, ib[1] - 2, 4)
+    p.badge(boxes["Tas"][0] - 6, boxes["Tas"][1] + 6, 5)
+    p.badge(boxes["Vic"][0] - 8, boxes["Vic"][1] + 4, 6)
+    ramp_legend(p, 32, 470, max(rates.values()), aus, " · ACT enlarged in the box")
+    p.text(44, 504, 370, 28, "How to use: Click a state (or Tab, arrow keys, Enter) to\ncompare all states as a ranking.", fs=9.5, align="left", valign="top")
+    p.badge(32, 512, 7)
+    # linked detail
+    p.card(430, 128, 280, 430, "Northern Territory vs Australia,\npedestrians per 100,000")
+    mini_line(p, 462, 200, 628, 440, years["NT"], aus_years, "NT")
+    p.badge(700, 140, 8)
+    p.takeaway(24, 566, 690, f"Highest for pedestrians: Northern Territory ({rates['NT']:.1f} per 100,000); lowest: ACT ({rates['ACT']:.1f}).")
+    p.text(24, 584, 690, 14, "Sources: (BITRE, 2023); (ABS, 2026); map boundaries (ABS, 2021) - ASGS Edition 3, CC BY 4.0, generalised to 66 KB.",
+           fs=9, color=G2, align="left")
+    p.table_toggle(24, 604, 690)
+    p.badge(16, 616, 9)
+    p.notes([(1, "Prompt answers half (NT) and teases\nthe other half (ACT for cyclists)"),
+             (2, "Road-user chips + Map | Ranking chips\n(always visible: the ranking can be\nfound without clicking the map)"),
+             (3, "Real outlines, equal-area conic\nprojection (sizes stay honest);\nselected state = ink outline"),
+             (4, "ACT is ~0.03% of the area (4x7 px):\nenlarged in a box + dashed leader;\nthe box is the ACT's button"),
+             (5, "Labels: code + rate on each state;\nTas beside the island, Vic on one\nline (too small for two)"),
+             (6, "Tab = one stop, arrow keys move\nstate to state, Enter -> ranking;\nfocus = yellow ring (here Vic)"),
+             (7, "Click / Enter a state: morph to the\nranking, see page 09b"),
+             (8, "Linked trend: selected state (solid)\nvs Australia (dashed), COVID shaded"),
+             (9, "Table: every state + Australia;\ntake-away names highest + lowest")],
+            watch="mapGroup, mapState, mapView, width, theme, cvd")
+    return p
+
+
+def ranking_page():
+    p = Page("09b Ch4 Where - ranking and morph", "Chapter 4 (b) continued: map -> ranking morph, and the ranking view",
+             "Clicking a state turns the map into a ranked bar chart; each state stays the same object, so the eye can follow it. Back / Esc / chips reverse it.")
+    rates, aus, years, aus_years = state_rates("Pedestrian")
+    # --- storyboard: 3 frames ---
+    fw, fh, fy = 218, 150, 66
+    frames = [(20, "1  Map: click WA (or Enter)"), (256, "2  Morph, 0-750 ms"), (492, "3  Ranking")]
+    for fx, title in frames:
+        p.rect(fx, fy, fw, fh, stroke=G3, r=8)
+        p.text(fx + 8, fy + 4, fw - 16, 16, title, fs=10.5, bold=True, align="left")
+    b1 = draw_map(p, 28, fy + 24, fw - 16, fh - 30, rates, selected="WA", labels=False, inset=True, fs=8)
+    cx, cy = b1["WA"][0] + b1["WA"][2] / 2, b1["WA"][1] + b1["WA"][3] / 2
+    p.circle(cx, cy, 6, fill=YEL, stroke=INK, sw=1)
+    # frame 2: faded map on the left, bar slots on the right; three states show the path they travel
+    b2 = draw_map(p, 262, fy + 26, 110, fh - 52, rates, labels=False, inset=False, fs=8,
+                  dim={"WA", "NT", "SA", "Qld", "NSW", "Vic", "Tas", "ACT"})
+    order = sorted(rates, key=lambda k: -rates[k])
+    vmax = max(rates.values())
+    slot_x, slot_y, slot_h = 392, fy + 30, 11
+    for i, code in enumerate(order):
+        p.rect(slot_x, slot_y + i * 13, 10 + rates[code] / vmax * 44, slot_h - 2, fill="none", stroke=G3, sw=0.8, dash=True, r=1)
+    for code, solid in (("WA", True), ("NT", False), ("Vic", False)):
+        bx, by, bw, bh = b2[code]
+        i = order.index(code)
+        mid = (bx + bw / 2, by + bh / 2)
+        tgt = (slot_x - 2, slot_y + i * 13 + 4)
+        p.rect(bx, by, bw, bh, fill="none", stroke=INK if solid else G2, sw=1.5 if solid else 1, dash=not solid, r=2)
+        p.line([mid, tgt], stroke=INK if solid else G2, sw=1.5 if solid else 1, arrow=True)
+        p.text(slot_x + 12 + rates[code] / vmax * 44, slot_y + i * 13 - 3, 30, 12, code, fs=8, bold=solid, align="left")
+    p.text(262, fy + fh - 22, fw - 12, 24, "shapes fade (0-340 ms); a box the size of each\nstate grows into its bar slot (0-750 ms)", fs=8.5, italic=True, color=G1, align="left")
+    # frame 3: small ranking
+    rank_bars(p, 500, fy + 26, fw - 20, fh - 32, rates, aus, selected="WA", fs=8.5)
+    for (fx, _), nxt in zip(frames[:2], frames[1:]):
+        p.line([(fx + fw + 2, fy + fh / 2), (nxt[0] - 2, fy + fh / 2)], stroke=INK, sw=1.5, arrow=True)
+    p.text(20, fy + fh + 4, 690, 14, "Reverse (Back to map / Esc / Map chip): bars shrink back into the state boxes, shapes fade in. Reduced motion: instant switch.",
+           fs=9.5, italic=True, color=G1, align="left")
+    p.badge(20 + fw - 8, fy + 4, 1); p.badge(256 + fw - 8, fy + 4, 2)
+    # --- the ranking view, full size ---
+    p.card(20, 244, 410, 414, "Per 100,000 people per year")
+    p.rect(300, 252, 120, 24, fill=INK, stroke=INK, r=12, text="← Back to map", fs=10.5, bold=True, color=PAPER)
+    p.badge(296, 250, 3)
+    order, X, step, bh = rank_bars(p, 34, 290, 386, 270, rates, aus, selected="WA", focus="NSW")
+    p.badge(X(rates["WA"]) + 40, 290 + order.index("WA") * step + 6, 4)
+    p.badge(X(aus) + 8, 300, 5)
+    p.badge(X(rates["NSW"]) + 40, 290 + order.index("NSW") * step + 6, 6)
+    p.text(32, 566, 390, 28, "Bar length = admissions per 100,000, highest first · dashed\nline = Australia · colour = same 5 classes as the map",
+           fs=9, color=G1, align="left", valign="top")
+    p.text(44, 600, 380, 28, "How to use: Click a bar (or Enter) to show its trend;\n← Back to map or Esc returns to the map.", fs=9.5, align="left", valign="top")
+    p.badge(32, 608, 7)
+    # linked detail follows the selected bar
+    p.card(440, 244, 270, 414, "Western Australia vs Australia,\npedestrians per 100,000")
+    mini_line(p, 470, 320, 630, 540, years["WA"], aus_years, "WA")
+    p.badge(700, 256, 8)
+    p.notes([(1, "Click / Enter on a state = select it\nAND switch to the ranking\n{mapState: WA, mapView: bars}"),
+             (2, "Each state is ONE group: its shape\nfades while a box from the state's\nbounds grows into its bar"),
+             (3, "\"← Back to map\" only in this view;\nEsc and the Map chip do the same;\nfocus goes back to the state"),
+             (4, f"Selected bar: ink outline, bold value;\nscreen reader: \"rank {order.index('WA') + 1} of 8\""),
+             (5, "Zero baseline + dashed Australia\nline: bars compare honestly"),
+             (6, "Tab = one stop, ↑ ↓ between bars,\nfocus ring + tooltip + announcer"),
+             (7, f"Legend and hint change with the\nview; <title>/<desc> rewritten and\nannounced (\"ranked {order.index('WA') + 1} of 8\")"),
+             (8, "Click another bar: only the trend\nchanges {mapState}; the ranking\nstays (no re-animation)")],
+            watch="mapGroup, mapState, mapView (\"map\" | \"bars\")")
     return p
 
 
@@ -1011,7 +1348,7 @@ document.addEventListener("click", async (e) => {{
 
 def main():
     pages = [overview_desktop(), overview_phone(), ward(), trend(), severity(), counterparty(),
-             age(), season(), state_map(), roles(), summary(), a11y_layer(), references_page()]
+             age(), season(), state_map(), ranking_page(), roles(), summary(), a11y_layer(), references_page()]
     svg_dir = os.path.join(HERE, "svg")
     os.makedirs(svg_dir, exist_ok=True)
     for f in os.listdir(svg_dir):
