@@ -6,12 +6,21 @@
  * labelled "extra protection" so they do not read as blaming victims.
  * Every action carries a source key from sources.js (checked 24 Nov 2026).
  *
+ * v2 (wireframe 10): buttons are type="button" with aria-pressed; actions are
+ * sorted System → Driver → Extra protection and the level is shown by border
+ * style (solid / outline / dashed), not colour, with the order as a key; the
+ * self-protection tips sit under their own "Extra protection" heading so they
+ * do not read as blaming the person who was hurt. The panel is aria-live.
+ *
  * Interface: init(el, data) + update(state).  el = wrapper with
  * [data-part=buttons] and [data-part=panel]. Clicking a role emits { role }.
+ *
+ * GenAI acknowledgement: v1 drafted by Quang with Claude; v2 changes written
+ * with Claude (Anthropic) from wireframe 10 ("Safe System order with style-coded
+ * tags and an Extra protection group"). Reviewed and tested by Cường; see GENAI_LOG.md.
  */
 /* global d3 */
-import { DAYS_2011_2021 } from "../constants.js";
-import { sev, cpShare, ageRow, seasonIndex } from "../data.js";
+import { sev, cpShare, ageRow, seasonIndex, wardBeds } from "../data.js";  // same bed count as the hero
 import { fmt1, pct, emit } from "../utils.js";
 import { renderCites } from "../cite.js";
 
@@ -23,7 +32,7 @@ export function init(el, data) {
   panel = el.querySelector('[data-part="panel"]');
   roles = buildRoles(data);
   buttons.innerHTML = Object.entries(roles).map(([k, r]) => `
-    <button class="role" data-role="${k}" aria-pressed="false">
+    <button type="button" class="role" data-role="${k}" aria-pressed="false">
       <span class="role-icon" aria-hidden="true">${r.icon}</span>
       <span class="role-name">${r.name}</span><br><span class="role-sub">${r.sub}</span>
     </button>`).join("");
@@ -39,13 +48,24 @@ export function update(state) {
     b.setAttribute("aria-pressed", on);
   });
   const r = roles[state.role];
+  // Safe System order: change the system and drivers first, self-protection last
+  const sorted = [...r.actions].sort((a, b) => LEVELS.indexOf(a[0]) - LEVELS.indexOf(b[0]));
+  const main = sorted.filter(([tag]) => tag !== "Extra protection");
+  const extra = sorted.filter(([tag]) => tag === "Extra protection");
   panel.innerHTML = `
     <h3>${r.title}</h3>
     <div class="role-stats">${r.stats.map(([v, l]) => `<div class="stat"><div class="value">${v}</div><div class="label">${l}</div></div>`).join("")}</div>
-    <ul class="actions">${r.actions.map(([tag, a, ref]) => `<li><span class="tag">${tag}</span>${a} <span class="cite" data-ref="${ref}"></span></li>`).join("")}</ul>
-    <p class="src">Figures: BITRE (2023), road-crash hospital admissions 2011–2021. Full references in <strong>Sources</strong> at the end.</p>`;
+    <p class="action-key"><span>Safe System order:</span>${LEVELS.map((l) => tag(l)).join('<span aria-hidden="true">→</span>')}</p>
+    <ul class="actions">${main.map(item).join("")}</ul>
+    ${extra.length ? `<h4>Extra protection</h4><p class="hint">On top of safer roads and drivers, not instead of them.</p>
+    <ul class="actions">${extra.map(item).join("")}</ul>` : ""}
+    <p class="src">Figures: BITRE (2023), road-crash hospital admissions 2011–2021; ABS (2026) population. Full references in <strong>Sources</strong> at the end.</p>`;
   renderCites(panel);
 }
+
+const LEVELS = ["System", "Driver", "Extra protection"];
+const tag = (level) => `<span class="tag tag-${level.split(" ")[0].toLowerCase()}">${level === "Extra protection" ? "Extra" : level}</span>`;
+const item = ([level, text, ref]) => `<li>${tag(level)}${text} <span class="cite" data-ref="${ref}"></span></li>`;
 
 function buildRoles(data) {
   const ped = sev(data, "Pedestrian"), car = sev(data, "Car occupant"), cyc = sev(data, "Pedal cyclist");
@@ -99,7 +119,7 @@ function buildRoles(data) {
       title: "Where the data says to act first",
       stats: [
         [pct(ped.died_rate), `of pedestrian admissions end in death within 30 days (car occupants ${d3.format(".1%")(car.died_rate)})`],
-        [`${Math.round((ped.bed + cyc.bed) / DAYS_2011_2021)}`, "hospital beds filled every day by injured pedestrians and cyclists"],
+        [`${d3.sum(wardBeds(data.severity), (d) => d.n)}`, "hospital beds filled every day by injured pedestrians and cyclists"],
         [pct(cpShare(data, "Pedal cyclist", "No collision (e.g. fall)")), "of cyclist injuries involve no other vehicle: a road-design issue"],
       ],
       actions: [

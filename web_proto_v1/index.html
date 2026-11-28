@@ -152,7 +152,7 @@
         <p class="chapter-num">Chapter 3 · It is someone's grandparent</p>
         <h2>Older pedestrians are hurt the worst</h2>
         <p class="body">Each bar is an age group; the <strong>75+</strong> bar is in full colour and marked in yellow. Use the buttons to switch between pedestrians and cyclists, and between three measures.</p>
-        <p class="question">Switch to <em>Cyclists</em>: is it the same age group?</p>
+        <p class="question">Switch to <em>Cyclists</em> and <em>Per 100,000 people</em>: the highest rates are not older people, but ages 8–16 and 40–64.</p>
         <div class="controls" data-state-key="ageGroup" role="group" aria-label="Road user">
           <button class="chip" data-value="Pedestrian">Pedestrians</button>
           <button class="chip" data-value="Pedal cyclist">Cyclists</button>
@@ -164,7 +164,8 @@
         </div>
         <figure class="chart-card" data-viz="age">
           <figcaption class="chart-title" id="age-title">By age group</figcaption>
-          <div class="chart" role="img" aria-labelledby="age-title"></div>
+          <p class="takeaway" data-part="takeaway"></p>
+          <div class="chart"></div>
           <p class="chart-note">Per 100,000 uses ABS population <span class="cite" data-ref="abs"></span>. "≈" = estimate, because BITRE and ABS use different age bands.</p>
         </figure>
         <aside class="insight">
@@ -178,16 +179,17 @@
     <section class="chapter-step chapter" id="s-when" data-label="When &amp; where" aria-label="Chapter 4: When and where">
       <div class="wrap">
         <p class="chapter-num">Chapter 4 · When and where</p>
-        <h2>Pedestrians are hurt most in winter, cyclists in warmer months</h2>
-        <p class="body"><strong>1.0 = an average month.</strong> Above the line means more admissions than usual. Yellow rings mark each group's worst month.</p>
+        <h2>Pedestrian admissions stay high into winter; cyclist admissions drop</h2>
+        <p class="body"><strong>1.0 = an average month.</strong> Above the line means more admissions than usual. Yellow rings mark each group's worst month. Pedestrians are circles on a solid line; cyclists are squares on a dashed line.</p>
         <figure class="chart-card" data-viz="season">
           <figcaption class="chart-title" id="season-title">Each month compared with an average month, 2011–2019</figcaption>
-          <div class="chart" role="img" aria-labelledby="season-title"></div>
+          <p class="takeaway" data-part="takeaway"></p>
+          <div class="chart"></div>
           <p class="chart-note">2020–21 left out so COVID lockdowns do not distort the pattern. The data records the month, not the time of day.</p>
         </figure>
 
-        <p class="body" style="margin-top:28px">Each square is a state. <strong>Darker = more admissions per 100,000 people</strong>, so big and small states can be compared fairly. Click a square to see its trend.</p>
-        <p class="question">Which state is highest for pedestrians? Is it the same for cyclists?</p>
+        <p class="body" style="margin-top:28px">Each square is a state. <strong>Darker = more admissions per 100,000 people</strong>, so big and small states can be compared fairly. Click a square (or Tab to the map, use the arrow keys and press Enter) to see its trend.</p>
+        <p class="question">For pedestrians the Northern Territory is highest. Switch to <em>Cyclists</em>: a different territory leads.</p>
         <div class="controls" data-state-key="mapGroup" role="group" aria-label="Road user">
           <button class="chip" data-value="Pedestrian">Pedestrians</button>
           <button class="chip" data-value="Pedal cyclist">Cyclists</button>
@@ -195,17 +197,19 @@
         <div class="split" data-viz="stateMap">
           <figure class="chart-card">
             <figcaption class="chart-title" id="state-title">Admissions per 100,000 people per year, 2011–2021</figcaption>
-            <div class="chart" data-part="map" role="group" aria-labelledby="state-title"></div>
+            <p class="takeaway" data-part="takeaway"></p>
+            <div class="chart" data-part="map"></div>
             <div class="ramp-legend" data-part="legend"></div>
           </figure>
-          <figure class="chart-card" aria-live="polite">
+          <figure class="chart-card">
             <figcaption class="chart-title" data-part="detail-title">Select a state</figcaption>
             <div class="chart" data-part="detail"></div>
           </figure>
         </div>
+        <p class="chart-note">Rates are not age-standardised: BITRE does not publish state × age × road user. For all road users together, standardising by age does not change the state ranking. Small states and territories (NT, ACT, Tas) have few admissions, so their yearly rates jump around; the map uses the 11-year average.</p>
         <p class="chart-note">Sources: <span class="cite" data-ref="bitre"></span>; <span class="cite" data-ref="abs"></span>.</p>
         <aside class="insight">
-          <div><h3>What it means</h3><p>Pedestrian admissions peak in June (<strong class="hl-ped" data-fact="pedJune">…</strong> above an average month); cyclists peak in March. Darker evenings may play a part, but this data cannot prove it. Per person, the <strong>Northern Territory</strong> is highest for pedestrians and the <strong>ACT</strong> for cyclists.</p></div>
+          <div><h3>What it means</h3><p>Pedestrian admissions peak in May and June (about <strong class="hl-ped" data-fact="pedJune">…</strong> above an average month); cyclists peak in March and are lowest in July. Darker evenings may play a part, but this data cannot prove it. Per person, the <strong>Northern Territory</strong> is highest for pedestrians and the <strong>ACT</strong> for cyclists.</p></div>
           <div><h3>What can be done</h3><p>Be seen when it is dark: wear brightly coloured clothing when walking <span class="cite" data-ref="vic65"></span>, and a bike ridden at night must have a white front light and a red rear light <span class="cite" data-ref="nswBike"></span>. Governments should compare rates per person, not raw counts, when choosing where to act first.</p></div>
         </aside>
       </div>
@@ -254,8 +258,8 @@
           </article>
           <article class="summary-card">
             <p class="chapter-num">4 · When &amp; where</p>
-            <p class="value"><span class="hl-ped">June</span></p>
-            <p><strong>The worst month for pedestrians.</strong> The NT has the highest rate per person.</p>
+            <p class="value"><span class="hl-ped">May–June</span></p>
+            <p><strong>The worst months for pedestrians.</strong> The NT has the highest rate per person.</p>
             <p class="todo">→ Be seen after dark; target help by rate per person.</p>
             <button class="revisit" data-goto="s-when">Revisit chapter 4</button>
           </article>
@@ -287,7 +291,7 @@
           <li><strong>Who is missing.</strong> People killed at the scene are not in hospital data. Patients who died within 30 days are reported separately.</li>
           <li><strong>Scope.</strong> First Nations data was left out: a narrow treatment without community context risked misrepresenting First Nations people.</li>
         </ul>
-        <p class="chart-note">Figures computed with <code>scripts/build_data.py</code> (prototype); final figures must come from the team's KNIME workflow.</p>
+        <p class="chart-note">Figures computed in the team's KNIME workflow (<code>DataWerk_COS30045_Workflow</code>) from BITRE hospitalisation data and ABS population. Bed days include patients who died within 30 days.</p>
         <p><button class="revisit" data-goto="s-start">Back to the start ↑</button></p>
       </div>
     </section>
