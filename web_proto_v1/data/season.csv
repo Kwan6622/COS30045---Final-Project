@@ -1,0 +1,25 @@
+group,month,hosp,index
+Pedal cyclist,1,5444,1.11
+Pedal cyclist,2,5339,1.088
+Pedal cyclist,3,5889,1.2
+Pedal cyclist,4,5206,1.061
+Pedal cyclist,5,4783,0.975
+Pedal cyclist,6,3894,0.794
+Pedal cyclist,7,3782,0.771
+Pedal cyclist,8,4027,0.821
+Pedal cyclist,9,4476,0.912
+Pedal cyclist,10,5521,1.125
+Pedal cyclist,11,5284,1.077
+Pedal cyclist,12,5222,1.065
+Pedestrian,1,1592,0.793
+Pedestrian,2,1754,0.874
+Pedestrian,3,2067,1.029
+Pedestrian,4,2003,0.998
+Pedestrian,5,2308,1.149
+Pedestrian,6,2304,1.147
+Pedestrian,7,2261,1.126
+Pedestrian,8,2191,1.091
+Pedestrian,9,1886,0.939
+Pedestrian,10,1994,0.993
+Pedestrian,11,1872,0.932
+Pedestrian,12,1863,0.928

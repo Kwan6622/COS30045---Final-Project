@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>12 Accessibility layer - one chart card</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">v2: the accessibility layer of one chart card (same on every chart)</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">What a mouse user, a keyboard user and a screen-reader user each get. Lectures: W8 slides 7-49, Chartability, W7.1.</tspan></text>
+<rect x="20.0" y="70.0" width="470.0" height="560.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="36.0" y="92.0">Pedestrians: average days in hospital, by age group</tspan></text>
+<circle cx="480.0" cy="86.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="480.0" y="89.4">1</tspan></text>
+<text font-size="11" fill="#1F2328" text-anchor="start"><tspan x="36.0" y="113.4">Highest: age 75+ (15.8 days).</tspan></text>
+<circle cx="250.0" cy="110.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="250.0" y="113.4">2</tspan></text>
+<rect x="34.0" y="126.0" width="440.0" height="32.0" rx="6" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="254.0" y="145.1">chips: role="group" aria-label="Measure" · button type="button" aria-pressed</tspan></text>
+<circle cx="480.0" cy="142.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="480.0" y="145.4">3</tspan></text>
+<rect x="34.0" y="168.0" width="440.0" height="250.0" rx="4" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text font-size="9.5" fill="#4A4A4A" text-anchor="start"><tspan x="42.0" y="182.9">&lt;svg role="group" aria-roledescription="chart" aria-labelledby aria-describedby&gt;</tspan></text>
+<text font-size="9.5" fill="#4A4A4A" text-anchor="start"><tspan x="42.0" y="198.9">  &lt;title&gt; chart title   &lt;desc&gt; numbers + conclusion   axes aria-hidden</tspan></text>
+<circle cx="480.0" cy="176.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="480.0" y="179.4">4</tspan></text>
+<rect x="70.0" y="352.0" width="40.0" height="48.0" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<rect x="126.0" y="340.0" width="40.0" height="60.0" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<rect x="182.0" y="328.0" width="40.0" height="72.0" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<rect x="238.0" y="316.0" width="40.0" height="84.0" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<rect x="294.0" y="280.0" width="40.0" height="120.0" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<rect x="350.0" y="244.0" width="40.0" height="156.0" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<rect x="406.0" y="208.0" width="40.0" height="192.0" rx="2" fill="#1F2328" stroke="#1F2328" stroke-width="1.5"/>
+<rect x="402.0" y="204.0" width="48.0" height="200.0" rx="6" fill="none" stroke="#F2B705" stroke-width="4"/>
+<rect x="404.0" y="206.0" width="44.0" height="196.0" rx="5" fill="none" stroke="#1F2328" stroke-width="2"/>
+<rect x="250.0" y="214.0" width="150.0" height="56.0" rx="6" fill="#FFFFFF" stroke="#7A7A7A" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="325.0" y="231.6">Pedestrians, age 75+</tspan><tspan x="325.0" y="245.1">Admissions 3,656</tspan><tspan x="325.0" y="258.6">Avg days 15.8</tspan></text>
+<polyline points="400.0,250.0 404.0,250.0" fill="none" stroke="#7A7A7A" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="462.0" cy="214.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="462.0" y="217.4">5</tspan></text>
+<polyline points="34.0,430.0 474.0,430.0" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="11" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="40.0" y="447.4">▸ Show the data as a table</tspan></text>
+<rect x="34.0" y="456.0" width="440.0" height="112.0" rx="4" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="9.5" fill="#4A4A4A" text-anchor="start"><tspan x="44.0" y="469.9">caption: Pedestrians hospitalised after road crashes, by age group</tspan></text>
+<polyline points="42.0,492.0 466.0,492.0" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="46.0" y="478.0" width="50.0" height="8.0" rx="2" fill="#D4D4D4" stroke="none" stroke-width="1"/>
+<rect x="150.0" y="478.0" width="70.0" height="8.0" rx="2" fill="#D4D4D4" stroke="none" stroke-width="1"/>
+<rect x="254.0" y="478.0" width="70.0" height="8.0" rx="2" fill="#D4D4D4" stroke="none" stroke-width="1"/>
+<rect x="358.0" y="478.0" width="70.0" height="8.0" rx="2" fill="#D4D4D4" stroke="none" stroke-width="1"/>
+<polyline points="42.0,508.0 466.0,508.0" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="46.0" y="494.0" width="50.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="150.0" y="494.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="254.0" y="494.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="358.0" y="494.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<polyline points="42.0,524.0 466.0,524.0" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="46.0" y="510.0" width="50.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="150.0" y="510.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="254.0" y="510.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="358.0" y="510.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<polyline points="42.0,540.0 466.0,540.0" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="46.0" y="526.0" width="50.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="150.0" y="526.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="254.0" y="526.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="358.0" y="526.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<polyline points="42.0,556.0 466.0,556.0" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="46.0" y="542.0" width="50.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="150.0" y="542.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="254.0" y="542.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="358.0" y="542.0" width="70.0" height="8.0" rx="2" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<circle cx="480.0" cy="470.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="480.0" y="473.4">6</tspan></text>
+<rect x="34.0" y="580.0" width="440.0" height="36.0" rx="6" fill="#FFFFFF" stroke="#1F2328" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="254.0" y="601.0">#tooltip-announcer  class="sr-only"  aria-live="polite"</tspan></text>
+<circle cx="480.0" cy="598.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="480.0" y="601.4">7</tspan></text>
+<rect x="510.0" y="70.0" width="510.0" height="244.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="524.0" y="92.0">Keyboard map</tspan></text>
+<rect x="522.0" y="102.0" width="118.0" height="24.0" rx="5" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="581.0" y="117.2">Tab</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="650.0" y="117.2">next control, then ONE stop per chart (roving tabindex)</tspan></text>
+<rect x="522.0" y="131.0" width="118.0" height="24.0" rx="5" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="581.0" y="146.2">← → ↑ ↓</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="650.0" y="146.2">next / previous mark, year, month, row or tile</tspan></text>
+<rect x="522.0" y="160.0" width="118.0" height="24.0" rx="5" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="581.0" y="175.2">Home / End</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="650.0" y="175.2">first / last mark of the chart</tspan></text>
+<rect x="522.0" y="189.0" width="118.0" height="24.0" rx="5" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="581.0" y="204.2">Enter / Space</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="650.0" y="204.2">select (map tiles, chips, role buttons, table toggle)</tspan></text>
+<rect x="522.0" y="218.0" width="118.0" height="24.0" rx="5" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="581.0" y="233.2">Esc</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="650.0" y="233.2">hide the tooltip (WCAG 1.4.13)</tspan></text>
+<rect x="522.0" y="247.0" width="118.0" height="24.0" rx="5" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="581.0" y="262.2">← → on the page</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="650.0" y="262.2">next / previous part, ONLY when nothing is focused</tspan></text>
+<rect x="522.0" y="276.0" width="118.0" height="24.0" rx="5" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="581.0" y="291.2">↓ ↑ Space PgDn</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="650.0" y="291.2">scroll as usual (never overridden)</tspan></text>
+<rect x="510.0" y="326.0" width="510.0" height="232.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="12" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="524.0" y="347.7">Notes  (v2 = new in this version)</tspan></text>
+<circle cx="532.0" cy="372.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="532.0" y="375.4">1</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="552.0" y="375.5">Visible title (figcaption), changes with the chips</tspan></text>
+<circle cx="532.0" cy="398.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="532.0" y="401.4">2</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="552.0" y="401.5">Take-away: the answer in words, no click needed</tspan></text>
+<circle cx="532.0" cy="424.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="532.0" y="427.4">3</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="552.0" y="427.5">Chips: aria-pressed; the chart's new &lt;desc&gt; is announced</tspan></text>
+<circle cx="532.0" cy="450.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="532.0" y="453.4">4</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="552.0" y="453.5">W8 s.35-39: &lt;title&gt; + &lt;desc&gt;; role=group because the marks are</tspan><tspan x="552.0" y="467.7">focusable (role=img would hide them from screen readers)</tspan></text>
+<circle cx="532.0" cy="492.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="532.0" y="495.4">5</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="552.0" y="495.5">W8 s.41-49: focus = same tooltip as hover + announcer</tspan></text>
+<circle cx="532.0" cy="518.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="532.0" y="521.4">6</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="552.0" y="521.5">Chartability "no table": &lt;details&gt; with a real &lt;table&gt;, th scope</tspan></text>
+<circle cx="532.0" cy="544.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="532.0" y="547.4">7</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="552.0" y="547.5">One polite live region for the whole page</tspan></text>
+</svg>

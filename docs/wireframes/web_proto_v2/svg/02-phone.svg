@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>02 Overview - phone</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">Overview: phone (760 px and narrower)</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">Same order as desktop; one column; header on two rows; arrow buttons bottom-right; footer stacks into one column.</tspan></text>
+<rect x="120.0" y="70.0" width="300.0" height="600.0" rx="26" fill="#FFFFFF" stroke="#1F2328" stroke-width="2"/>
+<rect x="132.0" y="86.0" width="276.0" height="62.0" rx="8" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="15" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="144.0" y="105.6">Outside the Car</tspan></text>
+<rect x="140.0" y="116.0" width="112.0" height="24.0" rx="12" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="196.0" y="131.1">★ 1 2 3 4 5 6</tspan></text>
+<rect x="258.0" y="116.0" width="70.0" height="24.0" rx="12" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="9.5" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="293.0" y="130.9">References</tspan></text>
+<rect x="334.0" y="116.0" width="26.0" height="24.0" rx="12" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle"><tspan x="347.0" y="131.4">☾</tspan></text>
+<rect x="366.0" y="116.0" width="40.0" height="24.0" rx="12" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="386.0" y="131.1">▾</tspan></text>
+<circle cx="410.0" cy="92.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="410.0" y="95.4">1</tspan></text>
+<rect x="132.0" y="158.0" width="276.0" height="150.0" rx="8" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#7A7A7A" text-anchor="middle"><tspan x="270.0" y="228.9">pinned chart</tspan><tspan x="270.0" y="243.8">(300 px tall on phones)</tspan></text>
+<circle cx="410.0" cy="166.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="410.0" y="169.4">2</tspan></text>
+<rect x="132.0" y="316.0" width="276.0" height="64.0" rx="8" fill="#FFFFFF" stroke="#F2B705" stroke-width="2"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="270.0" y="344.3">active message card</tspan><tspan x="270.0" y="357.8">(others hidden so they never cover the chart)</tspan></text>
+<circle cx="410.0" cy="322.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="410.0" y="325.4">3</tspan></text>
+<rect x="132.0" y="388.0" width="276.0" height="64.0" rx="8" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="270.0" y="405.0">chart card (full width)</tspan></text>
+<polyline points="140.0,424.0 400.0,424.0" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="11" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="146.0" y="441.4">▸ Show the data as a table</tspan></text>
+<circle cx="410.0" cy="432.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="410.0" y="435.4">4</tspan></text>
+<rect x="132.0" y="460.0" width="276.0" height="44.0" rx="8" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="270.0" y="478.3">Summary: cards 1 column</tspan><tspan x="270.0" y="491.8">[References and data notes →]</tspan></text>
+<circle cx="410.0" cy="468.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="410.0" y="471.4">5</tspan></text>
+<rect x="132.0" y="512.0" width="276.0" height="86.0" rx="6" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="144.0" y="528.2">Outside the Car</tspan></text>
+<text font-size="9" fill="#4A4A4A" text-anchor="start"><tspan x="144.0" y="542.7">Team DataWerk: Nguyễn Duy Quang (@Kwan6622)</tspan></text>
+<text font-size="9" fill="#4A4A4A" text-anchor="start"><tspan x="144.0" y="557.7">Hồ Cao Cường (@cuongidol26)</tspan></text>
+<text font-size="9" fill="#4A4A4A" text-anchor="start"><tspan x="144.0" y="572.7">COS30045 Data Visualisation · 2026 · Swinburne (Vietnam)</tspan></text>
+<text font-size="9" fill="#4A4A4A" text-anchor="start"><tspan x="144.0" y="587.7">GitHub repository · References · Data: BITRE, ABS</tspan></text>
+<circle cx="410.0" cy="520.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="410.0" y="523.4">6</tspan></text>
+<rect x="316.0" y="608.0" width="88.0" height="46.0" rx="23" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<circle cx="338.0" cy="631.0" r="16" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1.5"/>
+<text font-size="13" fill="#1F2328" text-anchor="middle"><tspan x="338.0" y="635.0">↑</tspan></text>
+<circle cx="382.0" cy="631.0" r="16" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="13" fill="#1F2328" text-anchor="middle"><tspan x="382.0" y="635.0">↓</tspan></text>
+<circle cx="312.0" cy="606.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="312.0" y="609.4">7</tspan></text>
+<rect x="480.0" y="70.0" width="290.0" height="344.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="12" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="494.0" y="91.7">Notes  (v2 = new in this version)</tspan></text>
+<circle cx="502.0" cy="116.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="119.4">1</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="522.0" y="119.5">Title on row 1; chapters, v2</tspan><tspan x="522.0" y="133.7">References link, theme, vision on row 2</tspan></text>
+<circle cx="502.0" cy="158.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="161.4">2</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="522.0" y="161.5">Chapter 1 chart pinned under the</tspan><tspan x="522.0" y="175.7">header, shorter so the card fits</tspan></text>
+<circle cx="502.0" cy="200.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="203.4">3</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="522.0" y="203.5">Message card sits low, above the</tspan><tspan x="522.0" y="217.7">arrow buttons</tspan></text>
+<circle cx="502.0" cy="242.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="245.4">4</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="522.0" y="245.5">v2 table toggle under every chart;</tspan><tspan x="522.0" y="259.7">wide tables scroll inside the card</tspan></text>
+<circle cx="502.0" cy="284.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="287.4">5</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="522.0" y="287.5">v2 the story ends with a link to the</tspan><tspan x="522.0" y="301.7">separate References page</tspan></text>
+<circle cx="502.0" cy="326.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="329.4">6</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="522.0" y="329.5">v2 footer in one column: team,</tspan><tspan x="522.0" y="343.7">members, unit, GitHub, data</tspan></text>
+<circle cx="502.0" cy="368.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="502.0" y="371.4">7</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="522.0" y="371.5">Arrow buttons bottom-right</tspan><tspan x="522.0" y="385.7">(40 px targets); footer keeps space</tspan><tspan x="522.0" y="399.9">for them at the bottom</tspan></text>
+</svg>

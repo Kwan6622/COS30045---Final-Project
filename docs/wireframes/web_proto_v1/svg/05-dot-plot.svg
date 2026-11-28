@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>05 Ch2 How badly - dot plot</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">Chapter 2 "How badly": Cleveland dot plot</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">One dot per road user, sorted by the chosen measure; dotted line = average for all road users.</tspan></text>
+<rect x="20.0" y="70.0" width="121.6" height="26.0" rx="13" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#FFFFFF" text-anchor="middle"><tspan x="80.8" y="86.4">Days in hospital</tspan></text>
+<rect x="149.6" y="70.0" width="141.4" height="26.0" rx="13" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="220.3" y="86.4">Died within 30 days</tspan></text>
+<rect x="299.0" y="70.0" width="240.4" height="26.0" rx="13" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="419.2" y="86.4">Share of beds vs share of patients</tspan></text>
+<circle cx="16.0" cy="70.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="16.0" y="73.4">1</tspan></text>
+<rect x="20.0" y="110.0" width="690.0" height="330.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="36.0" y="133.0">How badly each road user is hurt, 2011-2021</tspan></text>
+<polyline points="150.0,370.0 650.0,370.0" fill="none" stroke="#A8A8A8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="150.0" y="385.1">0</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="250.0" y="385.1">2</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="350.0" y="385.1">4</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="450.0" y="385.1">6</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="550.0" y="385.1">8</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="650.0" y="385.1">10</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="end"><tspan x="142.0" y="178.4">Pedestrians</tspan></text>
+<polyline points="150.0,175.0 605.0,175.0" fill="none" stroke="#1F2328" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="605.0" cy="175.0" r="9" fill="#1F2328" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="11" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="619.0" y="178.4">9.1 days</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="end"><tspan x="142.0" y="233.4">Motorcyclists</tspan></text>
+<polyline points="150.0,230.0 420.0,230.0" fill="none" stroke="#A8A8A8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="420.0" cy="230.0" r="6" fill="#A8A8A8" stroke="#A8A8A8" stroke-width="1.5"/>
+<text font-size="11" fill="#1F2328" text-anchor="start"><tspan x="434.0" y="233.4">5.4 days</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="end"><tspan x="142.0" y="288.4">Car occupants</tspan></text>
+<polyline points="150.0,285.0 385.0,285.0" fill="none" stroke="#A8A8A8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+<circle cx="385.0" cy="285.0" r="6" fill="#A8A8A8" stroke="#A8A8A8" stroke-width="1.5"/>
+<text font-size="11" fill="#1F2328" text-anchor="start"><tspan x="399.0" y="288.4">4.7 days</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="end"><tspan x="142.0" y="343.4">Cyclists</tspan></text>
+<polyline points="150.0,340.0 295.0,340.0" fill="none" stroke="#7A7A7A" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="295.0" cy="340.0" r="9" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1.5"/>
+<text font-size="11" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="309.0" y="343.4">2.9 days</tspan></text>
+<polyline points="395.0,150.0 395.0,370.0" fill="none" stroke="#7A7A7A" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 3"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="401.0" y="150.1">all road users 4.9 days</tspan></text>
+<circle cx="383.0" cy="150.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="383.0" y="153.4">2</tspan></text>
+<circle cx="685.0" cy="175.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="685.0" y="178.4">3</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="36.0" y="411.1">Days in hospital leave out patients who died within 30 days. Source: (BITRE, 2023).</tspan></text>
+<rect x="20.0" y="460.0" width="690.0" height="60.0" rx="8" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="11" fill="#7A7A7A" text-anchor="middle"><tspan x="365.0" y="493.4">then: 100% stacked bars - what they collided with (next page)</tspan></text>
+<rect x="730.0" y="70.0" width="290.0" height="236.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="744.0" y="92.0">Notes</tspan></text>
+<circle cx="752.0" cy="116.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="119.4">1</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="120.0">Measure chips re-sort the rows</tspan><tspan x="772.0" y="134.8">(animated; instant with reduced</tspan><tspan x="772.0" y="149.7">motion)</tspan></text>
+<circle cx="752.0" cy="180.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="183.4">2</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="184.0">Reference line = all road users,</tspan><tspan x="772.0" y="198.8">including the small "other" group</tspan></text>
+<circle cx="752.0" cy="226.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="229.4">3</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="230.0">Pedestrians and cyclists: bigger</tspan><tspan x="772.0" y="244.8">dots and bold values</tspan></text>
+<circle cx="752.0" cy="272.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="275.4">4</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="276.0">Hover: tooltip with all three</tspan><tspan x="772.0" y="290.9">measures for that road user</tspan></text>
+</svg>

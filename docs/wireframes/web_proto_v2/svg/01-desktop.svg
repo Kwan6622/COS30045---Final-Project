@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>01 Overview - desktop</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">Overview: the story page (desktop, 900 px and wider) + link to the References page</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">Header on top, side arrows on the right; every chapter = message + chart (+ data table) + insight/action; project footer at the end.</tspan></text>
+<rect x="20.0" y="70.0" width="680.0" height="44.0" rx="6" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="16" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="32.0" y="96.9">Outside the Car</tspan></text>
+<polyline points="118.0,103.0 152.0,103.0" fill="none" stroke="#F2B705" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="185.0" y="78.0" width="280.0" height="28.0" rx="14" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="middle"><tspan x="325.0" y="95.2">★  1 Who  2 How badly  3 Age  4  5  6 Summary</tspan></text>
+<rect x="472.0" y="80.0" width="84.0" height="24.0" rx="12" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="514.0" y="95.2">References ↗</tspan></text>
+<rect x="562.0" y="80.0" width="50.0" height="24.0" rx="12" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="middle"><tspan x="587.0" y="95.2">Dark</tspan></text>
+<rect x="618.0" y="80.0" width="76.0" height="24.0" rx="12" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10.5" fill="#1F2328" text-anchor="middle"><tspan x="656.0" y="95.2">Vision ▾</tspan></text>
+<polyline points="20.0,118.0 280.0,118.0" fill="none" stroke="#F2B705" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="180.0" cy="74.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="180.0" y="77.4">1</tspan></text>
+<circle cx="514.0" cy="74.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="514.0" y="77.4">8</tspan></text>
+<circle cx="616.0" cy="74.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="616.0" y="77.4">2</tspan></text>
+<rect x="30.0" y="126.0" width="610.0" height="62.0" rx="6" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="38.0" y="142.5">Start - title, lede, WHO IT IS FOR, bed pictogram + table, insight + action</tspan></text>
+<rect x="30.0" y="194.0" width="610.0" height="78.0" rx="6" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="38.0" y="210.5">Ch1 Who - sticky line chart | 5 message cards; table under the scrolly</tspan></text>
+<rect x="30.0" y="278.0" width="610.0" height="48.0" rx="6" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="38.0" y="294.5">Ch2 How badly - teaser prompt, chips, dot plot + table, stacked bars + table</tspan></text>
+<rect x="30.0" y="332.0" width="610.0" height="40.0" rx="6" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="38.0" y="348.5">Ch3 Age - teaser prompt, chips, take-away line, bar chart + table</tspan></text>
+<rect x="30.0" y="378.0" width="610.0" height="48.0" rx="6" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="38.0" y="394.5">Ch4 When &amp; where - month chart + table; REAL MAP &lt;-&gt; ranking | trend, take-away, table</tspan></text>
+<rect x="30.0" y="432.0" width="610.0" height="34.0" rx="6" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="38.0" y="448.5">Ch5 What you can do - role buttons -&gt; action panel</tspan></text>
+<rect x="30.0" y="472.0" width="610.0" height="48.0" rx="6" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="38.0" y="488.5">Summary - 5 cards + Revisit; closing message</tspan></text>
+<text font-size="10" fill="#1F2328" text-anchor="start" font-style="italic"><tspan x="42.0" y="160.1">It is for everyone who uses Australian roads …</tspan></text>
+<circle cx="450.0" cy="157.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="450.0" y="160.4">4</tspan></text>
+<rect x="40.0" y="216.0" width="360.0" height="48.0" rx="4" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="220.0" y="243.1">chart stays pinned</tspan></text>
+<rect x="410.0" y="216.0" width="220.0" height="21.0" rx="4" fill="#FFFFFF" stroke="#F2B705" stroke-width="2"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="520.0" y="229.6">active message</tspan></text>
+<rect x="410.0" y="243.0" width="220.0" height="21.0" rx="4" fill="#FFFFFF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="520.0" y="256.6">next message</tspan></text>
+<circle cx="640.0" cy="222.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="640.0" y="225.4">3</tspan></text>
+<text font-size="9.5" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="422.0" y="175.9">▸ Show the data as a table</tspan></text>
+<text font-size="9.5" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="422.0" y="309.9">▸ Show the data as a table</tspan></text>
+<text font-size="9.5" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="422.0" y="363.9">▸ Show the data as a table</tspan></text>
+<text font-size="9.5" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="422.0" y="409.9">▸ Show the data as a table</tspan></text>
+<circle cx="620.0" cy="307.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="620.0" y="310.4">5</tspan></text>
+<rect x="40.0" y="494.0" width="178.0" height="20.0" rx="10" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="9.5" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="129.0" y="506.9">References and data notes →</tspan></text>
+<rect x="226.0" y="494.0" width="120.0" height="20.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="9.5" fill="#1F2328" text-anchor="middle"><tspan x="286.0" y="506.9">Back to the start ↑</tspan></text>
+<polyline points="129.0,516.0 129.0,524.0" fill="none" stroke="#1F2328" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="358.0" cy="504.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="358.0" y="507.4">8</tspan></text>
+<rect x="654.0" y="300.0" width="38.0" height="80.0" rx="19" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<circle cx="673.0" cy="322.0" r="13" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1.5"/>
+<text font-size="13" fill="#1F2328" text-anchor="middle"><tspan x="673.0" y="326.0">↑</tspan></text>
+<circle cx="673.0" cy="358.0" r="13" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="13" fill="#1F2328" text-anchor="middle"><tspan x="673.0" y="362.0">↓</tspan></text>
+<circle cx="650.0" cy="390.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="650.0" y="393.4">6</tspan></text>
+<rect x="20.0" y="546.0" width="680.0" height="88.0" rx="6" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="32.0" y="563.0">Outside the Car</tspan></text>
+<polyline points="102.0,567.0 128.0,567.0" fill="none" stroke="#F2B705" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="32.0" y="579.6">Interactive data story:</tspan></text>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="32.0" y="593.6">pedestrians and cyclists</tspan></text>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="32.0" y="607.6">hospitalised, 2011-2021</tspan></text>
+<text font-size="9" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="197.0" y="562.7">TEAM DATAWERK</tspan></text>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="197.0" y="579.6">Nguyễn Duy Quang · @Kwan6622</tspan></text>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="197.0" y="593.6">Hồ Cao Cường · @cuongidol26</tspan></text>
+<text font-size="9" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="362.0" y="562.7">PROJECT</tspan></text>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="362.0" y="579.6">COS30045 Data Visualisation</tspan></text>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="362.0" y="593.6">Final design project, 2026</tspan></text>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="362.0" y="607.6">Swinburne Univ. of Tech. (Vietnam)</tspan></text>
+<text font-size="9" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="527.0" y="562.7">LINKS</tspan></text>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="527.0" y="579.6">GitHub repository ↗</tspan></text>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="527.0" y="593.6">References and data notes</tspan></text>
+<text font-size="8.5" fill="#4A4A4A" text-anchor="start"><tspan x="527.0" y="607.6">Data: BITRE, ABS</tspan></text>
+<polyline points="30.0,616.0 690.0,616.0" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="8.5" fill="#7A7A7A" text-anchor="start"><tspan x="32.0" y="626.6">web_proto_v2 (prototype) · D3.js v7 + Scrollama · GenAI use in GENAI_LOG.md</tspan></text>
+<circle cx="692.0" cy="548.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="692.0" y="551.4">9</tspan></text>
+<rect x="20.0" y="640.0" width="680.0" height="30.0" rx="6" fill="#FFFFFF" stroke="#1F2328" stroke-width="1" stroke-dasharray="5 4"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="360.0" y="658.0">hidden: #tooltip-announcer (aria-live=polite) reads tooltips on keyboard focus and chart updates</tspan></text>
+<circle cx="28.0" cy="640.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="28.0" y="643.4">7</tspan></text>
+<rect x="730.0" y="70.0" width="290.0" height="428.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="12" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="744.0" y="91.7">Notes  (v2 = new in this version)</tspan></text>
+<circle cx="752.0" cy="116.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="119.4">1</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="119.5">Stepper: Start + 6 chapters, click</tspan><tspan x="772.0" y="133.7">to jump; yellow bar = progress</tspan></text>
+<circle cx="752.0" cy="158.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="161.4">2</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="161.5">Light/dark + colour-vision preview</tspan><tspan x="772.0" y="175.7">(remembered on both pages)</tspan></text>
+<circle cx="752.0" cy="200.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="203.4">3</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="203.5">Ch1: chart pinned, each message</tspan><tspan x="772.0" y="217.7">changes what the chart shows</tspan></text>
+<circle cx="752.0" cy="242.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="245.4">4</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="245.5">v2 audience line: the reader is</tspan><tspan x="772.0" y="259.7">the main character (W3.1)</tspan></text>
+<circle cx="752.0" cy="284.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="287.4">5</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="287.5">v2 every chart: "Show the data as</tspan><tspan x="772.0" y="301.7">a table" (&lt;details&gt;, real &lt;table&gt;)</tspan></text>
+<circle cx="752.0" cy="326.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="329.4">6</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="329.5">Arrows: next / previous part; ← →</tspan><tspan x="772.0" y="343.7">only when nothing is focused</tspan></text>
+<circle cx="752.0" cy="368.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="371.4">7</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="371.5">v2 live region for screen readers</tspan><tspan x="772.0" y="385.7">(W8 slide 45)</tspan></text>
+<circle cx="752.0" cy="410.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="413.4">8</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="413.5">v2 Sources is no longer a chapter:</tspan><tspan x="772.0" y="427.7">References = separate page (page 13),</tspan><tspan x="772.0" y="441.9">linked from header, Summary, footer</tspan></text>
+<circle cx="752.0" cy="468.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="471.4">9</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="471.5">v2 footer: team, members (GitHub),</tspan><tspan x="772.0" y="485.7">unit, project, repository, data</tspan></text>
+<rect x="730.0" y="532.0" width="290.0" height="138.0" rx="8" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="744.0" y="548.4">State bus (main.js)</tspan></text>
+<rect x="756.0" y="558.0" width="238.0" height="20.0" rx="5" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="9.5" fill="#1F2328" text-anchor="middle"><tspan x="875.0" y="570.9">chip / tile / role / scroll step</tspan></text>
+<rect x="756.0" y="586.0" width="238.0" height="20.0" rx="5" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="9.5" fill="#1F2328" text-anchor="middle"><tspan x="875.0" y="598.9">emit({ key: value })</tspan></text>
+<polyline points="875.0,578.0 875.0,585.0" fill="none" stroke="#4A4A4A" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah)"/>
+<rect x="756.0" y="614.0" width="238.0" height="20.0" rx="5" fill="#FFFFFF" stroke="#1F2328" stroke-width="1"/>
+<text font-size="9.5" fill="#1F2328" text-anchor="middle"><tspan x="875.0" y="626.9">setState(patch) - one state</tspan></text>
+<polyline points="875.0,606.0 875.0,613.0" fill="none" stroke="#4A4A4A" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah)"/>
+<rect x="756.0" y="642.0" width="238.0" height="20.0" rx="5" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="9.5" fill="#1F2328" text-anchor="middle"><tspan x="875.0" y="654.9">chart.update(state) x 8</tspan></text>
+<polyline points="875.0,634.0 875.0,641.0" fill="none" stroke="#4A4A4A" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah)"/>
+</svg>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>04 Ch1 Who - trend line chart</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">Chapter 1 "Who": scrollytelling line chart</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">Hospital admissions per year by road user, 2011-2021. Default view: change since 2012 (2012 = 100).</tspan></text>
+<rect x="20.0" y="70.0" width="470.0" height="420.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="36.0" y="93.0">Hospital admissions after road crashes, by road user</tspan></text>
+<rect x="342.0" y="120.0" width="48.0" height="280.0" rx="0" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="366.0" y="114.0">COVID</tspan></text>
+<polyline points="70.0,400.0 390.0,400.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="62.0" y="403.1">60</tspan></text>
+<polyline points="70.0,344.0 390.0,344.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="62.0" y="347.1">80</tspan></text>
+<polyline points="70.0,288.0 390.0,288.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="62.0" y="291.1">100</tspan></text>
+<polyline points="70.0,232.0 390.0,232.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="62.0" y="235.1">120</tspan></text>
+<polyline points="70.0,176.0 390.0,176.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="62.0" y="179.1">140</tspan></text>
+<polyline points="70.0,120.0 390.0,120.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="62.0" y="123.0">160</tspan></text>
+<polyline points="70.0,400.0 390.0,400.0" fill="none" stroke="#A8A8A8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="70.0" y="415.1">2011</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="134.0" y="415.1">2013</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="198.0" y="415.1">2015</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="262.0" y="415.1">2017</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="326.0" y="415.1">2019</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="390.0" y="415.1">2021</tspan></text>
+<polyline points="70.0,288.0 390.0,288.0" fill="none" stroke="#7A7A7A" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="262.0,120.0 262.0,400.0" fill="none" stroke="#7A7A7A" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="2 3"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="268.0" y="132.1">NSW counting change</tspan></text>
+<polyline points="70.0,299.2 102.0,288.0 134.0,257.2 166.0,237.6 198.0,232.0 230.0,223.6 262.0,215.2 294.0,220.8 326.0,204.0 358.0,153.6 390.0,159.2" fill="none" stroke="#7A7A7A" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="398.0" y="162.3">Cyclists</tspan></text>
+<polyline points="70.0,279.6 102.0,288.0 134.0,290.8 166.0,299.2 198.0,290.8 230.0,279.6 262.0,282.4 294.0,288.0 326.0,282.4 358.0,346.8 390.0,324.4" fill="none" stroke="#1F2328" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="398.0" y="327.4">Pedestrians</tspan></text>
+<polyline points="70.0,293.6 102.0,288.0 134.0,276.8 166.0,265.6 198.0,265.6 230.0,257.2 262.0,251.6 294.0,254.4 326.0,246.0 358.0,254.4 390.0,246.0" fill="none" stroke="#A8A8A8" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="398.0" y="242.1">Motorcyclists</tspan></text>
+<polyline points="70.0,285.2 102.0,288.0 134.0,285.2 166.0,288.0 198.0,265.6 230.0,243.2 262.0,240.4 294.0,232.0 326.0,240.4 358.0,274.0 390.0,251.6" fill="none" stroke="#A8A8A8" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+<text font-size="10" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="398.0" y="261.6">Car occupants</tspan></text>
+<circle cx="326.0" cy="204.0" r="6" fill="none" stroke="#F2B705" stroke-width="3"/>
+<text font-size="10" fill="#1F2328" text-anchor="end" font-weight="bold"><tspan x="314.0" y="193.1">+30% 2012-19</tspan></text>
+<circle cx="326.0" cy="282.4" r="6" fill="none" stroke="#F2B705" stroke-width="3"/>
+<text font-size="10" fill="#1F2328" text-anchor="end" font-weight="bold"><tspan x="314.0" y="271.4">+2% 2012-19</tspan></text>
+<rect x="34.0" y="430.0" width="128.2" height="26.0" rx="13" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#FFFFFF" text-anchor="middle"><tspan x="98.1" y="446.4">Change since 2012</tspan></text>
+<rect x="160.0" y="430.0" width="148.0" height="26.0" rx="13" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="234.0" y="446.4">Number of admissions</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="36.0" y="473.1">Other road users (4%) not shown. Source: (BITRE, 2023).</tspan></text>
+<circle cx="340.0" cy="204.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="340.0" y="207.4">1</tspan></text>
+<circle cx="30.0" cy="443.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="30.0" y="446.4">2</tspan></text>
+<circle cx="392.0" cy="141.2" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="392.0" y="144.6">3</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="512.0" y="82.4">Message cards scroll past</tspan></text>
+<rect x="510.0" y="96.0" width="200.0" height="50.0" rx="6" fill="#FFFFFF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="518.0" y="124.0">1  How to read: 2012 = 100</tspan></text>
+<rect x="510.0" y="158.0" width="200.0" height="50.0" rx="6" fill="#FFFFFF" stroke="#F2B705" stroke-width="3"/>
+<text font-size="10" fill="#1F2328" text-anchor="start"><tspan x="518.0" y="186.1">2  Cyclists +30% (others fade)</tspan></text>
+<rect x="510.0" y="220.0" width="200.0" height="50.0" rx="6" fill="#FFFFFF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="518.0" y="248.1">3  Pedestrians +2%</tspan></text>
+<rect x="510.0" y="282.0" width="200.0" height="50.0" rx="6" fill="#FFFFFF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="518.0" y="310.1">4  Count view: pedestrians more</tspan></text>
+<rect x="510.0" y="344.0" width="200.0" height="50.0" rx="6" fill="#FFFFFF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="518.0" y="372.1">5  COVID dip, then back up</tspan></text>
+<circle cx="712.0" cy="121.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="712.0" y="124.4">4</tspan></text>
+<rect x="730.0" y="96.0" width="290.0" height="264.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="744.0" y="118.0">Notes</tspan></text>
+<circle cx="752.0" cy="142.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="145.4">1</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="146.0">Yellow rings + labels: the 2012-&gt;19</tspan><tspan x="772.0" y="160.8">change the text talks about</tspan></text>
+<circle cx="752.0" cy="188.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="191.4">2</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="192.0">Chips: index (growth) or counts</tspan></text>
+<circle cx="752.0" cy="216.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="219.4">3</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="220.0">Direct labels, no legend; car</tspan><tspan x="772.0" y="234.8">occupants dashed grey</tspan></text>
+<circle cx="752.0" cy="262.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="265.4">4</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="266.0">Each card sets trendMode /</tspan><tspan x="772.0" y="280.9">trendFocus; other lines fade to</tspan><tspan x="772.0" y="295.7">18 % so the eye follows the text</tspan></text>
+<circle cx="752.0" cy="326.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="329.4">5</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="330.0">Hover: tooltip with year and value</tspan><tspan x="772.0" y="344.9">for every road user</tspan></text>
+</svg>

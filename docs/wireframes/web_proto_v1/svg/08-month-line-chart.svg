@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>08 Ch4 When - month line chart</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">Chapter 4 "When &amp; where" (a): month of the year</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">Each month ÷ the average month (1.0 = typical), 2011-2019 so COVID lockdowns do not distort the shape.</tspan></text>
+<rect x="20.0" y="70.0" width="690.0" height="380.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="36.0" y="93.0">Each month compared with an average month, 2011-2019</tspan></text>
+<rect x="288.6" y="130.0" width="139.1" height="270.0" rx="0" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="358.2" y="124.0">Winter</tspan></text>
+<polyline points="80.0,400.0 590.0,400.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="72.0" y="403.1">0.7x</tspan></text>
+<polyline points="80.0,350.9 590.0,350.9" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="72.0" y="354.0">0.8x</tspan></text>
+<polyline points="80.0,301.8 590.0,301.8" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="72.0" y="304.9">0.9x</tspan></text>
+<polyline points="80.0,252.7 590.0,252.7" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="72.0" y="255.8">1.0x</tspan></text>
+<polyline points="80.0,203.6 590.0,203.6" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="72.0" y="206.7">1.1x</tspan></text>
+<polyline points="80.0,154.5 590.0,154.5" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="72.0" y="157.6">1.2x</tspan></text>
+<polyline points="80.0,400.0 590.0,400.0" fill="none" stroke="#A8A8A8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="80.0" y="415.1">Jan</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="126.4" y="415.1">Feb</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="172.7" y="415.1">Mar</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="219.1" y="415.1">Apr</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="265.5" y="415.1">May</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="311.8" y="415.1">Jun</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="358.2" y="415.1">Jul</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="404.5" y="415.1">Aug</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="450.9" y="415.1">Sep</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="497.3" y="415.1">Oct</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="543.6" y="415.1">Nov</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="590.0" y="415.1">Dec</tspan></text>
+<polyline points="80.0,252.7 590.0,252.7" fill="none" stroke="#7A7A7A" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="86.0" y="246.8">average month</tspan></text>
+<polyline points="80.0,198.7 126.4,208.5 172.7,154.5 219.1,223.3 265.5,262.5 311.8,350.9 358.2,365.6 404.5,341.1 450.9,296.9 497.3,188.9 543.6,213.5 590.0,218.4" fill="none" stroke="#7A7A7A" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="80.0" cy="198.7" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="126.4" cy="208.5" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="172.7" cy="154.5" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="219.1" cy="223.3" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="265.5" cy="262.5" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="311.8" cy="350.9" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="358.2" cy="365.6" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="404.5" cy="341.1" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="450.9" cy="296.9" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="497.3" cy="188.9" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="543.6" cy="213.5" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<circle cx="590.0" cy="218.4" r="3" fill="#7A7A7A" stroke="#7A7A7A" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="600.0" y="221.7">Cyclists</tspan></text>
+<circle cx="172.7" cy="154.5" r="8" fill="none" stroke="#F2B705" stroke-width="3"/>
+<polyline points="80.0,355.8 126.4,316.5 172.7,238.0 219.1,252.7 265.5,179.1 311.8,179.1 358.2,188.9 404.5,208.5 450.9,282.2 497.3,252.7 543.6,287.1 590.0,287.1" fill="none" stroke="#1F2328" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="80.0" cy="355.8" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="126.4" cy="316.5" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="172.7" cy="238.0" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="219.1" cy="252.7" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="265.5" cy="179.1" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="311.8" cy="179.1" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="358.2" cy="188.9" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="404.5" cy="208.5" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="450.9" cy="282.2" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="497.3" cy="252.7" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="543.6" cy="287.1" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<circle cx="590.0" cy="287.1" r="3" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="600.0" y="290.4">Pedestrians</tspan></text>
+<circle cx="265.5" cy="179.1" r="8" fill="none" stroke="#F2B705" stroke-width="3"/>
+<circle cx="188.7" cy="140.5" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="188.7" y="143.9">1</tspan></text>
+<circle cx="358.2" cy="144.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="358.2" y="147.4">2</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="36.0" y="436.1">2020-21 left out (COVID). The data records the month, not the time of day.</tspan></text>
+<rect x="730.0" y="70.0" width="290.0" height="236.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="744.0" y="92.0">Notes</tspan></text>
+<circle cx="752.0" cy="116.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="119.4">1</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="120.0">Yellow rings: each group's worst</tspan><tspan x="772.0" y="134.8">month (cyclists March, pedestrians</tspan><tspan x="772.0" y="149.7">May-June)</tspan></text>
+<circle cx="752.0" cy="180.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="183.4">2</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="184.0">Winter shaded: pedestrians up,</tspan><tspan x="772.0" y="198.8">cyclists down</tspan></text>
+<circle cx="752.0" cy="226.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="229.4">3</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="230.0">Direct labels; points on every</tspan><tspan x="772.0" y="244.8">month for hover targets</tspan></text>
+<circle cx="752.0" cy="272.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="275.4">4</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="276.0">Hover: month, index and average</tspan><tspan x="772.0" y="290.9">admissions that month</tspan></text>
+</svg>

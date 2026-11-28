@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>09 Ch4 Where - tile map + detail</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">Chapter 4 "When &amp; where" (b): states, linked views</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">Equal-area tile map shaded per 100,000 people (5-step ramp); clicking a state updates the line chart beside it.</tspan></text>
+<rect x="20.0" y="70.0" width="88.6" height="26.0" rx="13" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#FFFFFF" text-anchor="middle"><tspan x="64.3" y="86.4">Pedestrians</tspan></text>
+<rect x="116.6" y="70.0" width="68.8" height="26.0" rx="13" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="151.0" y="86.4">Cyclists</tspan></text>
+<circle cx="16.0" cy="70.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="16.0" y="73.4">1</tspan></text>
+<rect x="20.0" y="110.0" width="340.0" height="420.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="36.0" y="133.0">Admissions per 100,000 people per year</tspan></text>
+<rect x="122.0" y="160.0" width="66.0" height="66.0" rx="4" fill="#1F2328" stroke="#F2B705" stroke-width="4"/>
+<text font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="bold"><tspan x="155.0" y="196.7">NT</tspan></text>
+<rect x="194.0" y="160.0" width="66.0" height="66.0" rx="4" fill="#A8A8A8" stroke="#FFFFFF" stroke-width="2"/>
+<text font-size="12" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="227.0" y="196.7">Qld</tspan></text>
+<rect x="50.0" y="232.0" width="66.0" height="66.0" rx="4" fill="#A8A8A8" stroke="#FFFFFF" stroke-width="2"/>
+<text font-size="12" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="83.0" y="268.7">WA</tspan></text>
+<rect x="122.0" y="232.0" width="66.0" height="66.0" rx="4" fill="#D4D4D4" stroke="#FFFFFF" stroke-width="2"/>
+<text font-size="12" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="155.0" y="268.7">SA</tspan></text>
+<rect x="194.0" y="232.0" width="66.0" height="66.0" rx="4" fill="#A8A8A8" stroke="#FFFFFF" stroke-width="2"/>
+<text font-size="12" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="227.0" y="268.7">NSW</tspan></text>
+<rect x="266.0" y="232.0" width="66.0" height="66.0" rx="4" fill="#EFEFEF" stroke="#FFFFFF" stroke-width="2"/>
+<text font-size="12" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="299.0" y="268.7">ACT</tspan></text>
+<rect x="194.0" y="304.0" width="66.0" height="66.0" rx="4" fill="#D4D4D4" stroke="#FFFFFF" stroke-width="2"/>
+<text font-size="12" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="227.0" y="340.7">Vic</tspan></text>
+<rect x="194.0" y="376.0" width="66.0" height="66.0" rx="4" fill="#EFEFEF" stroke="#FFFFFF" stroke-width="2"/>
+<text font-size="12" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="227.0" y="412.7">Tas</tspan></text>
+<circle cx="118.0" cy="156.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="118.0" y="159.4">2</tspan></text>
+<rect x="40.0" y="470.0" width="56.0" height="14.0" rx="0" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="9" fill="#7A7A7A" text-anchor="middle"><tspan x="68.0" y="495.7">low</tspan></text>
+<rect x="100.0" y="470.0" width="56.0" height="14.0" rx="0" fill="#D4D4D4" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="9" fill="#7A7A7A" text-anchor="middle"><tspan x="128.0" y="495.7">class 2</tspan></text>
+<rect x="160.0" y="470.0" width="56.0" height="14.0" rx="0" fill="#A8A8A8" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="9" fill="#7A7A7A" text-anchor="middle"><tspan x="188.0" y="495.7">class 3</tspan></text>
+<rect x="220.0" y="470.0" width="56.0" height="14.0" rx="0" fill="#7A7A7A" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="9" fill="#7A7A7A" text-anchor="middle"><tspan x="248.0" y="495.7">class 4</tspan></text>
+<rect x="280.0" y="470.0" width="56.0" height="14.0" rx="0" fill="#1F2328" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="9" fill="#7A7A7A" text-anchor="middle"><tspan x="308.0" y="495.7">high</tspan></text>
+<circle cx="30.0" cy="470.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="30.0" y="473.4">3</tspan></text>
+<rect x="370.0" y="110.0" width="340.0" height="420.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="386.0" y="133.0">NT vs Australia, pedestrians per 100,000</tspan></text>
+<polyline points="410.0,170.0 690.0,170.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="410.0,242.0 690.0,242.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="410.0,314.0 690.0,314.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="410.0,386.0 690.0,386.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="410.0,458.0 690.0,458.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="410.0,460.0 690.0,460.0" fill="none" stroke="#A8A8A8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="410.0" y="475.1">2011</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="550.0" y="475.1">2016</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="middle"><tspan x="690.0" y="475.1">2021</tspan></text>
+<polyline points="410.0,239.6 438.0,216.4 466.0,228.0 494.0,251.2 522.0,204.8 550.0,222.2 578.0,233.8 606.0,210.6 634.0,245.4 662.0,268.6 690.0,257.0" fill="none" stroke="#1F2328" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="410.0,344.0 438.0,344.0 466.0,349.8 494.0,349.8 522.0,344.0 550.0,344.0 578.0,344.0 606.0,349.8 634.0,349.8 662.0,373.0 690.0,361.4" fill="none" stroke="#A8A8A8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6 4"/>
+<text font-size="11" fill="#1F2328" text-anchor="end" font-weight="bold"><tspan x="688.0" y="245.4">NT</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="412.0" y="334.4">Australia</tspan></text>
+<circle cx="684.0" cy="164.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="684.0" y="167.4">4</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="32.0" y="556.0">Sketch values. Source: BITRE admissions ÷ ABS population.</tspan></text>
+<rect x="730.0" y="70.0" width="290.0" height="282.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="744.0" y="92.0">Notes</tspan></text>
+<circle cx="752.0" cy="116.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="119.4">1</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="120.0">Road-user chips switch the ramp</tspan><tspan x="772.0" y="134.8">and the detail chart together</tspan></text>
+<circle cx="752.0" cy="162.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="165.4">2</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="166.0">Click or Enter on a tile selects the</tspan><tspan x="772.0" y="180.8">state (yellow outline); tiles are</tspan><tspan x="772.0" y="195.7">keyboard focusable</tspan></text>
+<circle cx="752.0" cy="226.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="229.4">3</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="230.0">Legend shows the 5 class limits</tspan><tspan x="772.0" y="244.8">(rates per 100,000)</tspan></text>
+<circle cx="752.0" cy="272.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="275.4">4</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="276.0">Linked line chart: selected state</tspan><tspan x="772.0" y="290.9">(solid) vs Australia (dashed)</tspan></text>
+<circle cx="752.0" cy="318.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="321.4">5</tspan></text>
+<text font-size="11" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="322.0">Hover a tile: state, rate,</tspan><tspan x="772.0" y="336.9">admissions</tspan></text>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>11 Summary - revisit cards</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">Summary: one finding and one action per chapter, then the way out</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">Five cards; Revisit jumps back to that chapter. The story ends with the message and a link to the References page.</tspan></text>
+<rect x="20.0" y="76.0" width="222.0" height="184.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<polyline points="22.0,77.0 240.0,77.0" fill="none" stroke="#F2B705" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="34.0" y="97.4">1 · Who</tspan></text>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="34.0" y="124.0">Cyclists +30%</tspan></text>
+<rect x="32.0" y="140.0" width="198.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="32.0" y="158.0" width="160.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="34.0" y="187.1">→ Action:</tspan></text>
+<rect x="32.0" y="196.0" width="190.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="32.0" y="220.0" width="130.0" height="28.0" rx="14" fill="#FFFFFF" stroke="#1F2328" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="97.0" y="237.1">Revisit chapter 1</tspan></text>
+<rect x="252.0" y="76.0" width="222.0" height="184.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<polyline points="254.0,77.0 472.0,77.0" fill="none" stroke="#F2B705" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="266.0" y="97.4">2 · How badly</tspan></text>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="266.0" y="124.0">Pedestrians 9.1 days</tspan></text>
+<rect x="264.0" y="140.0" width="198.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="264.0" y="158.0" width="160.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="266.0" y="187.1">→ Action:</tspan></text>
+<rect x="264.0" y="196.0" width="190.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="264.0" y="220.0" width="130.0" height="28.0" rx="14" fill="#FFFFFF" stroke="#1F2328" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="329.0" y="237.1">Revisit chapter 2</tspan></text>
+<rect x="484.0" y="76.0" width="222.0" height="184.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<polyline points="486.0,77.0 704.0,77.0" fill="none" stroke="#F2B705" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="498.0" y="97.4">3 · Age</tspan></text>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="498.0" y="124.0">1 in 18 (75+ die)</tspan></text>
+<rect x="496.0" y="140.0" width="198.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="496.0" y="158.0" width="160.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="498.0" y="187.1">→ Action:</tspan></text>
+<rect x="496.0" y="196.0" width="190.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="496.0" y="220.0" width="130.0" height="28.0" rx="14" fill="#FFFFFF" stroke="#1F2328" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="561.0" y="237.1">Revisit chapter 3</tspan></text>
+<rect x="20.0" y="272.0" width="222.0" height="184.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<polyline points="22.0,273.0 240.0,273.0" fill="none" stroke="#F2B705" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="34.0" y="293.4">4 · When &amp; where</tspan></text>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="34.0" y="320.0">May-June, NT highest</tspan></text>
+<rect x="32.0" y="336.0" width="198.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="32.0" y="354.0" width="160.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="34.0" y="383.1">→ Action:</tspan></text>
+<rect x="32.0" y="392.0" width="190.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="32.0" y="416.0" width="130.0" height="28.0" rx="14" fill="#FFFFFF" stroke="#1F2328" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="97.0" y="433.1">Revisit chapter 4</tspan></text>
+<rect x="252.0" y="272.0" width="222.0" height="184.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<polyline points="254.0,273.0 472.0,273.0" fill="none" stroke="#F2B705" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="266.0" y="293.4">5 · You</tspan></text>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="266.0" y="320.0">120 beds every day</tspan></text>
+<rect x="264.0" y="336.0" width="198.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="264.0" y="354.0" width="160.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start" font-weight="bold"><tspan x="266.0" y="383.1">→ Action:</tspan></text>
+<rect x="264.0" y="392.0" width="190.0" height="10.0" rx="3" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<rect x="264.0" y="416.0" width="130.0" height="28.0" rx="14" fill="#FFFFFF" stroke="#1F2328" stroke-width="1"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="329.0" y="433.1">Revisit chapter 5</tspan></text>
+<circle cx="30.0" cy="226.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="30.0" y="229.4">1</tspan></text>
+<circle cx="498.0" cy="286.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="498.0" y="289.4">2</tspan></text>
+<polyline points="20.0,474.0 20.0,508.0" fill="none" stroke="#F2B705" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="34.0" y="486.2">Outside the car, your body is the only crumple zone,</tspan><tspan x="34.0" y="503.7">so the road has to protect it.</tspan></text>
+<rect x="20.0" y="522.0" width="210.0" height="30.0" rx="15" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="125.0" y="540.4">References and data notes →</tspan></text>
+<rect x="240.0" y="522.0" width="150.0" height="30.0" rx="15" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle"><tspan x="315.0" y="540.4">Back to the start ↑</tspan></text>
+<circle cx="400.0" cy="537.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="400.0" y="540.4">3</tspan></text>
+<polyline points="125.0,554.0 125.0,590.0" fill="none" stroke="#1F2328" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#ah)"/>
+<text font-size="10" fill="#4A4A4A" text-anchor="start" font-style="italic"><tspan x="134.0" y="581.0">opens references.html (page 13)</tspan></text>
+<rect x="20.0" y="596.0" width="690.0" height="70.0" rx="6" fill="#EFEFEF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="365.0" y="634.4">project footer (page 13 shows it in full)</tspan></text>
+<circle cx="30.0" cy="596.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="30.0" y="599.4">4</tspan></text>
+<rect x="730.0" y="70.0" width="290.0" height="260.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="12" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="744.0" y="91.7">Notes  (v2 = new in this version)</tspan></text>
+<circle cx="752.0" cy="116.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="119.4">1</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="119.5">Revisit = smooth scroll to the</tspan><tspan x="772.0" y="133.7">chapter start (instant with</tspan><tspan x="772.0" y="147.8">reduced motion); type=button</tspan></text>
+<circle cx="752.0" cy="174.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="177.4">2</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="177.5">v2 card 4 says May-June (data</tspan><tspan x="772.0" y="191.7">peak), not June</tspan></text>
+<circle cx="752.0" cy="216.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="219.4">3</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="219.5">v2 Sources is no longer a chapter:</tspan><tspan x="772.0" y="233.7">the story ends with a link to the</tspan><tspan x="772.0" y="247.8">separate References page</tspan></text>
+<circle cx="752.0" cy="274.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="277.4">4</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="277.5">v2 footer with team, members, unit,</tspan><tspan x="772.0" y="291.7">project, GitHub and data links</tspan></text>
+<circle cx="752.0" cy="316.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="319.4">5</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="319.5">Cards wrap to 1 column on phones</tspan></text>
+</svg>

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="680" viewBox="0 0 1040 680" font-family="Helvetica, Arial, sans-serif">
+<title>07 Ch3 Age - bar chart</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9z" fill="#4A4A4A"/></marker></defs>
+<rect width="1040" height="680" fill="#FFFFFF"/>
+<text font-size="20" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="22.0" y="33.1">Chapter 3 "Age": bar chart by age group</tspan></text>
+<text font-size="12" fill="#7A7A7A" text-anchor="start"><tspan x="22.0" y="52.7">Road-user chips, then measure chips. 75+ in full colour + yellow marker. v2: teaser prompt, take-away line, outlined light bars, table.</tspan></text>
+<rect x="20.0" y="64.0" width="690.0" height="28.0" rx="6" fill="#EFEFEF" stroke="none" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="start"><tspan x="22.0" y="81.4">Try this: Switch to Cyclists and Per 100,000 people: the highest rate is not older people but age 8-16.</tspan></text>
+<polyline points="21.0,66.0 21.0,90.0" fill="none" stroke="#F2B705" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="16.0" cy="64.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="16.0" y="67.4">1</tspan></text>
+<rect x="20.0" y="100.0" width="88.6" height="26.0" rx="13" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#FFFFFF" text-anchor="middle"><tspan x="64.3" y="116.4">Pedestrians</tspan></text>
+<rect x="116.6" y="100.0" width="68.8" height="26.0" rx="13" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="151.0" y="116.4">Cyclists</tspan></text>
+<rect x="20.0" y="132.0" width="121.6" height="26.0" rx="13" fill="#1F2328" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#FFFFFF" text-anchor="middle"><tspan x="80.8" y="148.4">Days in hospital</tspan></text>
+<rect x="149.6" y="132.0" width="141.4" height="26.0" rx="13" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="220.3" y="148.4">Died within 30 days</tspan></text>
+<rect x="299.0" y="132.0" width="134.8" height="26.0" rx="13" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="11" fill="#4A4A4A" text-anchor="middle"><tspan x="366.4" y="148.4">Per 100,000 people</tspan></text>
+<rect x="20.0" y="168.0" width="690.0" height="400.0" rx="10" fill="#FFFFFF" stroke="#A8A8A8" stroke-width="1"/>
+<text font-size="13" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="36.0" y="191.0">Pedestrians: average days in hospital, by age group (2011-2021)</tspan></text>
+<text font-size="11" fill="#1F2328" text-anchor="start"><tspan x="36.0" y="205.4">Highest: age 75+ (15.8 days).</tspan></text>
+<circle cx="250.0" cy="202.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="250.0" y="205.4">2</tspan></text>
+<polyline points="80.0,490.0 690.0,490.0" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="72.0" y="493.1">0</tspan></text>
+<polyline points="80.0,411.9 690.0,411.9" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="72.0" y="414.9">5</tspan></text>
+<polyline points="80.0,333.8 690.0,333.8" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="72.0" y="336.8">10</tspan></text>
+<polyline points="80.0,255.6 690.0,255.6" fill="none" stroke="#EFEFEF" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="end"><tspan x="72.0" y="258.7">15</tspan></text>
+<polyline points="80.0,490.0 690.0,490.0" fill="none" stroke="#A8A8A8" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="36.0" y="229.1">Average days in hospital</tspan></text>
+<rect x="98.0" y="425.9" width="66.0" height="64.1" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="131.0" y="419.0">4.1 d</tspan></text>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="131.0" y="505.1">0-7</tspan></text>
+<rect x="184.0" y="418.1" width="66.0" height="71.9" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="217.0" y="411.2">4.6 d</tspan></text>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="217.0" y="505.1">8-16</tspan></text>
+<rect x="270.0" y="393.1" width="66.0" height="96.9" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="303.0" y="386.2">6.2 d</tspan></text>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="303.0" y="505.1">17-25</tspan></text>
+<rect x="356.0" y="375.9" width="66.0" height="114.1" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="389.0" y="369.0">7.3 d</tspan></text>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="389.0" y="505.1">26-39</tspan></text>
+<rect x="442.0" y="329.1" width="66.0" height="160.9" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="475.0" y="322.1">10.3 d</tspan></text>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="475.0" y="505.1">40-64</tspan></text>
+<rect x="528.0" y="280.6" width="66.0" height="209.4" rx="2" fill="#EFEFEF" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle"><tspan x="561.0" y="273.7">13.4 d</tspan></text>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="561.0" y="505.1">65-74</tspan></text>
+<rect x="614.0" y="243.1" width="66.0" height="246.9" rx="2" fill="#1F2328" stroke="#1F2328" stroke-width="1.5"/>
+<text font-size="10" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="647.0" y="236.2">15.8 d</tspan></text>
+<text font-size="10" fill="#4A4A4A" text-anchor="middle"><tspan x="647.0" y="505.1">75+</tspan></text>
+<rect x="614.0" y="512.0" width="66.0" height="5.0" rx="0" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<rect x="610.0" y="239.1" width="74.0" height="254.9" rx="6" fill="none" stroke="#F2B705" stroke-width="4"/>
+<rect x="612.0" y="241.1" width="70.0" height="250.9" rx="5" fill="none" stroke="#1F2328" stroke-width="2"/>
+<circle cx="600.0" cy="253.1" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="600.0" y="256.5">3</tspan></text>
+<text font-size="10" fill="#7A7A7A" text-anchor="start"><tspan x="36.0" y="531.0">Per 100,000 uses ABS population; "≈" = estimate where age bands differ. (ABS, 2026)</tspan></text>
+<polyline points="34.0,540.0 694.0,540.0" fill="none" stroke="#D4D4D4" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text font-size="11" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="40.0" y="557.4">▸ Show the data as a table</tspan></text>
+<circle cx="28.0" cy="552.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="28.0" y="555.4">4</tspan></text>
+<rect x="730.0" y="168.0" width="290.0" height="338.0" rx="8" fill="#EFEFEF" stroke="#D4D4D4" stroke-width="1"/>
+<text font-size="12" fill="#1F2328" text-anchor="start" font-weight="bold"><tspan x="744.0" y="189.7">Notes  (v2 = new in this version)</tspan></text>
+<text font-size="9.5" fill="#4A4A4A" text-anchor="start" font-style="italic"><tspan x="744.0" y="210.9">Redraws on: ageGroup, ageMeasure, width, theme, cvd</tspan></text>
+<circle cx="752.0" cy="234.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="237.4">1</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="237.5">v2 prompt names the surprise</tspan><tspan x="772.0" y="251.7">(cyclists aged 8-16) so it is not</tspan><tspan x="772.0" y="265.9">hidden behind two clicks</tspan></text>
+<circle cx="752.0" cy="292.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="295.4">2</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="295.5">v2 take-away line: the highest bar</tspan><tspan x="772.0" y="309.7">of the current view, in words</tspan></text>
+<circle cx="752.0" cy="334.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="337.4">3</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="337.5">v2 Tab starts on 75+, ← → between</tspan><tspan x="772.0" y="351.7">ages; tooltip + announcer</tspan></text>
+<circle cx="752.0" cy="376.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="379.4">4</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="379.5">v2 table for the selected road user</tspan><tspan x="772.0" y="393.7">(all 3 measures)</tspan></text>
+<circle cx="752.0" cy="418.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="421.4">5</tspan></text>
+<text font-size="10.5" fill="#1F2328" text-anchor="start"><tspan x="772.0" y="421.5">v2 light bars outlined in the full</tspan><tspan x="772.0" y="435.7">colour (light fill alone &lt; 2:1);</tspan><tspan x="772.0" y="449.9">yellow marker has a dark edge</tspan></text>
+<circle cx="752.0" cy="476.0" r="10" fill="#F2B705" stroke="#1F2328" stroke-width="1"/>
+<text font-size="11" fill="#1F2328" text-anchor="middle" font-weight="bold"><tspan x="752.0" y="479.4">6</tspan></text>
+<text font-size="10.5" fill="#4A4A4A" text-anchor="start"><tspan x="772.0" y="479.5">One y-scale for both road users:</tspan><tspan x="772.0" y="493.7">switching never rescales silently</tspan></text>
+</svg>

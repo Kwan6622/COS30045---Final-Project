@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Book §3 Draft</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f7f6f3; --surface:#fcfcfb; --border:#e4e2dc; --text:#0b0b0b; --text-2:#52514e; --text-3:#6e6c66;
+          --accent:#1F2328; --ped:#BF4632; --cyc:#1E5664; --wf:#9a988f; --wf-fill:#efede8; --note:#fff7e6; --note-b:#f0c674; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg:#121211; --surface:#1a1a19; --border:#2e2e2b; --text:#f0efec; --text-2:#c3c2b7; --text-3:#9b9a92;
+    --accent:#f08a4b; --ped:#f08a4b; --cyc:#5b9cf0; --wf:#77766f; --wf-fill:#232321; --note:#2a2418; --note-b:#7a6230; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 Inter, system-ui, sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 32px 16px 80px; }
+  h1, h2 { font-family:"Source Serif 4", Georgia, serif; line-height:1.15; }
+  h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: .2em 0 .3em; }
+  h2 { font-size: 1.7rem; margin: 2.2em 0 .4em; padding-top: 12px; border-top: 2px solid var(--text); }
+  h3 { font-size: 1.15rem; margin: 1.8em 0 .4em; }
+  h4 { margin: 1.2em 0 .3em; }
+  p, li { color: var(--text-2); }
+  strong { color: var(--text); }
+  a { color: var(--accent); }
+  .eyebrow { font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin:0; }
+  .meta { font-size: 14px; color: var(--text-3); }
+  .note { background: var(--note); border: 1px solid var(--note-b); border-radius: 10px; padding: 12px 16px; font-size: 14px; }
+  .note p, .note li { color: var(--text); margin: 4px 0; }
+  figure { margin: 18px 0 24px; }
+  figure img, figure svg { display:block; width:100%; height:auto; border:1px solid var(--border); border-radius:10px; background:var(--surface); }
+  figcaption { font-size: 13px; color: var(--text-3); margin-top: 6px; }
+  figcaption b { color: var(--text); }
+  .two { display:grid; grid-template-columns: 2.2fr 1fr; gap: 16px; align-items: start; }
+  .two-eq { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  @media (max-width: 760px) { .two, .two-eq { grid-template-columns: 1fr; } }
+  .table-wrap { overflow-x: auto; margin: 12px 0 4px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; background: var(--surface); }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--text); color: var(--bg); font-weight: 600; }
+  td { color: var(--text-2); }
+  td:first-child { color: var(--text); font-weight: 600; }
+  .tcap { font-size: 13px; color: var(--text-3); margin: 4px 0 20px; }
+  .ref { padding-left: 2em; text-indent: -2em; font-size: 14px; margin: 6px 0; }
+  .tag { display:inline-block; font-size:11px; font-weight:700; padding:0 6px; border-radius:4px; background:var(--note-b); color:#000; margin-right:4px; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:4px; }
+  code { font-size: 13px; background: var(--wf-fill); padding: 1px 4px; border-radius: 4px; }
+  kbd { font: 600 12px Inter, sans-serif; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--surface); color: var(--text); }
+  /* wireframe + storyboard drawing primitives (SVG uses these via class) */
+  .wf-box { fill: var(--wf-fill); stroke: var(--wf); stroke-width: 1.5; }
+  .wf-line { stroke: var(--wf); stroke-width: 1.5; fill: none; }
+  .wf-dash { stroke: var(--wf); stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+  .wf-t { fill: var(--text); font: 600 12px Inter, sans-serif; }
+  .wf-s { fill: var(--text-2); font: 11px Inter, sans-serif; }
+  .wf-ped { fill: var(--ped); } .wf-cyc { fill: var(--cyc); }
+  .wf-ped-s { stroke: var(--ped); stroke-width: 2.5; fill: none; } .wf-cyc-s { stroke: var(--cyc); stroke-width: 2.5; fill: none; }
+  .callout { fill: var(--accent); font: 700 11px Inter, sans-serif; }
+  .toc { columns: 2; font-size: 14px; } @media (max-width: 600px) { .toc { columns: 1; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="eyebrow">DataWerk · COS30045 · Design Book draft</p>
+<h1>Section 3: Website, Visualisation and Interaction Design</h1>
+<p class="meta">Draft for web_proto_v1 · Prototype: <a href="../index.html">../index.html</a> (from the repo root run <code>python -m http.server 8001 --directory web_proto_v1</code>) · Screenshots taken from the prototype at 1280 px and 375 px.</p>
+
+<div class="note">
+  <p><strong>Ghi chú cho nhóm (xóa trước khi nộp):</strong></p>
+  <ul>
+    <li>Số liệu trong bản này tính bằng <code>web_proto_v1/scripts/build_data.py</code> theo định nghĩa của Design Book §1 v2: ngày nằm viện = (Bed days − Died_bed_days) ÷ Hospitalisations, nên ra <b>9,1 ngày</b> với người đi bộ. KNIME của Cường không trừ Died_bed_days, nên ra 9,2. Hai bạn cần chốt một cách tính rồi sửa cho khớp.</li>
+    <li>Mọi tài liệu tham khảo ở cuối trang đều đang ở trạng thái <span class="tag">verify</span>. Theo <code>docs/references.md</code>, phải có người mở từng nguồn và kiểm tra trước khi đưa vào bản nộp.</li>
+    <li>Bản 26/11: chuyển sang <b>Scrollama</b> (cuộn như bình thường, chương 1 là scrollytelling), màu theo <b>palette v2</b> (<code>docs/sketches/datawerk_palette_v2.png</code>), bỏ dark mode vì palette chỉ định nghĩa trên nền trắng, code chung theo interface <code>init(el, data)</code> + <code>update(state)</code> trong <code>constants.js</code> / <code>data.js</code> / <code>main.js</code>.</li>
+    <li>Bản 26/11 (2): thêm nút mũi tên bên phải, ←/→ đi từng tin nhắn trong chương 1, nút sáng/tối và chọn chế độ mù màu. <b>Màu dark mode không có trong palette v2</b> (palette chỉ có nền trắng): mình lấy bước sáng hơn của cùng màu trên nền ink #1F2328, ghi trong <code>constants.js</code> → nhóm cần duyệt và có thể thêm vào file palette. Chế độ mù màu là <b>mô phỏng</b> (Machado et al., 2009), đã kiểm tra ra đúng các ô Deuteranopia/Protanopia/Tritanopia/Achromatopsia trong palette.</li>
+    <li>Website đã có 6 nguồn cho các biện pháp, đã mở và kiểm tra ngày 24/11/2026 (WHO, Hussain et al. 2019, NRSS 2021–30, 2 trang NSW Government, Transport Victoria). Danh sách nằm ở bước "Sources" cuối website và trong <code>js/sources.js</code>.</li>
+  </ul>
+</div>
+
+<ul class="toc">
+  <li><a href="#s31">3.1 Website Design: wireframe and storyboard</a></li>
+  <li><a href="#s32">3.2 Visualisation Design: chart types (Table 5)</a></li>
+  <li><a href="#integrity">Graphical integrity</a></li>
+  <li><a href="#access">Accessibility</a></li>
+  <li><a href="#scale">Scalability</a></li>
+  <li><a href="#elements">Graphical elements, colour, labelling and layout</a></li>
+  <li><a href="#annot">Annotations and tooltips</a></li>
+  <li><a href="#s33">3.3 Interaction Design (Table 6)</a></li>
+  <li><a href="#refs">References</a></li>
+</ul>
+
+<!-- =================================================================== -->
+<h2 id="s31">3.1 Website Design</h2>
+<p>The website is a single <strong>scrollytelling</strong> page built with <strong>Scrollama</strong>, in the <strong>martini-glass</strong> structure described by Segel and Heer (2010): an opening, five chapters that each make one point, a <strong>Summary</strong> and a <strong>Sources</strong> section. Readers scroll as on any web page (mouse wheel, trackpad, <kbd>↓</kbd>, <kbd>Space</kbd>); Scrollama detects which chapter is in the middle of the screen and updates the page. In <strong>Chapter 1</strong> the chart stays pinned (sticky) while short text steps scroll past it, and each step changes what the chart shows (Figure 6). <kbd>→</kbd> / <kbd>←</kbd> and two <strong>arrow buttons</strong> fixed on the right of the screen move to the next or previous part: a chapter, or inside Chapter 1 the next or previous message, so the scrollytelling is read one message at a time. A <strong>stepper</strong> at the top always shows every chapter name, highlights the current one and jumps to any chapter on click, so after the Summary the reader can return to any part (the reader-driven end of the martini glass). An earlier version showed one chapter per screen with a Next button; scrolling was chosen instead because it is the interaction readers already know and it lets Scrollama drive the scrollytelling.</p>
+<figure><img src="img/stepper.png" alt="Stepper bar showing every chapter, the current one highlighted"><figcaption>The stepper: the current chapter (set by Scrollama) has a yellow dot and an outline; chapters already passed are filled; every chapter is clickable.</figcaption></figure>
+<p>Two reader preferences sit in the top-right corner: a <strong>light/dark switch</strong> (dark uses the palette's ink/asphalt as background) and a <strong>colour-vision select</strong> that previews every chart as seen with deuteranopia, protanopia, tritanopia or achromatopsia.</p>
+<figure><img src="img/scrolly.png" alt="Chapter 1 scrollytelling: sticky chart with a text step"><figcaption><b>Figure 6:</b> Chapter 1 scrollytelling. The step "Cyclists rose +30%" is active (yellow edge), so the chart highlights cyclists and fades the other lines.</figcaption></figure>
+<p>Every chapter uses the same pattern so readers learn the layout once:</p>
+<ol>
+  <li><strong>Chapter label and headline that states the finding</strong> (e.g. "Older pedestrians are hurt the worst"), so the message is readable even by someone who only skims headings.</li>
+  <li><strong>One or two plain sentences on how to read the chart</strong> ("Further right = worse", "Above 100 means more admissions than in 2012").</li>
+  <li>A <strong>"Try this" prompt</strong> that turns the chapter's question into a task.</li>
+  <li><strong>Controls</strong> (toggle buttons) placed directly above the chart they change.</li>
+  <li>A <strong>chart card</strong> with a descriptive title, the chart and a source/caveat note.</li>
+  <li>An <strong>insight box</strong> in two halves: <em>What it means</em> (the finding in numbers) and <em>What can be done</em> (an action with an inline citation to an official source). Every number is filled in from the same CSV as the chart, so text and chart cannot disagree.</li>
+</ol>
+<figure><img src="img/insight.png" alt="Insight box with What it means and What can be done"><figcaption>Insight box at the end of Chapter 2. Citations open the full reference on hover or keyboard focus.</figcaption></figure>
+
+<h3>Wireframe</h3>
+<div class="two">
+<figure>
+<svg viewBox="0 0 640 1010" role="img" aria-labelledby="wf-desk-t">
+  <title id="wf-desk-t">Desktop wireframe of the web_proto_v1 page</title>
+  <rect class="wf-box" x="10" y="10" width="620" height="34" rx="4"/>
+  <text class="wf-t" x="22" y="31">Outside the Car</text>
+  <text class="wf-s" x="130" y="31">★Start ①Who ②How badly ③Age ④When ⑤You ⑥Summary ⑦Sources</text>
+  <circle class="wf-box" cx="608" cy="27" r="10"/><text class="wf-s" x="603" y="31">◐</text>
+  <line x1="10" y1="46" x2="250" y2="46" stroke="var(--accent)" stroke-width="3"/>
+  <text class="wf-s" x="258" y="58">sticky stepper (Scrollama sets current) + progress bar</text>
+  <text class="wf-s" x="22" y="74">EYEBROW: topic · Australia 2011–2021</text>
+  <rect class="wf-box" x="22" y="82" width="360" height="44" rx="3"/><text class="wf-t" x="32" y="109">H1: "Every day, 120 hospital beds hold…"</text>
+  <line class="wf-line" x1="22" y1="138" x2="470" y2="138"/><line class="wf-line" x1="22" y1="148" x2="440" y2="148"/>
+  <rect class="wf-box" x="22" y="160" width="596" height="92" rx="6"/>
+  <text class="wf-t" x="32" y="178">Chart card: "The ward" (unit chart, beds fill in on open)</text>
+  <g>
+    <rect class="wf-ped" x="32" y="188" width="300" height="12" rx="2" opacity=".85"/>
+    <rect class="wf-ped" x="32" y="204" width="200" height="12" rx="2" opacity=".85"/>
+    <rect class="wf-cyc" x="232" y="204" width="100" height="12" rx="2" opacity=".85"/>
+    <rect class="wf-cyc" x="32" y="220" width="300" height="12" rx="2" opacity=".85"/>
+  </g>
+  <rect class="wf-box" x="22" y="262" width="330" height="34" rx="3"/><text class="wf-t" x="32" y="284">Key message (pull quote)</text>
+  <line class="wf-line" x1="10" y1="310" x2="630" y2="310"/>
+  <text class="wf-s" x="22" y="330">01 · CHAPTER LABEL</text>
+  <rect class="wf-box" x="22" y="338" width="330" height="26" rx="3"/><text class="wf-t" x="32" y="356">H2: headline = the finding</text>
+  <line class="wf-line" x1="22" y1="376" x2="440" y2="376"/><line class="wf-line" x1="22" y1="386" x2="420" y2="386"/>
+  <rect class="wf-dash" x="22" y="396" width="300" height="20" rx="4"/><text class="wf-s" x="30" y="410">"Try this:" task prompt</text>
+  <rect class="wf-box" x="22" y="424" width="88" height="20" rx="10"/><rect class="wf-box" x="116" y="424" width="60" height="20" rx="10"/>
+  <text class="wf-s" x="184" y="438">toggle chips (above the chart they change)</text>
+  <rect class="wf-box" x="22" y="452" width="596" height="150" rx="6"/>
+  <text class="wf-t" x="32" y="470">Chart card: title · chart · note (source, caveats)</text>
+  <path class="wf-cyc-s" d="M40 580 C120 560 200 520 300 515 S 420 500 470 490"/>
+  <path class="wf-ped-s" d="M40 560 C120 565 200 562 300 560 S 420 562 470 575"/>
+  <path class="wf-line" d="M40 550 C140 545 260 540 470 538" opacity=".5"/>
+  <rect x="470" y="478" width="40" height="110" fill="var(--wf)" opacity=".18"/><text class="wf-s" x="474" y="474">COVID</text>
+  <text class="wf-s" x="520" y="494">direct labels</text>
+  <text class="wf-s" x="32" y="596">source + caveat note</text>
+  <rect class="wf-box" x="22" y="608" width="290" height="22" rx="4"/><text class="wf-s" x="30" y="623">Insight: What it means</text>
+  <rect class="wf-box" x="312" y="608" width="306" height="22" rx="4"/><text class="wf-s" x="320" y="623">What can be done (cited)</text>
+  <text class="wf-s" x="618" y="438" text-anchor="end">Ch1: chart sticky, text steps scroll</text>
+  <line class="wf-line" x1="10" y1="640" x2="630" y2="640"/>
+  <text class="wf-s" x="22" y="660">04 · WHEN AND WHERE: season card, then split layout</text>
+  <rect class="wf-box" x="22" y="668" width="290" height="130" rx="6"/><text class="wf-t" x="32" y="686">Tile map (click a state)</text>
+  <g opacity=".9">
+    <rect class="wf-ped" x="110" y="696" width="26" height="22" rx="3"/><rect class="wf-ped" x="140" y="696" width="26" height="22" rx="3" opacity=".4"/>
+    <rect class="wf-ped" x="80" y="722" width="26" height="22" rx="3" opacity=".4"/><rect class="wf-ped" x="110" y="722" width="26" height="22" rx="3" opacity=".45"/>
+    <rect class="wf-ped" x="140" y="722" width="26" height="22" rx="3" opacity=".55"/><rect class="wf-ped" x="170" y="722" width="26" height="22" rx="3" opacity=".3"/>
+    <rect class="wf-ped" x="140" y="748" width="26" height="22" rx="3" opacity=".55"/><rect class="wf-ped" x="140" y="774" width="26" height="18" rx="3" opacity=".4"/>
+  </g>
+  <rect class="wf-box" x="328" y="668" width="290" height="130" rx="6"/><text class="wf-t" x="338" y="686">Linked detail: state vs Australia</text>
+  <path class="wf-ped-s" d="M345 770 L390 740 L430 760 L480 720 L520 735 L600 715"/>
+  <path class="wf-dash" d="M345 780 L600 784"/>
+  <text class="wf-s" x="296" y="812">click → updates</text>
+  <line class="wf-line" x1="10" y1="826" x2="630" y2="826"/>
+  <text class="wf-s" x="22" y="846">05 · WHAT YOU CAN DO: role picker (reader-driven ending)</text>
+  <rect class="wf-box" x="22" y="854" width="140" height="40" rx="6"/><rect class="wf-box" x="172" y="854" width="140" height="40" rx="6"/>
+  <rect class="wf-box" x="322" y="854" width="140" height="40" rx="6"/><rect class="wf-box" x="472" y="854" width="146" height="40" rx="6"/>
+  <text class="wf-t" x="34" y="878">🚗 I drive</text><text class="wf-t" x="184" y="878">🚶 I walk</text><text class="wf-t" x="334" y="878">🚲 I ride</text><text class="wf-t" x="484" y="878">🏛️ I decide</text>
+  <rect class="wf-box" x="22" y="902" width="596" height="62" rx="6"/>
+  <rect class="wf-box" x="32" y="910" width="180" height="24" rx="4"/><rect class="wf-box" x="222" y="910" width="180" height="24" rx="4"/><rect class="wf-box" x="412" y="910" width="196" height="24" rx="4"/>
+  <text class="wf-s" x="36" y="926">3 stat cards from the story</text>
+  <text class="wf-s" x="32" y="954">System → driver → extra protection actions + source</text>
+  <rect class="wf-box" x="10" y="974" width="620" height="28" rx="4"/><text class="wf-t" x="22" y="992">⑥ Summary: 5 cards + Revisit buttons → ⑦ Sources: references + data notes</text>
+</svg>
+<figcaption><b>Figure 4a:</b> Website wireframe, desktop (≥ 760 px). One column, max 1,040 px wide, so charts and text share the same reading line.</figcaption>
+</figure>
+<figure>
+<svg viewBox="0 0 220 520" role="img" aria-labelledby="wf-mob-t">
+  <title id="wf-mob-t">Mobile wireframe</title>
+  <rect class="wf-box" x="10" y="10" width="200" height="500" rx="16"/>
+  <rect class="wf-box" x="20" y="24" width="180" height="22" rx="3"/><text class="wf-s" x="26" y="39">★ ① ② (③ Age) ④ … ◐</text>
+  <rect class="wf-box" x="20" y="56" width="150" height="40" rx="3"/><text class="wf-t" x="26" y="80">H1 (wraps)</text>
+  <line class="wf-line" x1="20" y1="106" x2="190" y2="106"/><line class="wf-line" x1="20" y1="114" x2="170" y2="114"/>
+  <rect class="wf-box" x="20" y="124" width="180" height="70" rx="5"/>
+  <g><rect class="wf-ped" x="28" y="136" width="164" height="8" rx="2"/><rect class="wf-ped" x="28" y="148" width="100" height="8" rx="2"/><rect class="wf-cyc" x="128" y="148" width="64" height="8" rx="2"/><rect class="wf-cyc" x="28" y="160" width="164" height="8" rx="2"/><rect class="wf-cyc" x="28" y="172" width="120" height="8" rx="2"/></g>
+  <text class="wf-s" x="26" y="208">ward: 12 columns</text>
+  <rect class="wf-box" x="20" y="218" width="70" height="16" rx="8"/><rect class="wf-box" x="96" y="218" width="50" height="16" rx="8"/>
+  <text class="wf-s" x="26" y="252">chips wrap to 2 lines</text>
+  <rect class="wf-box" x="20" y="260" width="180" height="90" rx="5"/>
+  <path class="wf-cyc-s" d="M30 330 C80 310 140 290 190 285"/><path class="wf-ped-s" d="M30 320 C80 322 140 318 190 332"/>
+  <text class="wf-s" x="26" y="364">end labels hidden, ticks thinned</text>
+  <rect class="wf-box" x="20" y="372" width="180" height="60" rx="5"/><text class="wf-s" x="26" y="392">tile map</text>
+  <rect class="wf-box" x="20" y="438" width="180" height="60" rx="5"/><text class="wf-s" x="26" y="458">detail (stacks below)</text>
+</svg>
+<figcaption><b>Figure 4b:</b> Mobile (&lt; 760 px). The stepper shows numbered dots and only the current chapter's name; split layouts stack; in Chapter 1 the chart is pinned at the top and the text steps slide up under it; charts simplify labels instead of shrinking text.</figcaption>
+</figure>
+</div>
+<figcaption><b>Figure 4:</b> Website wireframe. One scrolling page. Navigation: sticky stepper listing every chapter (click to jump), a yellow reading-progress bar, and a skip link for keyboard users.</figcaption>
+
+<h3>Storyboard</h3>
+<p>The storyboard follows one persona from the target audience (Design Book §1.1): <strong>Mai, 34, drives to work; her mother, 77, walks to the shops every day.</strong> It shows how she answers the three key questions (Q1–Q3) through the site.</p>
+<figure>
+<svg viewBox="0 0 960 560" role="img" aria-labelledby="sb-t">
+  <title id="sb-t">Six-panel storyboard of a user moving through the site</title>
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--wf)"/></marker></defs>
+  <g transform="translate(10,10)">
+    <rect class="wf-box" width="300" height="250" rx="10"/>
+    <text class="wf-t" x="12" y="22">1 · Arrive: the ward fills</text>
+    <rect class="wf-box" x="12" y="34" width="276" height="110" rx="6"/>
+    <g>
+      <rect class="wf-ped" x="22" y="46" width="250" height="10" rx="2"/><rect class="wf-ped" x="22" y="60" width="150" height="10" rx="2"/>
+      <rect class="wf-cyc" x="172" y="60" width="100" height="10" rx="2"/><rect class="wf-cyc" x="22" y="74" width="250" height="10" rx="2"/>
+      <rect class="wf-cyc" x="22" y="88" width="160" height="10" rx="2" opacity=".35"/>
+    </g>
+    <text class="wf-s" x="22" y="118">beds appear one by one…</text>
+    <text class="wf-s" x="12" y="164">Mai sees 120 beds filled every day by</text>
+    <text class="wf-s" x="12" y="178">people walking or riding. Hovers a bed:</text>
+    <text class="wf-s" x="12" y="192">tooltip "Pedestrians · 65 beds".</text>
+    <text class="callout" x="12" y="220">Feels: "That's a whole hospital ward."</text>
+    <text class="wf-s" x="12" y="238">Purpose: awareness (hook)</text>
+  </g>
+  <g transform="translate(330,10)">
+    <rect class="wf-box" width="300" height="250" rx="10"/>
+    <text class="wf-t" x="12" y="22">2 · Ch1: who is outside the car</text>
+    <rect class="wf-box" x="12" y="34" width="276" height="110" rx="6"/>
+    <path class="wf-cyc-s" d="M24 120 C80 100 150 80 200 78 S 250 60 280 58"/>
+    <path class="wf-ped-s" d="M24 112 C80 114 150 110 200 112 S 250 130 280 124"/>
+    <rect x="236" y="40" width="44" height="100" fill="var(--wf)" opacity=".18"/>
+    <circle cx="200" cy="78" r="4" class="wf-cyc"/><text class="wf-s" x="150" y="70">+30%</text>
+    <circle cx="200" cy="112" r="4" class="wf-ped"/><text class="wf-s" x="160" y="104">+2%</text>
+    <text class="wf-s" x="12" y="164">Toggles Growth ↔ Count. Hovers 2019:</text>
+    <text class="wf-s" x="12" y="178">tooltip lists every road user that year.</text>
+    <text class="wf-s" x="12" y="192">Reads the COVID band and 2017 note.</text>
+    <text class="callout" x="12" y="220">Learns: cycling rising, walking not improving</text>
+    <text class="wf-s" x="12" y="238">Answers: Q2 (has it improved?)</text>
+  </g>
+  <g transform="translate(650,10)">
+    <rect class="wf-box" width="300" height="250" rx="10"/>
+    <text class="wf-t" x="12" y="22">3 · Ch2: the only crumple zone</text>
+    <rect class="wf-box" x="12" y="34" width="276" height="110" rx="6"/>
+    <line class="wf-line" x1="70" y1="54" x2="250" y2="54"/><circle cx="250" cy="54" r="6" class="wf-ped"/>
+    <line class="wf-line" x1="70" y1="74" x2="160" y2="74"/><circle cx="160" cy="74" r="5" fill="var(--wf)"/>
+    <line class="wf-line" x1="70" y1="94" x2="148" y2="94"/><circle cx="148" cy="94" r="5" fill="var(--wf)"/>
+    <line class="wf-line" x1="70" y1="114" x2="110" y2="114"/><circle cx="110" cy="114" r="6" class="wf-cyc"/>
+    <text class="wf-s" x="20" y="58">Ped</text><text class="wf-s" x="20" y="118">Cyc</text><text class="wf-s" x="258" y="58">9.1 d</text>
+    <text class="wf-s" x="12" y="164">Switches to "Died within 30 days":</text>
+    <text class="wf-s" x="12" y="178">pedestrians stay on top. Hovers the</text>
+    <text class="wf-s" x="12" y="192">collision bar: 88% with a car.</text>
+    <text class="callout" x="12" y="220">Learns: pedestrians are hurt worst</text>
+    <text class="wf-s" x="12" y="238">Answers: Q1 and Q3 (how it happens)</text>
+  </g>
+  <path d="M312 135 L328 135" stroke="var(--wf)" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M632 135 L648 135" stroke="var(--wf)" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M800 262 L800 280 L160 280 L160 296" stroke="var(--wf)" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <g transform="translate(10,300)">
+    <rect class="wf-box" width="300" height="250" rx="10"/>
+    <text class="wf-t" x="12" y="22">4 · Ch3: someone's grandparent</text>
+    <rect class="wf-box" x="12" y="34" width="276" height="110" rx="6"/>
+    <g class="wf-ped" opacity=".5">
+      <rect x="30" y="112" width="26" height="22"/><rect x="66" y="108" width="26" height="26"/><rect x="102" y="100" width="26" height="34"/>
+      <rect x="138" y="94" width="26" height="40"/><rect x="174" y="78" width="26" height="56"/><rect x="210" y="64" width="26" height="70"/>
+    </g>
+    <rect class="wf-ped" x="246" y="50" width="26" height="84"/><text class="wf-s" x="238" y="46">15.8 d</text>
+    <text class="wf-s" x="12" y="164">Hovers 75+: 1 in 18 die within 30 days.</text>
+    <text class="wf-s" x="12" y="178">Switches to "Per 100,000": 75+ still</text>
+    <text class="wf-s" x="12" y="192">highest, so it is not just a big group.</text>
+    <text class="callout" x="12" y="220">Thinks of her mother</text>
+    <text class="wf-s" x="12" y="238">Answers: Q2 (who is most at risk)</text>
+  </g>
+  <g transform="translate(330,300)">
+    <rect class="wf-box" width="300" height="250" rx="10"/>
+    <text class="wf-t" x="12" y="22">5 · Ch4: when and where</text>
+    <rect class="wf-box" x="12" y="34" width="130" height="110" rx="6"/>
+    <rect x="62" y="40" width="36" height="98" fill="var(--wf)" opacity=".18"/>
+    <path class="wf-ped-s" d="M20 120 C50 110 70 70 90 72 S 120 110 136 112"/>
+    <path class="wf-cyc-s" d="M20 70 C50 66 70 120 90 118 S 120 76 136 74"/>
+    <rect class="wf-box" x="152" y="34" width="136" height="110" rx="6"/>
+    <rect class="wf-ped" x="190" y="46" width="24" height="20" rx="3" stroke="var(--text)" stroke-width="2"/>
+    <rect class="wf-ped" x="218" y="46" width="24" height="20" rx="3" opacity=".4"/>
+    <rect class="wf-ped" x="162" y="70" width="24" height="20" rx="3" opacity=".4"/><rect class="wf-ped" x="190" y="70" width="24" height="20" rx="3" opacity=".45"/>
+    <rect class="wf-ped" x="218" y="70" width="24" height="20" rx="3" opacity=".55"/><rect class="wf-ped" x="246" y="70" width="24" height="20" rx="3" opacity=".3"/>
+    <rect class="wf-ped" x="218" y="94" width="24" height="20" rx="3" opacity=".55"/><rect class="wf-ped" x="218" y="118" width="24" height="20" rx="3" opacity=".4"/>
+    <text class="wf-s" x="12" y="164">Sees the winter peak for pedestrians.</text>
+    <text class="wf-s" x="12" y="178">Clicks her state's tile: its rate vs</text>
+    <text class="wf-s" x="12" y="192">Australia appears in the linked chart.</text>
+    <text class="callout" x="12" y="220">Learns: winter + her state matter</text>
+    <text class="wf-s" x="12" y="238">Answers: Q2 (time of year, state)</text>
+  </g>
+  <g transform="translate(650,300)">
+    <rect class="wf-box" width="300" height="250" rx="10"/>
+    <text class="wf-t" x="12" y="22">6 · Ch5: what can I do?</text>
+    <rect class="wf-box" x="12" y="34" width="64" height="28" rx="5" stroke="var(--text)" stroke-width="2"/><text class="wf-s" x="18" y="52">🚗 drive</text>
+    <rect class="wf-box" x="82" y="34" width="64" height="28" rx="5"/><text class="wf-s" x="88" y="52">🚶 walk</text>
+    <rect class="wf-box" x="152" y="34" width="64" height="28" rx="5"/><text class="wf-s" x="158" y="52">🚲 ride</text>
+    <rect class="wf-box" x="222" y="34" width="66" height="28" rx="5"/><text class="wf-s" x="228" y="52">🏛️ decide</text>
+    <rect class="wf-box" x="12" y="70" width="276" height="74" rx="6"/>
+    <text class="wf-s" x="20" y="88">88% · 9.1 days · +15% in June</text>
+    <text class="wf-s" x="20" y="106">SYSTEM lower speeds near shops</text>
+    <text class="wf-s" x="20" y="122">DRIVER slow down where people walk</text>
+    <text class="wf-s" x="12" y="164">Picks "I drive", then "I walk" to</text>
+    <text class="wf-s" x="12" y="178">see what to tell her mother. At the</text>
+    <text class="wf-s" x="12" y="192">Summary she clicks "Age" to revisit.</text>
+    <text class="callout" x="12" y="220">Decides: slow down in winter evenings</text>
+    <text class="wf-s" x="12" y="238">Answers: Q3 (what can be done)</text>
+  </g>
+</svg>
+<figcaption><b>Figure 5:</b> User storyboard. Mai moves between panels by scrolling (or <kbd>→</kbd>). Panels 1–4 are author-driven (one finding each); panels 5–6 hand control to the reader, who ends with an action for her own role and can jump back to any chapter from the Summary.</figcaption>
+</figure>
+
+<!-- =================================================================== -->
+<h2 id="s32">3.2 Visualisation Design</h2>
+<p>Chart types were chosen from the task each chart supports (Munzner, 2014) and from how accurately people read each visual encoding: position on a common scale is read most accurately, then length, with angle, area and colour saturation read less accurately (Cleveland &amp; McGill, 1984). Most charts therefore use position or length; colour saturation is used only on the tile map, where every value is also printed.</p>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Chart</th><th>Data shown</th><th>Question answered</th><th>Why this chart type</th></tr></thead>
+<tbody>
+<tr><td>Opening · "The ward" (unit chart / isotype)</td><td>Bed days of pedestrians and cyclists, 2011–2021, ÷ 4,018 days = 120 beds filled every day (65 pedestrian, 55 cyclist)</td><td>Hook: how big is the burden, in human terms?</td><td>One icon = one bed makes an abstract total countable and concrete, the same idea as the "stolen years" of Periscopic's <em>U.S. Gun Deaths</em>. Pictographs improve engagement and recall without hurting accuracy (Haroz et al., 2015). Rejected: one big number alone (less felt).</td></tr>
+<tr><td>Ch1 · Multi-line chart, indexed (2012 = 100) with Count toggle, in a Scrollama scrollytelling section</td><td>Hospitalisations per year, 4 road-user groups, 2011–2021</td><td>Q2: has it improved over time? Which group is growing fastest?</td><td>Lines show change over continuous time. Indexing puts groups of very different size on one scale so growth can be compared; Count restores absolute size. Scroll steps highlight one group at a time so the text and the line being discussed match. Rejected: stacked area (only the bottom layer has a common baseline, so growth of middle layers is hard to read).</td></tr>
+<tr><td>Ch2 · Cleveland dot plot, sorted, measure toggle</td><td>Average days in hospital; % died within 30 days; share of bed days ÷ share of hospitalisations; by road user</td><td>Q1: who is hurt most severely?</td><td>Position on a common scale, sorted, with an average reference line. Less ink than bars, so the ranking stands out. Zero baseline kept so values can be read as ratios ("twice as long"). Rejected: pie of bed days (angle is read poorly).</td></tr>
+<tr><td>Ch2 · 100% stacked horizontal bar</td><td>Share of hospitalisations by counterparty (car/van, heavy vehicle, motorcycle, fixed object, no collision, other), pedestrians vs cyclists</td><td>Q3: how do these injuries happen?</td><td>Part-to-whole for two groups side by side; the dominant segment of each (88% car; 44% no collision) is labelled and read as length. Rejected: two pie charts (angles cannot be compared across pies).</td></tr>
+<tr><td>Ch3 · Vertical bar chart by age group, two toggles</td><td>Pedestrians or cyclists × days in hospital / died within 30 days / rate per 100,000 (ABS population), 7 age groups</td><td>Q2: who among pedestrians and cyclists is most at risk?</td><td>Ordered categories with a zero baseline. The y-scale is fixed across both road users, so switching does not silently rescale. The 75+ bar is full-strength colour and labelled because it carries the chapter's point. Rejected: age–sex pyramid (sex is not part of the question).</td></tr>
+<tr><td>Ch4 · Line chart of seasonal index</td><td>Each month ÷ average month, 2011–2019, pedestrians vs cyclists</td><td>Q2: when in the year is risk highest?</td><td>Index (1.0 = average month) shows the seasonal shape of two groups whose sizes differ 2.6×. Winter band shaded. COVID years excluded. Rejected: month × year heatmap (hard to compare two groups).</td></tr>
+<tr><td>Ch4 · Tile-grid map + linked line chart</td><td>Hospitalisations per 100,000 people by state (BITRE ÷ ABS population, 2011–2021 pooled); selected state's yearly rate vs Australia</td><td>Q2: where is risk highest, fairly compared?</td><td>Equal-size tiles stop land area from dominating (WA, NT) and keep ACT visible; values printed on tiles. The linked chart gives detail on demand. Rejected: choropleth (area bias); raw counts (follow population).</td></tr>
+<tr><td>Ch5 · Role picker with stat cards</td><td>Figures already shown, filtered by role; actions ordered system → driver → extra protection, each with a citation to an official source</td><td>Q3: what can I, or government, do?</td><td>Turns the story into a decision for the reader's own situation: the reader-driven end of the martini-glass structure (Segel &amp; Heer, 2010).</td></tr>
+<tr><td>Summary · five stat cards</td><td>One headline number, one finding and one action per chapter</td><td>All: what did I learn, and what should I do?</td><td>Repeats the key number of each chapter in one view so the message is remembered, with a Revisit button on each card. Rejected: a text-only conclusion (the first prototype), which reviewers found hard to take in.</td></tr>
+</tbody></table></div>
+<p class="tcap"><b>Table 5:</b> Chart types and justification</p>
+
+<div class="two-eq">
+  <figure><img src="img/trend.png" alt="Screenshot of the indexed line chart"><figcaption>Ch1 line chart: focus colours, grey context, direct labels, COVID band, 2017 series-break note.</figcaption></figure>
+  <figure><img src="img/severity.png" alt="Screenshot of the dot plot"><figcaption>Ch2 dot plot: sorted, zero baseline, average reference line.</figcaption></figure>
+  <figure><img src="img/counterparty.png" alt="Screenshot of the stacked bar"><figcaption>Ch2 100% stacked bar: greys only, so road-user colours keep meaning "who".</figcaption></figure>
+  <figure><img src="img/age.png" alt="Screenshot of the age bar chart"><figcaption>Ch3 bar chart: 75+ emphasised; fixed scale across toggles.</figcaption></figure>
+  <figure><img src="img/season.png" alt="Screenshot of the seasonal line chart"><figcaption>Ch4 seasonal index with winter band.</figcaption></figure>
+  <figure><img src="img/states.png" alt="Screenshot of the tile map and linked chart"><figcaption>Ch4 tile map (NT selected) and linked detail chart.</figcaption></figure>
+</div>
+
+<h3 id="integrity">Graphical Integrity</h3>
+<p>Following Tufte (2001), the size of each mark should match the size of the number it shows, and the data should be shown in context.</p>
+<ul>
+  <li><strong>Zero baselines</strong> on every bar and dot chart; the dot plot keeps zero so "twice as long" can be read from the chart. Only the indexed line chart does not start at zero, because its reference is 100 (drawn as a line).</li>
+  <li><strong>Fair comparisons:</strong> growth is compared 2012 → 2019, avoiding the Victorian series break before 2012 and the COVID years after 2019. Comparing 2011 → 2021 would have shown pedestrians at −15% instead of +2%, a misleading "improvement".</li>
+  <li><strong>Rates, not just counts:</strong> states and age groups use hospitalisations per 100,000 people (ABS population), so large populations do not look like high risk. Rates that rely on an approximate population split are marked "≈".</li>
+  <li><strong>Context visible:</strong> COVID years shaded, the 2017 NSW counting change marked, and every chart note names the source and its main caveat. An "About the data" section lists all limitations.</li>
+  <li><strong>No blame:</strong> the counterparty chart says "collided with", never "hit by"; the data records the other party, not fault.</li>
+  <li><strong>Text = chart:</strong> every number in the prose is computed from the same CSV the chart uses (<code>data-fact</code> fields in <code>main.js</code>).</li>
+  <li><strong>Stable scales:</strong> the age chart keeps one y-scale for both road users; the tile map's colour scale is printed with Australia's rate as a reference.</li>
+</ul>
+
+<h3 id="access">Accessibility</h3>
+<p>Colours come from the team palette (<code>docs/sketches/datawerk_palette_v2.png</code>): one colour per road user on every chart, chosen so the four road users stay distinct when simulated for deuteranopia, protanopia, tritanopia and full greyscale (worst pair ΔE2000 = 11.3). Contrast was checked against WCAG 2.1 (W3C, 2018) with the relative-luminance formula, on the white background:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Element</th><th>Colour on #FFFFFF</th><th>Contrast</th><th>Requirement / use</th></tr></thead>
+<tbody>
+<tr><td>Pedestrian</td><td><span class="swatch" style="background:#BF4632"></span>#BF4632</td><td>5.1 : 1</td><td>≥ 4.5, usable as text (1.4.3) ✓</td></tr>
+<tr><td>Pedal cyclist</td><td><span class="swatch" style="background:#1E5664"></span>#1E5664</td><td>8.2 : 1</td><td>≥ 4.5, usable as text ✓</td></tr>
+<tr><td>Motorcyclist</td><td><span class="swatch" style="background:#3F1B58"></span>#3F1B58</td><td>13.9 : 1</td><td>≥ 4.5, usable as text ✓</td></tr>
+<tr><td>Car occupant</td><td><span class="swatch" style="background:#9A9B9D"></span>#9A9B9D</td><td>2.8 : 1</td><td>Below 3 : 1 on purpose (context, not the story): car lines are always <strong>dashed</strong> and <strong>directly labelled</strong> in dark grey</td></tr>
+<tr><td>Body text / ink</td><td>#454545 / #1F2328</td><td>9.6 / 15.8 : 1</td><td>≥ 4.5 ✓</td></tr>
+<tr><td>Chart notes (13 px)</td><td>#6E6E6E</td><td>5.1 : 1</td><td>≥ 4.5 ✓</td></tr>
+<tr><td>Dark theme: pedestrian / cyclist / motorcyclist / car</td><td><span class="swatch" style="background:#D9735C"></span><span class="swatch" style="background:#4FB8CF"></span><span class="swatch" style="background:#E2D4F0"></span><span class="swatch" style="background:#6E6E6E"></span> on #1F2328</td><td>4.9 / 6.8 / 11.2 / 3.1 : 1</td><td>Lighter steps of the same hues (pedestrian and cyclist from the palette ramps); car stays dashed + labelled. Not in the palette image yet: <strong>team to approve</strong></td></tr>
+<tr><td>Road-marking accent</td><td><span class="swatch" style="background:#F2B705"></span>#F2B705</td><td>1.8 : 1</td><td>Never text or data: only rings, bars and edges next to ink (ink on yellow 8.7 : 1)</td></tr>
+</tbody></table></div>
+<ul>
+  <li><strong>Colour-blind safe:</strong> palette v2 replaced v1 after a greyscale check showed the v1 hero pair became indistinguishable (ΔE 2.4). v2 orders the road users on a lightness ladder (motorcyclist darkest → cyclist → pedestrian → car lightest), so they also differ in greyscale and print (Okabe &amp; Ito, 2008).</li>
+  <li><strong>Colour-vision view:</strong> a header select re-colours every chart with the Machado et al. (2009) simulation at full severity. Applied to the light palette it reproduces the palette image's Deuteranopia, Protanopia, Tritanopia and Achromatopsia swatches exactly (checked value by value), so the same function is used for the dark theme and the map ramps. It is a <em>preview</em> for readers and the team to check that nothing relies on colour alone; colour-blind readers do not need to switch it on. Checked separation of the four road users (minimum ΔE76): light theme 12.8 in greyscale and ≥ 19 in the other views; dark theme 9.8 in greyscale and ≥ 14 in the others.</li>
+  <li><strong>Not colour alone (1.4.1):</strong> every coloured series also has a <strong>direct text label</strong>, car occupants are also <strong>dashed</strong>, legend order follows the lightness ladder, and the tile map prints each value.</li>
+  <li><strong>Scrolling and keys:</strong> the page scrolls natively, so <kbd>↓</kbd>/<kbd>↑</kbd>, <kbd>Space</kbd>, <kbd>Page Up/Down</kbd>, the wheel and screen readers all work as usual; <kbd>→</kbd>/<kbd>←</kbd> and the side arrow buttons (real buttons with labels such as "Next: Who: message 3 of 5") move one part at a time and are disabled at the start and end. The stepper is an ordered list of buttons with <code>aria-current="step"</code> on the current chapter. Scrollytelling text is ordinary HTML in reading order, so nothing is lost if a reader scrolls fast.</li>
+  <li><strong>Keyboard:</strong> all controls are real <code>&lt;button&gt;</code>s with <code>aria-pressed</code>; state tiles are focusable (<code>tabindex="0"</code>, <code>role="button"</code>) and respond to Enter/Space; a skip link jumps to the content; focus is always visible.</li>
+  <li><strong>Screen readers:</strong> each chart has <code>role="img"</code> labelled by its title; tiles have a full-sentence <code>aria-label</code>; the role panel and state detail are <code>aria-live</code> so changes are announced.</li>
+  <li><strong>Motion:</strong> the ward animation, smooth scrolling and transitions are switched off under <code>prefers-reduced-motion</code>.</li>
+  <li><strong>Type:</strong> 16 px body, 12 px minimum chart text, Inter for UI and numbers (tabular figures), Source Serif for headings.</li>
+  <li><strong>Plain language:</strong> "days in hospital" rather than "length of stay", "hospitalisations" rather than "separations", with the definition in the limitations.</li>
+</ul>
+
+<h3 id="scale">Scalability</h3>
+<div class="two">
+<div>
+<ul>
+  <li><strong>Responsive SVG:</strong> each chart is drawn into an SVG with a <code>viewBox</code> sized to its container and is <strong>redrawn when the width changes</strong> (debounced), so axes and labels are re-laid out rather than scaled down.</li>
+  <li><strong>Breakpoints inside charts:</strong> under 560 px the line chart hides end labels and thins year ticks; the seasonal chart uses month initials; the ward switches from 24 to 12 columns.</li>
+  <li><strong>Layout:</strong> one column, max 1,040 px; the map + detail split stacks below 760 px; control chips wrap; the insight box stacks its two halves below 760 px.</li>
+  <li><strong>Stepper:</strong> all chapter names show at 1,100 px and wider; below that only numbered dots plus the current chapter's name; below 560 px the site title is hidden and the row scrolls to keep the current chapter in view.</li>
+  <li><strong>Scrollytelling on phones:</strong> below 860 px the Chapter 1 chart is pinned at the top and the text steps slide up underneath; each step is a tall band (85% of the screen) so Scrollama never misses one on a fast flick.</li>
+  <li><strong>Arrow buttons</strong> sit vertically centred on the right on wide screens (with a "Next: …" label on hover/focus) and move to the bottom-right corner below 760 px; the Chapter 1 message cards leave room for them.</li>
+  <li><strong>Themes:</strong> every colour is a CSS variable or comes from <code>palette(theme, cvd)</code>, so switching theme or colour-vision view redraws the charts without reloading; the choice is remembered and applied before the page first paints.</li>
+  <li><strong>Checked</strong> in a real browser (Edge, scripted): every Scrollama step fires in order when scrolling with the wheel at 1280 px and 375 px, <kbd>→</kbd>/<kbd>←</kbd> and the arrow buttons stop at each Chapter 1 message and then each chapter, in both themes; no horizontal scroll.</li>
+  <li><strong>Data size:</strong> the browser only loads six small pre-aggregated CSVs (about 280 rows in total), so the page stays fast on mobile.</li>
+</ul>
+</div>
+<figure><img src="img/dark.png" alt="Dark theme of the opening"><figcaption>Dark theme: ink/asphalt background, lighter steps of the road-user colours.</figcaption></figure>
+<figure><img src="img/cvd.png" alt="Chapter 1 in the achromatopsia (greyscale) preview"><figcaption>Colour-vision preview, achromatopsia: the four road users still differ by lightness, dashing and direct labels.</figcaption></figure>
+<figure><img src="img/mobile.png" alt="Phone-width screenshot of the Chapter 1 scrollytelling"><figcaption>375 px: the chart is pinned, the active step sits under it.</figcaption></figure>
+</div>
+
+<h3 id="elements">Graphical Elements, Colour, Labelling and Layout</h3>
+<ul>
+  <li><strong>One colour per road user, everywhere.</strong> <span style="color:#BF4632;font-weight:700">red = pedestrians</span>, <span style="color:#1E5664;font-weight:700">teal = cyclists</span>, <span style="color:#3F1B58;font-weight:700">purple = motorcyclists</span>, dashed light grey = car occupants (context, not the story). Because the rule never changes, readers learn it once and carry it through every chapter; pedestrians and cyclists also get thicker lines and bigger dots, and the light car grey keeps attention on the people outside the car (Knaflic, 2015).</li>
+  <li><strong>Colour is not reused for other meanings.</strong> The counterparty chart uses greys; the tile map uses the palette's 5-step ramp of the selected group (light = lower rate, dark = higher, class limits printed). <strong>Yellow</strong> (road-marking accent) is never data: it marks annotations (rings on the 2012→2019 points and the peak months, the bar under 75+, the active scroll step, the current chapter and the progress bar).</li>
+  <li><strong>Size and weight for emphasis:</strong> focus lines are 3 px vs 2 px for the others; focus dots are larger; the 75+ bar is full colour while the other ages are lighter.</li>
+  <li><strong>Shape:</strong> a bed glyph in the opening ties the unit to the message ("hospital beds"); lines for time, dots for ranking, bars for parts and ordered categories.</li>
+  <li><strong>Labelling:</strong> direct labels at line ends and on bar segments instead of legends where possible; chart titles describe exactly what is shown (measure, group, years); headlines state the finding; axis numbers use thousands separators and units ("days", "×", "%").</li>
+  <li><strong>Layout:</strong> narrow text column for reading, chart cards full width; controls sit directly above the chart they change; reading order is headline → explanation → task → chart → note.</li>
+</ul>
+<figure><img src="img/hero.png" alt="Screenshot of the opening section"><figcaption>Opening: headline states the number, the ward shows it, the pull quote states the message.</figcaption></figure>
+
+<h3 id="annot">Annotations and Tooltips</h3>
+<ul>
+  <li><strong>Annotations carry the story</strong> so a reader who never hovers still gets it: "+30% 2012→19" and "+2% 2012→19" written at the 2019 points; "NSW counting change (2017)"; the shaded "COVID" and "Winter" bands; "all road users 4.9 days" on the dot plot; "average month" on the seasonal chart; "Australia" on the state chart.</li>
+  <li><strong>Tooltips give detail on demand</strong> (Shneiderman, 1996) and add information instead of repeating the label: the line chart's crosshair lists all four groups for that year; the dot plot shows all three measures plus shares; age bars show count, days, deaths and rate (marked ≈ when approximate); tiles show the rate, Australia's rate and the count.</li>
+  <li>One shared tooltip element, kept inside the window and never covering the pointer.</li>
+  <li><strong>"Try this" prompts</strong> act as task annotations: they tell the reader which control to use and what to look for.</li>
+  <li><strong>Insight boxes</strong> close every chapter with the finding and an action. Actions are only taken from sources the team has opened and checked (WHO, a peer-reviewed meta-analysis, the National Road Safety Strategy, NSW Government and Transport Victoria), cited inline as (Author, year); hovering or focusing a citation shows the full reference, and the full list is in the Sources step.</li>
+</ul>
+<figure><img src="img/summary.png" alt="Summary step with five cards"><figcaption>Summary step: one number, finding and action per chapter, each with a Revisit button.</figcaption></figure>
+
+<!-- =================================================================== -->
+<h2 id="s33">3.3 Interaction Design</h2>
+<p>Navigation is <strong>scrollytelling with Scrollama</strong>: scrolling (wheel, trackpad, <kbd>↓</kbd>/<kbd>↑</kbd>, <kbd>Space</kbd>) moves through the story and Scrollama turns scroll position into state (the current chapter and, in Chapter 1, the chart's mode and highlighted group). <kbd>→</kbd>/<kbd>←</kbd> and the side arrow buttons move one part at a time (each Chapter 1 message, then each chapter), and the stepper and the Summary's Revisit buttons jump to any chapter. Two preferences change how everything looks: light/dark theme and colour-vision view. Inside each chapter, interaction follows Shneiderman's (1996) "overview first, zoom and filter, then details on demand": the chapter opens on its main finding (overview), toggles let readers filter or change the measure, and tooltips and the linked state chart give details on demand. Every control is a single click or tap, nothing depends on hover alone, and the story makes sense without touching any chart control.</p>
+<figure><img src="img/roles.png" alt="Screenshot of the role picker"><figcaption>Ch5 role picker: the reader-driven ending.</figcaption></figure>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Interaction</th><th>Method (hover, click, drag…)</th><th>Expected user behaviour</th><th>System response</th></tr></thead>
+<tbody>
+<tr><td>Scroll through the story</td><td>Mouse wheel, trackpad, <kbd>↓</kbd>/<kbd>↑</kbd>, <kbd>Space</kbd>, <kbd>Page Up/Down</kbd></td><td>Read in order</td><td>Native scrolling. Scrollama marks the chapter in the middle of the screen as current: stepper and progress bar update; the opening's ward animates the first time it is reached.</td></tr>
+<tr><td>Next / previous part</td><td>Click the ↓ / ↑ buttons on the right, or press <kbd>→</kbd> / <kbd>←</kbd></td><td>Move through the story one step at a time</td><td>Smooth scroll to the next / previous stop: in Chapter 1 each message (the chart changes with it), elsewhere each chapter. Buttons show "Next: …" on hover/focus and are disabled at the start/end; pressing twice moves two stops.</td></tr>
+<tr><td>Scrollytelling steps (Ch1)</td><td>Scroll past the text steps</td><td>Follow the explanation one point at a time</td><td>The chart stays pinned; each step sets the chart's mode and highlighted group (all lines → cyclists → pedestrians → COVID note → counts); the active step gets a yellow edge.</td></tr>
+<tr><td>Stepper jump</td><td>Click a chapter name at the top</td><td>Go to any chapter</td><td>Smooth scroll to that chapter; passed chapters are filled, the current one has an outline and a yellow dot. On phones the row scrolls to keep the current chapter in view.</td></tr>
+<tr><td>Revisit</td><td>Click "Revisit chapter n" on a Summary card</td><td>Review one part</td><td>Scrolls back to that chapter; the stepper returns to the Summary.</td></tr>
+<tr><td>Citation</td><td>Hover or Tab to "(Author, year)"</td><td>Check where an action comes from</td><td>Tooltip with the full APA reference; full list in the Sources step.</td></tr>
+<tr><td>Theme switch</td><td>Click ☾ Dark / ☀ Light (top right)</td><td>Read in a dark room or in print colours</td><td>Page and charts switch theme instantly; choice remembered.</td></tr>
+<tr><td>Colour-vision view</td><td>Choose in the select (top right)</td><td>Check how the charts look with each type of colour blindness</td><td>All chart colours, legends and highlighted text are re-coloured with the simulation; a note says it is a simulated preview.</td></tr>
+<tr><td>Ward animation</td><td>Reach the opening (Scrollama, automatic)</td><td>Watch the beds fill</td><td>Beds appear one by one (once); shown instantly with reduced motion.</td></tr>
+<tr><td>Ward tooltip</td><td>Hover / tap a bed</td><td>Check what one bed stands for</td><td>Tooltip: group, beds per day, total bed days.</td></tr>
+<tr><td>Growth ↔ Count toggle (Ch1)</td><td>Click chip</td><td>Compare growth rates, then absolute sizes</td><td>Lines redraw on the new scale; 2012→19 labels stay.</td></tr>
+<tr><td>Year crosshair (Ch1)</td><td>Hover / move along the chart</td><td>Read exact values for one year</td><td>Vertical guide + tooltip listing all groups (count and index); "(COVID)" for 2020–21.</td></tr>
+<tr><td>Severity measure toggle (Ch2)</td><td>Click chip (3 options)</td><td>See if pedestrians rank worst on every measure</td><td>Dots re-sort and animate to new positions; reference line and labels update.</td></tr>
+<tr><td>Counterparty highlight (Ch2)</td><td>Hover a segment</td><td>Compare one category across both groups</td><td>Same category stays solid in both bars, others fade; tooltip with count and share.</td></tr>
+<tr><td>Road user + measure toggles (Ch3)</td><td>Click chips (2 × 3)</td><td>Compare ages for pedestrians vs cyclists</td><td>Bars animate; title updates; y-scale fixed so values stay comparable.</td></tr>
+<tr><td>Month tooltip (Ch4)</td><td>Hover a point</td><td>Read the size of the winter peak</td><td>Tooltip: count and % above/below the average month.</td></tr>
+<tr><td>State tile select (Ch4)</td><td>Click, or Tab + Enter</td><td>Choose own state</td><td>Tile outlined; linked chart shows that state's yearly rate vs Australia (announced via aria-live).</td></tr>
+<tr><td>Pedestrians ↔ Cyclists (Ch4 map)</td><td>Click chip</td><td>Check whether the same states lead</td><td>Tile colours and values recompute; detail chart updates.</td></tr>
+<tr><td>Role picker (Ch5)</td><td>Click a role card</td><td>Find figures and actions for their own situation</td><td>Panel updates: 3 stat cards + actions (system → driver → extra protection); focus moves to the panel.</td></tr>
+<tr><td>Resize / rotate</td><td>Change window or device width</td><td>Read on phone or desktop</td><td>Every chart redraws for the new width and Scrollama recalculates its trigger points (see Scalability).</td></tr>
+</tbody></table></div>
+<p class="tcap"><b>Table 6:</b> Interactions</p>
+
+<!-- =================================================================== -->
+<h2 id="refs">References</h2>
+<p class="note">All entries are <span class="tag">verify</span>: open each source and check it says what we claim before moving it to <code>docs/references.md</code> as ✅.</p>
+<p class="ref">Australian Bureau of Statistics. (2026). <em>Regional population by age and sex, 2025</em> [Data set, Cat. no. 3235.0, LGA tables]. https://www.abs.gov.au/</p>
+<p class="ref">Bureau of Infrastructure and Transport Research Economics. (2023). <em>Hospitalised injury</em> [Data set]. Australian Government. https://www.bitre.gov.au/publications/ongoing/hospitalised-injury</p>
+<p class="ref">Cleveland, W. S., &amp; McGill, R. (1984). Graphical perception: Theory, experimentation, and application to the development of graphical methods. <em>Journal of the American Statistical Association, 79</em>(387), 531–554. https://doi.org/10.1080/01621459.1984.10478080</p>
+<p class="ref">Haroz, S., Kosara, R., &amp; Franconeri, S. L. (2015). ISOTYPE visualization: Working memory, performance, and engagement with pictographs. In <em>Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems</em> (pp. 1191–1200). ACM. https://doi.org/10.1145/2702123.2702275</p>
+<p class="ref">Knaflic, C. N. (2015). <em>Storytelling with data: A data visualization guide for business professionals</em>. Wiley.</p>
+<p class="ref">Munzner, T. (2014). <em>Visualization analysis and design</em>. CRC Press.</p>
+<p class="ref">Okabe, M., &amp; Ito, K. (2008). <em>Color universal design (CUD): How to make figures and presentations that are friendly to colorblind people</em>. J*Fly. https://jfly.uni-koeln.de/color/</p>
+<p class="ref">Periscopic. (2013). <em>U.S. gun deaths in 2013</em> [Interactive visualisation]. https://guns.periscopic.com/</p>
+<p class="ref">Segel, E., &amp; Heer, J. (2010). Narrative visualization: Telling stories with data. <em>IEEE Transactions on Visualization and Computer Graphics, 16</em>(6), 1139–1148. https://doi.org/10.1109/TVCG.2010.179</p>
+<p class="ref">Shneiderman, B. (1996). The eyes have it: A task by data type taxonomy for information visualizations. In <em>Proceedings 1996 IEEE Symposium on Visual Languages</em> (pp. 336–343). IEEE. https://doi.org/10.1109/VL.1996.545307</p>
+<p class="ref">Tufte, E. R. (2001). <em>The visual display of quantitative information</em> (2nd ed.). Graphics Press.</p>
+<p class="ref">World Wide Web Consortium. (2018). <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>. https://www.w3.org/TR/WCAG21/</p>
+
+</div>
+</body>
+</html>
