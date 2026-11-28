@@ -229,6 +229,8 @@ function setupNav() {
   document.addEventListener("keydown", (e) => {
     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
     if (["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName)) return;
+    // Inside a chart the arrow keys move between marks (js/a11y.js roving), not between parts
+    if (e.target.closest?.(".mark, [data-roving]")) return;
     if (e.key === "ArrowRight") { e.preventDefault(); go("next"); }
     if (e.key === "ArrowLeft") { e.preventDefault(); go("prev"); }
   });
